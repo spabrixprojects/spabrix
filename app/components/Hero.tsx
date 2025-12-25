@@ -40,7 +40,7 @@ export default function Hero() {
           className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight"
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-            We Build
+            We are
           </span>
         </motion.h1>
 
