@@ -1,4 +1,4 @@
-import type { Metadata} from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -16,16 +16,56 @@ const poppins = Poppins({
 });
 
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#0f172a",
+};
+
 export const metadata: Metadata = {
-    metadataBase: new URL("https://spabrix.in"),
-    title: "spabrix solutions",
-    description: "spabrix specializes in creating modern, high-performance websites using Next.js, Three.js, and Tailwind CSS. Top-rated web development agency in Kerala.",
-    icons: {
-        icon: '/spabrixlogo.png',
-        shortcut: '/favicon-16x16.png',
-        apple: '/apple-touch-icon.png',
-    }
-}
+  metadataBase: new URL("https://spabrix.in"),
+  title: {
+    default: "Spabrix - Web Development & Digital Marketing Agency",
+    template: "%s | Spabrix",
+  },
+  description: "Spabrix is a top-rated web development and digital marketing agency in Malappuram, Kerala. We build high-performance Next.js websites, branding, and SEO solutions for growing businesses.",
+  keywords: ["Web Development", "Digital Marketing", "SEO Agency", "Malappuram", "Kerala", "Web Design", "Branding", "Next.js", "React", "Social Media Marketing"],
+  authors: [{ name: "Spabrix Team" }],
+  creator: "Spabrix",
+  publisher: "Spabrix",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/spabrixlogo.png',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://spabrix.in",
+    title: "Spabrix - Transform Your Digital Presence",
+    description: "Expert web development and digital marketing services in Kerala. We create stunning websites and data-driven marketing strategies.",
+    siteName: "Spabrix",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Spabrix Agency",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Spabrix - Web & Marketing Solutions",
+    description: "Grow your business with Spabrix. Professional web design and digital marketing in Malappuram.",
+    images: ["/og-image.png"],
+  },
+};
 
 
 
@@ -41,9 +81,6 @@ export default function RootLayout({
         {/* Canonical Link */}
         <link rel="canonical" href="https://spabrix.in" />
 
-        {/* Viewport for Mobile SEO */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
         {/* Structured Data (JSON-LD) */}
         <script
           type="application/ld+json"
@@ -51,9 +88,16 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Fozecode",
+              name: "Spabrix",
               url: "https://spabrix.in",
-              logo: "https://fozecode.tech/fozexd.svg",
+              logo: "https://spabrix.in/spabrixlogo.png",
+              description: "Web Development & Digital Marketing Agency in Malappuram, Kerala.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Malappuram",
+                addressRegion: "Kerala",
+                addressCountry: "IN"
+              },
               sameAs: [
                 "https://facebook.com/spabrix",
                 "https://instagram.com/spabrix",
@@ -61,7 +105,7 @@ export default function RootLayout({
               ],
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+91-9876543210",
+                telephone: "+91-9946972210",
                 contactType: "customer service",
                 areaServed: "IN",
                 availableLanguage: ["English", "Malayalam"],
@@ -78,7 +122,7 @@ export default function RootLayout({
           <Chatbot />
           <CustomCursor />
           <BackToTop />
-          <WhatsAppChatButton/>
+          <WhatsAppChatButton />
         </AOSProvider>
       </body>
     </html>

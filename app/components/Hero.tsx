@@ -7,7 +7,8 @@ import Link from 'next/link';
 export default function Hero() {
   const solutions = [
     'Web Development & Digital Marketing Agency in Malappuram',
- 
+    'Custom Website Design & SEO Services',
+    'Social Media Marketing & Branding Solutions',
   ];
 
   return (
@@ -30,7 +31,7 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Logo */}
-      
+
 
         {/* Heading */}
         <motion.h1
@@ -40,7 +41,7 @@ export default function Hero() {
           className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight"
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-            We are
+            We are Spabrix
           </span>
         </motion.h1>
 
@@ -62,8 +63,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg md:text-xl max-w-2xl mx-auto text-gray-300 mb-10"
         >
-         We help local businesses grow online with fast, SEO-ready websites,
-branding, and digital marketing solutions.
+          We help local businesses in Malappuram and beyond grow online with fast, SEO-ready websites, strategic branding, and result-driven digital marketing solutions. Transform your digital presence with Spabrix.
         </motion.p>
 
         {/* CTAs */}
@@ -78,7 +78,7 @@ branding, and digital marketing solutions.
               href="#contact"
               className="inline-block px-8 py-3 rounded-full text-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
             >
-             Get Free Consultation
+              Get Free Consultation
             </Link>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -98,7 +98,7 @@ branding, and digital marketing solutions.
           transition={{ delay: 1.2, duration: 1 }}
           className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
         >
-          
+
         </motion.div>
       </div>
     </section>

@@ -11,10 +11,9 @@ export default function About() {
   ];
 
   const process = [
-    { title: 'Discovery', text: 'We understand your business, customers, and goals to create a website that actually brings inquiries — not just looks good' },
-    { title: 'Design', text: 'Clean, modern designs focused on user experience and conversions,so visitors easily contact you.' },
-    { title: 'Development', text: 'Fast, secure, and responsive websites built with modern technologies,optimized for speed and SEO.' },
-   
+    { title: 'Discovery & Strategy', text: 'We start by deeply understanding your business, target audience, and goals. This allows us to craft a digital strategy that brings in genuine inquiries, not just traffic.' },
+    { title: 'Custom Design', text: 'We create clean, modern, and user-centric designs. Every pixel is crafted to ensure a seamless experience that guides visitors toward contacting you.' },
+    { title: 'Development & SEO', text: 'We build using the latest tech (Next.js) for blazing speed and security. All our websites are SEO-optimized from the ground up to help you rank higher on Google.' },
   ];
 
   return (
@@ -33,14 +32,12 @@ export default function About() {
             viewport={{ once: true }}
           >
             <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-lg">
-              Why Choose spabrix?
+              Why Choose Spabrix?
             </h1>
             <p className="text-gray-400 mb-8 leading-relaxed">
-           Local web agency based in Malappuram, Kerala
-, Affordable solutions for small & growing businesses
-,Fast delivery 
-,SEO-ready and mobile-optimized websites
-
+              Based in Malappuram, Kerala, Spabrix is a dedicated web agency helping small and growing businesses unlock their online potential. We don't just build websites; we build digital assets that work for you 24/7.
+              <br /><br />
+              From affordable, high-quality web design to results-focused digital marketing, we deliver fast, secure, and mobile-optimized solutions tailored to your specific needs.
             </p>
 
             {/* Process Steps */}
@@ -63,18 +60,18 @@ export default function About() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6">
               {stats.map(({ icon: Icon, label, value }, i) => (
-              <motion.div
-  key={label}
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: i * 0.2 }}
-  viewport={{ once: true }}
-  className="flex flex-col items-center justify-center p-6 rounded-xl bg-[#1a1f2b]/80 backdrop-blur-md border border-white/10 hover:scale-105 transition-transform text-white"
->
-  <Icon className="w-8 h-8 mb-3 text-cyan-400" />
-  <div className="text-2xl font-bold">{value}</div>
-  <div className="text-sm text-gray-400">{label}</div>
-</motion.div>
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: i * 0.2 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center justify-center p-6 rounded-xl bg-[#1a1f2b]/80 backdrop-blur-md border border-white/10 hover:scale-105 transition-transform text-white"
+                >
+                  <Icon className="w-8 h-8 mb-3 text-cyan-400" />
+                  <div className="text-2xl font-bold">{value}</div>
+                  <div className="text-sm text-gray-400">{label}</div>
+                </motion.div>
 
               ))}
             </div>
