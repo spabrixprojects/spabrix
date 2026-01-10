@@ -1,10 +1,21 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand: #026dfd;
+}
 
 :root {
-  --foreground-rgb: 255, 255, 255;
---background-start-rgb: 0, 0, 0;
---background-end-rgb: 0, 0, 0;
-  --cursor-color: 255, 255, 255;
+  --foreground-rgb: 15, 23, 42;
+  /* Slate 900 */
+  --background-start-rgb: 255, 255, 255;
+  /* White */
+  --background-end-rgb: 240, 248, 255;
+  /* Alice Blue / Very Light */
+  /* Sky Blue-500 equivalent: 14, 165, 233 */
+  /* Or Cyan-600: 8, 145, 178 */
+  --cursor-color: 8, 145, 178;
+  /* Cyan Text Color */
   --cursor-size: 30px;
 }
 
@@ -13,7 +24,7 @@
   * {
     cursor: none;
   }
-  
+
   .custom-cursor {
     position: fixed;
     top: 0;
@@ -23,38 +34,47 @@
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    border: 2px solid rgba(var(--cursor-color), 0.9);
+    border: 2px solid rgba(var(--cursor-color), 0.5);
     transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
-    transition: transform 0.2s;
+    mix-blend-mode: normal;
+    transition: transform 0.2s, background-color 0.2s;
   }
-  
+
   .custom-cursor::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     background-color: rgba(var(--cursor-color), 1);
     border-radius: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
   .custom-cursor.hover {
-    transform: translate(-50%, -50%) scale(1.2);
-    border-color: rgba(var(--cursor-color), 0.7);
-    mix-blend-mode: normal;
+    transform: translate(-50%, -50%) scale(1.5);
+    border-color: rgba(var(--cursor-color), 0.8);
+    background-color: rgba(var(--cursor-color), 0.1);
   }
-  
+
   /* Allow default cursor on inputs and text areas */
-  input, textarea, [contenteditable] {
+  input,
+  textarea,
+  [contenteditable] {
     cursor: text !important;
   }
-  
+
   /* Allow pointer cursor on clickable elements */
-  a, button, [role="button"], [type="button"], [type="submit"], [type="reset"], 
-  .bg-gradient-to-r, .hover\:text-white, [class*="transition-colors"] {
+  a,
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  .bg-gradient-to-r,
+  .hover\:text-white,
+  [class*="transition-colors"] {
     cursor: pointer !important;
   }
 }
@@ -64,33 +84,40 @@
   * {
     cursor: auto !important;
   }
-  
+
   .custom-cursor {
     display: none !important;
   }
-  
+
   /* Ensure inputs and buttons have proper cursors */
-  input, textarea, [contenteditable] {
+  input,
+  textarea,
+  [contenteditable] {
     cursor: text !important;
   }
-  
-  a, button, [role="button"], [type="button"], [type="submit"], [type="reset"],
-  .bg-gradient-to-r, .hover\:text-white, [class*="transition-colors"] {
+
+  a,
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  .bg-gradient-to-r,
+  .hover\:text-white,
+  [class*="transition-colors"] {
     cursor: pointer !important;
   }
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 .tech-slider {
@@ -102,6 +129,7 @@ html, body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-33.33%);
   }
@@ -110,16 +138,37 @@ html, body {
 .gradient-text {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-600;
 }
+
 @keyframes rotateBorder {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes gradient-x {
+
+  0%,
+  100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
 }
 
 .animated-border {
@@ -132,7 +181,7 @@ html, body {
 }
 
 .animated-border-inner {
-  background: #1a1f2b;
+  background: #ffffff;
   border-radius: 10px;
   padding: 1.5rem;
   display: flex;

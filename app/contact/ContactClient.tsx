@@ -6,7 +6,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
 
+import Breadcrumbs from '../components/Breadcrumbs';
+
 export default function ContactClient() {
+    // ... code truncated ...
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
@@ -47,8 +50,19 @@ export default function ContactClient() {
     return (
         <section
             id="contact"
-            className="py-20 px-6 bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#0f172a] text-white flex items-center justify-center relative overflow-hidden"
+            className="py-20 px-6 bg-white text-slate-800 flex flex-col items-center justify-center relative overflow-hidden min-h-screen"
         >
+            <div className="w-full max-w-6xl mb-8 flex flex-col items-center">
+                <Breadcrumbs />
+                <motion.h1
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700 mb-10"
+                >
+                    Contact Us
+                </motion.h1>
+            </div>
+
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -60,35 +74,41 @@ export default function ContactClient() {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="p-8 rounded-2xl bg-[#1a1f2b]/80 backdrop-blur-xl border border-white/10 shadow-lg"
+                    className="p-8 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-blue-500/5"
                 >
-                    <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                    <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700">
                         Contact Information
                     </h2>
-                    <p className="text-gray-400 mb-8 leading-relaxed">
+                    <p className="text-slate-600 mb-8 leading-relaxed">
                         Get in touch with us for any inquiries, collaborations, or support.
                     </p>
 
                     <div className="space-y-8">
                         <div className="flex items-center gap-4">
-                            <FaEnvelope className="text-cyan-400 w-6 h-6" />
+                            <div className="p-3 bg-blue-50 rounded-full">
+                                <FaEnvelope className="text-brand w-6 h-6" />
+                            </div>
                             <div>
-                                <h3 className="text-lg font-semibold">Email</h3>
-                                <p className="text-gray-400">spabrix@gmail.com</p>
+                                <h3 className="text-lg font-bold text-slate-800">Email</h3>
+                                <p className="text-slate-600">spabrix@gmail.com</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <FaPhone className="text-cyan-400 w-6 h-6" />
+                            <div className="p-3 bg-blue-50 rounded-full">
+                                <FaPhone className="text-brand w-6 h-6" />
+                            </div>
                             <div>
-                                <h3 className="text-lg font-semibold">Phone</h3>
-                                <p className="text-gray-400">+91 9946972210</p>
+                                <h3 className="text-lg font-bold text-slate-800">Phone</h3>
+                                <p className="text-slate-600">+91 9946972210</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <FaMapMarkerAlt className="text-cyan-400 w-6 h-6" />
+                            <div className="p-3 bg-blue-50 rounded-full">
+                                <FaMapMarkerAlt className="text-brand w-6 h-6" />
+                            </div>
                             <div>
-                                <h3 className="text-lg font-semibold">Location</h3>
-                                <p className="text-gray-400">Malappuram, Kerala</p>
+                                <h3 className="text-lg font-bold text-slate-800">Location</h3>
+                                <p className="text-slate-600">Malappuram, Kerala</p>
                             </div>
                         </div>
                     </div>
@@ -99,9 +119,9 @@ export default function ContactClient() {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="p-8 rounded-2xl bg-[#1a1f2b]/80 backdrop-blur-xl border border-white/10 shadow-lg"
+                    className="p-8 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-blue-500/5"
                 >
-                    <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700">
                         Send Us a Message
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -113,7 +133,7 @@ export default function ContactClient() {
                                 onChange={handleChange}
                                 placeholder="Your Name"
                                 required
-                                className="w-full bg-transparent border-b border-gray-600 text-white py-3 px-2 outline-none focus:border-cyan-400 transition"
+                                className="w-full bg-white border border-slate-200 text-slate-800 py-3 px-4 rounded-lg outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition shadow-sm"
                             />
                         </div>
                         <div>
@@ -124,7 +144,7 @@ export default function ContactClient() {
                                 onChange={handleChange}
                                 placeholder="Your Email"
                                 required
-                                className="w-full bg-transparent border-b border-gray-600 text-white py-3 px-2 outline-none focus:border-cyan-400 transition"
+                                className="w-full bg-white border border-slate-200 text-slate-800 py-3 px-4 rounded-lg outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition shadow-sm"
                             />
                         </div>
                         <div>
@@ -135,21 +155,21 @@ export default function ContactClient() {
                                 placeholder="Your Message"
                                 required
                                 rows={5}
-                                className="w-full bg-transparent border-b border-gray-600 text-white py-3 px-2 outline-none focus:border-cyan-400 transition"
+                                className="w-full bg-white border border-slate-200 text-slate-800 py-3 px-4 rounded-lg outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition shadow-sm"
                             />
                         </div>
                         <motion.button
-                            whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(0,255,255,0.4)" }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             disabled={loading}
-                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-600 py-3 rounded-lg text-lg font-semibold hover:shadow-lg transition disabled:opacity-50"
+                            className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand to-blue-700 text-white py-3 rounded-lg text-lg font-bold shadow-lg shadow-brand/30 hover:shadow-xl transition disabled:opacity-50"
                         >
                             {loading ? "Sending..." : <> Send Message <FaPaperPlane /> </>}
                         </motion.button>
                     </form>
                 </motion.div>
             </motion.div>
-            <ToastContainer position="top-right" autoClose={3000} theme="dark" />
+            <ToastContainer position="top-right" autoClose={3000} theme="light" />
         </section>
     );
 }

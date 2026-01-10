@@ -1,128 +1,129 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { FaRocket, FaLightbulb, FaUsers, FaCheckCircle, FaHospital, FaPlane, FaHome, FaShoppingCart, FaHotel, FaGraduationCap, FaBuilding } from 'react-icons/fa';
 
 export default function About() {
-  const stats = [
-    { icon: FaRocket, label: 'Projects Completed', value: '20+' },
-    { icon: FaLightbulb, label: 'Years Experience', value: '2+' },
-    { icon: FaUsers, label: 'Happy Clients', value: '98+' },
+  const steps = [
+    {
+      icon: <FaLightbulb className="text-3xl text-cyan-500" />,
+      title: "Discovery & Strategy",
+      description: "We start by understanding your business goals, target audience, and competitors to craft a data-driven strategy."
+    },
+    {
+      icon: <FaRocket className="text-3xl text-blue-500" />,
+      title: "Design & Development",
+      description: "Our team builds high-performance, mobile-first websites using the latest tech stack (Next.js, React) for speed and SEO."
+    },
+    {
+      icon: <FaUsers className="text-3xl text-indigo-500" />,
+      title: "Growth & Optimization",
+      description: "We don't just launch; we optimize. From SEO to social media integration, we ensure your digital presence drives revenue."
+    }
   ];
 
-  const process = [
-    { title: 'Discovery & Strategy', text: 'We start by deeply understanding your business, target audience, and goals. This allows us to craft a digital strategy that brings in genuine inquiries, not just traffic.' },
-    { title: 'Custom Design', text: 'We create clean, modern, and user-centric designs. Every pixel is crafted to ensure a seamless experience that guides visitors toward contacting you.' },
-    { title: 'Development & SEO', text: 'We build using the latest tech (Next.js) for blazing speed and security. All our websites are SEO-optimized from the ground up to help you rank higher on Google.' },
+  const industries = [
+    { name: "Healthcare & Clinics", icon: <FaHospital /> },
+    { name: "Travel Agencies", icon: <FaPlane /> },
+    { name: "Real Estate", icon: <FaHome /> },
+    { name: "E-commerce", icon: <FaShoppingCart /> },
+    { name: "Stay & Resort", icon: <FaHotel /> },
+    { name: "Educational Inst.", icon: <FaGraduationCap /> },
+    { name: "Construction", icon: <FaBuilding /> },
   ];
 
   return (
-    <section
-      id="about"
-      className="py-20 relative bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#0f172a] overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-14 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+    <section id="about" className="py-20 bg-white text-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+        {/* Intro Section */}
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-blue-700"
           >
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-lg">
-              Why Choose Spabrix?
-            </h1>
-            <p className="text-gray-400 mb-8 leading-relaxed">
-              Based in Malappuram, Kerala, Spabrix is a dedicated web agency helping small and growing businesses unlock their online potential. We don't just build websites; we build digital assets that work for you 24/7.
-              <br /><br />
-              From affordable, high-quality web design to results-focused digital marketing, we deliver fast, secure, and mobile-optimized solutions tailored to your specific needs.
-            </p>
-
-            {/* Process Steps */}
-            <div className="space-y-5 mb-10">
-              {process.map((step, i) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.15 }}
-                  viewport={{ once: true }}
-                  className="p-8 rounded-lg bg-[#1a1f2b]/70 backdrop-blur-md border border-white/10 hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-400/20 transition"
-                >
-                  <h2 className="text-lg font-semibold text-cyan-400 mb-1">{step.title}</h2>
-                  <p className="text-gray-300 text-sm leading-relaxed">{step.text}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6">
-              {stats.map(({ icon: Icon, label, value }, i) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.2 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center justify-center p-6 rounded-xl bg-[#1a1f2b]/80 backdrop-blur-md border border-white/10 hover:scale-105 transition-transform text-white"
-                >
-                  <Icon className="w-8 h-8 mb-3 text-cyan-400" />
-                  <div className="text-2xl font-bold">{value}</div>
-                  <div className="text-sm text-gray-400">{label}</div>
-                </motion.div>
-
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Content - Vision + Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            Why Choose Spabrix?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative flex flex-col items-center"
+            className="max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed"
           >
-            <div className="rounded-2xl p-[1px] bg-gradient-to-r from-cyan-500/30 via-blue-600/30 to-purple-500/30 mb-8 w-full max-w-md">
-              <div className="w-full h-full rounded-2xl bg-[#0d1117]/90 p-10 flex flex-col items-center justify-center text-center backdrop-blur-md border border-white/10">
-                <h3 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                  Our Vision
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  To be the leading force in creating digital experiences that inspire,
-                  innovate, and deliver exceptional value to our clients.
-                </p>
-              </div>
-            </div>
-
-            {/* Interactive Image */}
-            <motion.div
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              transition={{ type: 'spring', stiffness: 150 }}
-              className="rounded-3xl overflow-hidden shadow-lg cursor-pointer"
-              style={{ perspective: 800 }}
-            >
-              <Image
-                src="/aboutfoze.png" // Replace with your image path
-                alt="Fozecode team or office"
-                width={400}
-                height={300}
-                className="rounded-3xl object-cover"
-                draggable={false}
-              />
-            </motion.div>
-          </motion.div>
+            We are not just a web design agency; we are your digital growth partners.
+            Unlike generic template providers, Spabrix delivers <strong>custom-coded, ultra-fast, and SEO-optimized solutions</strong> tailored for the Kerala market.
+            We combine technical excellence with marketing insights to turn your website into a customer magnet.
+          </motion.p>
         </div>
-      </div>
 
-      {/* Decorative Neon Blobs */}
-      <div className="absolute -top-20 -left-20 w-72 h-72 bg-cyan-500/20 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-600/20 blur-3xl rounded-full pointer-events-none" />
+        {/* Process Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {steps.map((step, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              viewport={{ once: true }}
+              className="bg-slate-50 p-8 rounded-2xl border border-slate-200 hover:border-cyan-500/50 transition-all hover:shadow-xl hover:shadow-cyan-500/10 group"
+            >
+              <div className="mb-6 p-4 bg-white rounded-xl inline-block shadow-sm group-hover:scale-110 transition-transform">
+                {step.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-600 transition-colors">{step.title}</h3>
+              <p className="text-slate-600 leading-relaxed">
+                {step.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Industries Section */}
+        <div className="text-center mb-10">
+          <h3 className="text-2xl font-bold text-slate-800 mb-8">Industries We Serve</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {industries.map((industry, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full shadow-sm text-slate-700 font-medium hover:text-cyan-600 hover:border-cyan-500/50 transition-colors cursor-default"
+              >
+                <span className="text-cyan-500">{industry.icon}</span>
+                {industry.name}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { number: "50+", label: "Happy Clients" },
+            { number: "100%", label: "Satisfaction" },
+            { number: "24/7", label: "Support" },
+            { number: "5+", label: "Years Exp." }
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-white border border-blue-100 shadow-sm"
+            >
+              <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">{stat.number}</div>
+              <div className="text-slate-500 font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
     </section>
   );
 }
-
-// Remember to import these icons near the top:
-import { FaRocket, FaLightbulb, FaUsers } from 'react-icons/fa';

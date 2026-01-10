@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 type Project = {
     id: number;
@@ -33,17 +34,20 @@ const projects: Project[] = [
         imageUrl: '/pr4.png',
         projectUrl: 'https://chcenterozhukur.vercel.app/',
     },
-
 ];
 
 export default function ProjectsClient() {
     return (
         <section
             id="projects"
-            className="relative py-20 bg-gradient-to-b from-[#0f172a] via-[#0b1220] to-[#0f172a] min-h-screen text-white"
+            className="relative py-20 bg-slate-50 min-h-screen"
             aria-label="Website Projects"
         >
             <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14">
+                <div className="flex justify-center">
+                    <Breadcrumbs />
+                </div>
+
                 {/* Header */}
                 <motion.div
                     className="text-center mb-16"
@@ -52,17 +56,21 @@ export default function ProjectsClient() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                    <motion.h1
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700 mb-6"
+                    >
                         Recent Website Projects
-                    </h2>
-                    <p className="mt-4 text-gray-400 max-w-2xl mx-auto">
+                    </motion.h1>
+                    <p className="mt-4 text-slate-600 max-w-2xl mx-auto leading-relaxed">
                         Explore a showcase of our recent work. Each project represents our commitment to quality, performance, and user-centric design. From travel agencies to healthcare providers, we build solutions that deliver real results.
                     </p>
                 </motion.div>
 
-                {/* Smaller image cards with overlay text */}
+                {/* Project Cards */}
                 <motion.div
-                    className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3"
+                    className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
                     initial="hidden"
                     animate="visible"
                     variants={{
@@ -77,36 +85,39 @@ export default function ProjectsClient() {
                             href={projectUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="relative block cursor-pointer overflow-hidden rounded-3xl shadow-lg shadow-cyan-700/30 hover:shadow-blue-700/40 transition-shadow max-h-[300px]"
+                            className="group block bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-cyan-500/30"
                             variants={{
                                 hidden: { opacity: 0, y: 40 },
                                 visible: { opacity: 1, y: 0 },
                             }}
                         >
-                            {/* Image container with reduced height */}
-                            <div className="relative w-full  h-[300px] sm:h-[280px] md:h-[250px] rounded-3xl">
+                            {/* Image container */}
+                            <div className="relative w-full h-[220px] overflow-hidden">
                                 <Image
                                     src={imageUrl}
                                     alt={title}
                                     fill
-                                    className="object-cover rounded-3xl transition-transform duration-500 hover:scale-105"
-                                    priority
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    priority={id <= 3}
                                 />
+                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                             </div>
 
-                            {/* Top overlay text */}
-                            <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm px-6 py-3 rounded-t-3xl">
-                                <h3 className="text-xl font-bold text-white">{title}</h3>
-                                <p className="text-cyan-400 text-sm mt-1">{type}</p>
+                            {/* Content */}
+                            <div className="p-6">
+                                <h3 className="text-2xl font-bold text-slate-800 mb-2 group-hover:text-brand transition-colors">
+                                    {title}
+                                </h3>
+                                <p className="text-slate-500 text-sm mt-2">{type}</p>
                             </div>
                         </motion.a>
                     ))}
                 </motion.div>
             </div>
 
-            {/* Decorative glow blobs */}
-            <div className="absolute -top-40 -left-20 w-72 h-72 bg-cyan-500/30 blur-3xl rounded-full pointer-events-none" />
-            <div className="absolute -bottom-36 -right-20 w-72 h-72 bg-blue-600/30 blur-3xl rounded-full pointer-events-none" />
+            {/* Decorative blobs */}
+            <div className="absolute -top-40 -left-20 w-72 h-72 bg-cyan-200/30 blur-3xl rounded-full pointer-events-none" />
+            <div className="absolute -bottom-36 -right-20 w-72 h-72 bg-blue-200/30 blur-3xl rounded-full pointer-events-none" />
         </section>
     );
 }
