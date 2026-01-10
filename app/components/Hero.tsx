@@ -42,7 +42,7 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 mb-6 leading-[1.1]">
+          <h1 className="text-3xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 mb-6 leading-[1.1]">
             We Build <br className="hidden md:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand via-blue-600 to-cyan-500 animate-gradient-x">
               <TypeAnimation
