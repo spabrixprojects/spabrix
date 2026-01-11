@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import AboutClient from './AboutClient';
 
 export const metadata: Metadata = {
-  title: "About Us | Spabrix - Web Agency in Malappuram",
-  description: "Learn more about Spabrix, a leading web development and digital marketing agency in Malappuram, Kerala. Discover our mission, vision, and how we help businesses grow.",
+  title: "About Spabrix | Top Web Design & Marketing Agency in Kerala",
+  description: "Discover Spabrix's mission to transform businesses with custom web development and data-driven marketing. We are the digital growth partners for Malappuram and beyond.",
 };
 
 export default function AboutPage() {

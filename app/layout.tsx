@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { AOSProvider } from "./components/AOSProvider";
@@ -13,6 +13,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 
@@ -37,6 +43,16 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: '/',
   },
   icons: {
     icon: '/spabrixlogo.png',
@@ -55,7 +71,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Spabrix Agency",
+        alt: "Spabrix Agency - Web Development Studio",
       },
     ],
   },
@@ -65,6 +81,7 @@ export const metadata: Metadata = {
     description: "Grow your business with Spabrix. Professional web design and digital marketing in Malappuram.",
     images: ["/og-image.png"],
   },
+  category: "technology",
 };
 
 
@@ -78,9 +95,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Canonical Link */}
-        <link rel="canonical" href="https://spabrix.in" />
-
         {/* Structured Data (JSON-LD) */}
         <script
           type="application/ld+json"
@@ -114,7 +128,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${poppins.className} ${outfit.variable} antialiased`}>
         <AOSProvider>
           <Navbar />
           {children}

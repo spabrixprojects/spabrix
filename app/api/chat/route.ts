@@ -24,98 +24,102 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Enhanced response generator with Fozecode information
+// Enhanced response generator with Spabrix information
 function getFozecodeResponse(query: string): string {
   const normalizedQuery = query.toLowerCase();
-  
+
   // Greetings
   if (normalizedQuery.includes('hello') || normalizedQuery.includes('hi') || normalizedQuery.includes('hey')) {
-    return 'Hello! Welcome to Fozecode. I\'m here to help with your web development needs. How can I assist you today?';
+    return 'Hello! **I am Spabrix AI.** I\'m optimized to assist you with your web development needs. How can I elevate your project today?';
+  }
+
+  // Who are you
+  if (normalizedQuery.includes('who are you') || normalizedQuery.includes('what are you')) {
+    return 'I am the **Spabrix Neural Assistant**, a specialized AI designed to help you explore our digital services and solutions.';
   }
 
   // Services related queries
   if (normalizedQuery.includes('service') || normalizedQuery.includes('offer') || normalizedQuery.includes('provide')) {
-    return 'At Fozecode, we offer a comprehensive range of web development services including: frontend development, backend development, e-commerce solutions, UI/UX design, SEO optimization, and custom software development. Which service are you interested in learning more about?';
+    return 'At **Spabrix**, we deliver high-performance digital solutions: \n\n**1. Frontend Development** (React, Next.js)\n**2. Backend Systems** (Node.js, Python)\n**3. E-commerce Platforms** (Shopify, Custom)\n**4. UI/UX Design**\n**5. SEO Optimization**\n\nWhich area are you interested in?';
   }
 
   // Frontend development
-  if (normalizedQuery.includes('frontend') || normalizedQuery.includes('front-end') || normalizedQuery.includes('front end') || 
-      normalizedQuery.includes('ui') || normalizedQuery.includes('interface')) {
-    return 'Our frontend development team specializes in creating responsive, user-friendly interfaces using modern technologies like React, Next.js, and Tailwind CSS. We focus on delivering fast-loading, accessible, and visually appealing websites that engage your users and represent your brand effectively.';
+  if (normalizedQuery.includes('frontend') || normalizedQuery.includes('front-end') || normalizedQuery.includes('front end') ||
+    normalizedQuery.includes('ui') || normalizedQuery.includes('interface')) {
+    return 'Our **Frontend Engineering** team builds pixel-perfect, responsive interfaces using **React**, **Next.js**, and **Tailwind CSS**. We prioritize speed, accessibility, and fluid animations to create immersive user experiences.';
   }
 
   // Backend development
-  if (normalizedQuery.includes('backend') || normalizedQuery.includes('back-end') || normalizedQuery.includes('back end') || 
-      normalizedQuery.includes('server') || normalizedQuery.includes('database')) {
-    return 'Fozecode excels in robust backend development using Node.js, Python, and various database technologies. We build secure, scalable APIs and server architectures that power your applications efficiently. Our solutions ensure data integrity, high performance, and seamless integration with frontend systems.';
+  if (normalizedQuery.includes('backend') || normalizedQuery.includes('back-end') || normalizedQuery.includes('back end') ||
+    normalizedQuery.includes('server') || normalizedQuery.includes('database')) {
+    return 'We engineer robust **Backend Architectures** using **Node.js** and **Python**. Our systems are secure, scalable, and built to handle high data loads with minimal latency.';
   }
 
   // E-commerce
-  if (normalizedQuery.includes('ecommerce') || normalizedQuery.includes('e-commerce') || normalizedQuery.includes('shop') || 
-      normalizedQuery.includes('store') || normalizedQuery.includes('sell')) {
-    return 'Our e-commerce solutions help businesses establish powerful online stores. We work with platforms like Shopify, WooCommerce, and custom solutions to create engaging shopping experiences with secure payment processing, inventory management, and customer relationship tools. We focus on conversion optimization and seamless checkout flows.';
+  if (normalizedQuery.includes('ecommerce') || normalizedQuery.includes('e-commerce') || normalizedQuery.includes('shop') ||
+    normalizedQuery.includes('store') || normalizedQuery.includes('sell')) {
+    return 'We build **High-Conversion E-commerce Stores**. Whether using Shopify or custom Next.js solutions, we ensure secure payments, fast checkout flows, and seamless inventory management.';
   }
 
   // UI/UX Design
-  if (normalizedQuery.includes('design') || normalizedQuery.includes('ux') || normalizedQuery.includes('ui/ux') || 
-      normalizedQuery.includes('user experience')) {
-    return 'Fozecode\'s design team creates intuitive and beautiful user experiences. We begin with research and wireframing, then develop high-fidelity prototypes before implementation. Our design philosophy centers on user-centric approaches that balance aesthetics with functionality to increase engagement and conversion rates.';
+  if (normalizedQuery.includes('design') || normalizedQuery.includes('ux') || normalizedQuery.includes('ui/ux') ||
+    normalizedQuery.includes('user experience')) {
+    return 'Our **Design Philosophy** marries aesthetics with functionality. We create **Glassmorphism**, **Neomorphism**, and **Flat** designs that not only look stunning but drive user engagement and retention.';
   }
 
   // SEO
-  if (normalizedQuery.includes('seo') || normalizedQuery.includes('search engine') || normalizedQuery.includes('ranking') || 
-      normalizedQuery.includes('google')) {
-    return 'Our SEO optimization services help improve your website\'s visibility in search engines. We implement technical SEO best practices, optimize content for relevant keywords, improve site performance, and build quality backlinks. Our goal is to increase organic traffic and improve your search ranking position.';
+  if (normalizedQuery.includes('seo') || normalizedQuery.includes('search engine') || normalizedQuery.includes('ranking') ||
+    normalizedQuery.includes('google')) {
+    return 'Our **SEO Strategies** are data-driven. We optimize technical structure, content, and backlinks to ensure your brand dominates search results and attracts organic traffic.';
   }
 
   // Custom Software
-  if (normalizedQuery.includes('custom') || normalizedQuery.includes('bespoke') || normalizedQuery.includes('software') || 
-      normalizedQuery.includes('application') || normalizedQuery.includes('app')) {
-    return 'Fozecode specializes in custom software solutions tailored to your specific business needs. We develop web applications, internal tools, and specialized platforms that automate processes and solve unique challenges. Our agile development approach ensures we deliver functional, secure, and maintainable software.';
+  if (normalizedQuery.includes('custom') || normalizedQuery.includes('bespoke') || normalizedQuery.includes('software') ||
+    normalizedQuery.includes('application') || normalizedQuery.includes('app')) {
+    return 'Need something unique? We build **Custom Software Solutions** tailored to your specific business logic. From internal dashboards to SaaS platforms, we engineer efficiency.';
   }
 
   // Portfolio/Past work
-  if (normalizedQuery.includes('portfolio') || normalizedQuery.includes('examples') || normalizedQuery.includes('past work') || 
-      normalizedQuery.includes('projects') || normalizedQuery.includes('clients')) {
-    return 'We\'ve worked with businesses across multiple industries, from startups to established enterprises. Our portfolio includes e-commerce platforms, corporate websites, web applications, and custom software solutions. We\'d be happy to share relevant case studies during a consultation call. Would you like to schedule one?';
+  if (normalizedQuery.includes('portfolio') || normalizedQuery.includes('examples') || normalizedQuery.includes('past work') ||
+    normalizedQuery.includes('projects') || normalizedQuery.includes('clients')) {
+    return 'We have successfully deployed solutions for **Healthcare**, **E-commerce**, and **Corporate** sectors. Check our **Projects** section for case studies. Should I schedule a demo for you?';
   }
 
   // Pricing
-  if (normalizedQuery.includes('price') || normalizedQuery.includes('cost') || normalizedQuery.includes('fee') || 
-      normalizedQuery.includes('budget') || normalizedQuery.includes('quote')) {
-    return 'Our pricing is customized based on your project requirements, scope, and timeline. We offer competitive rates with flexible engagement models including fixed-price projects and hourly rates. To provide an accurate quote, we\'d need to understand your project in detail. Would you like to schedule a free consultation to discuss your needs?';
+  if (normalizedQuery.includes('price') || normalizedQuery.includes('cost') || normalizedQuery.includes('fee') ||
+    normalizedQuery.includes('budget') || normalizedQuery.includes('quote')) {
+    return 'We offer **Flexible Pricing Models** based on project complexity. \n\n- Fixed Price for defined scopes\n- Hourly for ongoing support\n\n**Contact us** for a precise, no-obligation quote.';
   }
 
   // Timeline
-  if (normalizedQuery.includes('timeline') || normalizedQuery.includes('time') || normalizedQuery.includes('duration') || 
-      normalizedQuery.includes('how long') || normalizedQuery.includes('deadline')) {
-    return 'Project timelines depend on complexity, scope, and specific requirements. Simple websites might take 2-4 weeks, while complex web applications or e-commerce platforms typically require 8-12 weeks or more. During our initial consultation, we can provide a more accurate timeline based on your project details.';
-  }
-
-  // Process
-  if (normalizedQuery.includes('process') || normalizedQuery.includes('approach') || normalizedQuery.includes('methodology') || 
-      normalizedQuery.includes('how do you') || normalizedQuery.includes('steps')) {
-    return 'Our development process includes discovery (requirements gathering), design (wireframes and prototypes), development (coding and testing), deployment, and maintenance. We work in agile sprints, providing regular updates and collecting feedback throughout. This approach ensures transparency and allows us to adapt to changing requirements.';
+  if (normalizedQuery.includes('timeline') || normalizedQuery.includes('time') || normalizedQuery.includes('duration') ||
+    normalizedQuery.includes('how long') || normalizedQuery.includes('deadline')) {
+    return 'Timelines vary by scope. \n\n- **Landing Pages:** 1-2 weeks\n- **Full Websites:** 2-4 weeks\n- **Custom Apps:** 4-12 weeks\n\nWe adhere to strict Agile sprints to ensure timely delivery.';
   }
 
   // Contact/Consultation
-  if (normalizedQuery.includes('contact') || normalizedQuery.includes('call') || normalizedQuery.includes('email') || 
-      normalizedQuery.includes('consultation') || normalizedQuery.includes('talk') || normalizedQuery.includes('meet')) {
-    return 'We\'d love to discuss your project! You can schedule a free consultation by filling out our contact form or sending an email to contact@fozecode.com. During this call, we\'ll discuss your requirements, answer your questions, and explore how we can help bring your vision to life.';
+  if (normalizedQuery.includes('contact') || normalizedQuery.includes('call') || normalizedQuery.includes('email') ||
+    normalizedQuery.includes('consultation') || normalizedQuery.includes('talk') || normalizedQuery.includes('meet')) {
+    return 'Ready to start? \n\n- **Email:** spabrix@gmail.com\n- **Phone:** +91 9946972210\n\nOr simply browse to our **Contact Page** to leave a message.';
   }
 
   // Support/Maintenance
-  if (normalizedQuery.includes('support') || normalizedQuery.includes('maintenance') || normalizedQuery.includes('update') || 
-      normalizedQuery.includes('after') || normalizedQuery.includes('warranty')) {
-    return 'Fozecode offers ongoing maintenance and support services to keep your website secure, up-to-date, and performing optimally. Our support packages include regular updates, security monitoring, performance optimization, content updates, and technical assistance. We can customize a maintenance plan that suits your specific needs.';
+  if (normalizedQuery.includes('support') || normalizedQuery.includes('maintenance') || normalizedQuery.includes('update') ||
+    normalizedQuery.includes('after') || normalizedQuery.includes('warranty')) {
+    return 'We don\'t just launch and leave. **Spabrix Care** packages ensure your site remains secure, updated, and fast specifically for the long term.';
   }
-  
+
   // Technologies
-  if (normalizedQuery.includes('technology') || normalizedQuery.includes('tech stack') || normalizedQuery.includes('programming') || 
-      normalizedQuery.includes('framework') || normalizedQuery.includes('language')) {
-    return 'We work with cutting-edge technologies including React, Next.js, Vue.js, Node.js, Python, MongoDB, PostgreSQL, AWS, and more. Our team selects the most appropriate tech stack for each project based on requirements, performance needs, scalability considerations, and long-term maintenance. This ensures efficient development and future-proof solutions.';
+  if (normalizedQuery.includes('technology') || normalizedQuery.includes('tech stack') || normalizedQuery.includes('programming') ||
+    normalizedQuery.includes('framework') || normalizedQuery.includes('language')) {
+    return 'Our stack is future-proof: **Next.js 14**, **React**, **TypeScript**, **Tailwind CSS**, **Node.js**, **Supabase**, and **AWS**. We choose the best tool for the job.';
+  }
+
+  // Functionality
+  if (normalizedQuery.includes('help') || normalizedQuery.includes('can you')) {
+    return 'I can explain our **Services**, detail our **technologies**, discuss **Pricing**, or guide you to **Contact** us. Just ask!';
   }
 
   // Default response
-  return "Thank you for your interest in Fozecode. I'd be happy to provide more information about our web development services, process, or answer any specific questions you might have. Feel free to ask about our expertise in frontend and backend development, e-commerce, UI/UX design, SEO, or custom software solutions. Would you like to schedule a free consultation to discuss your project?";
+  return "I am processing that... Could you please accept my apologies? I am trained on Spabrix services. Ask me about **Web Development**, **SEO**, **E-commerce**, or **Pricing** to get started.";
 } 

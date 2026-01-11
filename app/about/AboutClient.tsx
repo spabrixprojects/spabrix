@@ -1,173 +1,179 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { FaRocket, FaLightbulb, FaUsers } from 'react-icons/fa';
-
+import { FaRocket, FaLightbulb, FaUsers, FaHandshake, FaShieldAlt, FaChartLine } from 'react-icons/fa';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function AboutClient() {
     const stats = [
-        { icon: FaRocket, label: 'Projects Completed', value: '20+' },
-        { icon: FaLightbulb, label: 'Years Experience', value: '2+' },
-        { icon: FaUsers, label: 'Happy Clients', value: '98+' },
+        { label: 'Projects Completed', value: '50+' },
+        { label: 'Client Satisfaction', value: '100%' },
+        { label: 'Years Experience', value: '5+' },
+        { label: 'Support Available', value: '24/7' },
     ];
 
-    const process = [
-        { title: 'Discovery', text: 'We understand your goals, target audience, and brand through research and discussion.' },
-        { title: 'Design', text: 'We create clean, user-friendly designs that reflect your brand and engage users.' },
-        { title: 'Development', text: 'Our team builds fast, responsive, and functional websites using the latest technologies.' },
-        { title: 'Deployment', text: 'We launch your website, handle setup, and provide ongoing support.' },
+    const values = [
+        {
+            icon: FaShieldAlt,
+            title: "Integrity",
+            desc: "We believe in honest, transparent communication. No hidden fees, no false promises."
+        },
+        {
+            icon: FaLightbulb,
+            title: "Innovation",
+            desc: "We stay ahead of the curve, using the latest tech (Next.js, AI) to give you a competitive edge."
+        },
+        {
+            icon: FaChartLine,
+            title: "Results",
+            desc: "Beautiful code is useless if it doesn't sell. We focus on ROI and conversion-driven design."
+        },
+        {
+            icon: FaHandshake,
+            title: "Partnership",
+            desc: "We are not just vendors; we are your long-term digital growth partners."
+        }
     ];
 
     return (
-        <section
-            id="about"
-            className="py-20 relative bg-slate-50 overflow-hidden"
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-10 lg:px-14 relative z-10">
-                <div className="flex justify-center">
+        <section className="min-h-screen pt-24 pb-20 relative bg-slate-50 overflow-hidden font-sans">
+
+            {/* --- Background Aurora --- */}
+            <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent pointer-events-none" />
+            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+            <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-cyan-100/40 rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+                {/* Breadcrumbs & Header */}
+                <div className="flex flex-col items-center text-center mb-16">
                     <Breadcrumbs />
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-
-                    {/* Left Content */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="mt-6 text-4xl md:text-6xl font-black text-slate-900 tracking-tight"
                     >
-                        <motion.h1
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700 mb-6"
-                        >
-                            Why Choose Spabrix?
-                        </motion.h1>
-                        <p className="text-slate-600 mb-8 leading-relaxed">
-                            At Spabrix, we craft websites and digital experiences that help your business grow. We are a team of passionate developers and marketers in Malappuram dedicated to your success.
-                            <br /><br />
-                            Our process is smooth, transparent, and future-ready — we don’t just build websites, we create comprehensive digital solutions that strengthen your brand and drive real business results.
-                        </p>
+                        We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-blue-600 to-cyan-500">Spabrix</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="mt-4 text-lg text-slate-600 max-w-2xl font-medium"
+                    >
+                        The digital agency that fuses creative design with engineering excellence.
+                    </motion.p>
+                </div>
 
-                        {/* Process Steps */}
-                        <div className="space-y-5 mb-10">
-                            {process.map((step, i) => (
-                                <motion.div
-                                    key={step.title}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: i * 0.15 }}
-                                    viewport={{ once: true }}
-                                    className="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-brand/50 hover:shadow-lg hover:shadow-brand/10 transition"
-                                >
-                                    <h2 className="text-lg font-bold text-slate-800 mb-1">{step.title}</h2>
-                                    <p className="text-slate-600 text-sm leading-relaxed">{step.text}</p>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Mission & Vision - Updated to White Cards */}
-                        <div className="w-full max-w-6xl grid md:grid-cols-2 gap-10 mb-20">
-                            <motion.div
-                                initial={{ opacity: 0, x: -50 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="p-8 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-blue-500/5 hover:shadow-2xl transition-all"
-                            >
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="p-3 bg-blue-50 rounded-full">
-                                        <FaRocket className="text-brand w-8 h-8" />
-                                    </div>
-                                    <h2 className="text-2xl font-bold text-slate-800">Our Mission</h2>
-                                </div>
-                                <p className="text-slate-600 leading-relaxed">
-                                    To empower businesses of all sizes in Malappuram and beyond with robust, meaningful digital presences. We strive to bridge the gap between technology and business growth through innovative web solutions.
-                                </p>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, x: 50 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="p-8 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-blue-500/5 hover:shadow-2xl transition-all"
-                            >
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="p-3 bg-blue-50 rounded-full">
-                                        <FaLightbulb className="text-brand w-8 h-8" />
-                                    </div>
-                                    <h2 className="text-2xl font-bold text-slate-800">Our Vision</h2>
-                                </div>
-                                <p className="text-slate-600 leading-relaxed">
-                                    To be the most trusted and results-driven web development agency in Kerala, known for our commitment to quality, creativity, and client success.
-                                </p>
-                            </motion.div>
-                        </div>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-6">
-                            {stats.map(({ icon: Icon, label, value }, i) => (
-                                <motion.div
-                                    key={label}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: i * 0.2 }}
-                                    viewport={{ once: true }}
-                                    className="flex flex-col items-center justify-center p-6 rounded-xl bg-white border border-slate-200 shadow-sm hover:scale-105 transition-transform"
-                                >
-                                    <Icon className="w-8 h-8 mb-3 text-brand" />
-                                    <div className="text-2xl font-bold text-slate-900">{value}</div>
-                                    <div className="text-sm text-slate-500">{label}</div>
-                                </motion.div>
-
-                            ))}
+                {/* --- Our Story Section --- */}
+                <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="relative"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl rotate-2 opacity-10" />
+                        <div className="relative bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Story</h2>
+                            <p className="text-slate-600 leading-relaxed mb-4">
+                                Born in the heart of Malappuram, Spabrix started with a simple belief:
+                                <span className="font-semibold text-slate-800"> businesses in Kerala deserve world-class digital solutions.</span>
+                            </p>
+                            <p className="text-slate-600 leading-relaxed">
+                                We saw too many generic, slow, and ineffective websites holding great businesses back.
+                                So, we built a team of elite developers and strategists to change that. Today, we are proud
+                                to be the go-to agency for brands that want to dominate their market.
+                            </p>
                         </div>
                     </motion.div>
 
-                    {/* Right Content - Vision + Image */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="relative flex flex-col items-center"
-                    >
-                        <div className="rounded-2xl p-[1px] bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 mb-8 w-full max-w-md">
-                            <div className="w-full h-full rounded-2xl bg-white p-10 flex flex-col items-center justify-center text-center shadow-lg">
-                                <h2 className="text-3xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-700">
-                                    Meet The Team
-                                </h2>
-                                <p className="text-slate-600 leading-relaxed">
-                                    To be the leading force in creating digital experiences that inspire,
-                                    innovate, and deliver exceptional value to our clients.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Interactive Image */}
+                    {/* Mission & Vision Column */}
+                    <div className="flex flex-col gap-6">
                         <motion.div
-                            whileHover={{ scale: 1.05, rotate: 2 }}
-                            transition={{ type: 'spring', stiffness: 150 }}
-                            className="rounded-3xl overflow-hidden shadow-xl cursor-pointer"
-                            style={{ perspective: 800 }}
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.1 }}
+                            className="p-8 rounded-3xl bg-gradient-to-br from-white to-blue-50/50 border border-slate-200 hover:border-brand/30 transition-colors shadow-lg"
                         >
-                            <Image
-                                src="/aboutfoze.png" // Replace with your image path
-                                alt="Spabrix team or office"
-                                width={400}
-                                height={300}
-                                className="rounded-3xl object-cover"
-                                draggable={false}
-                            />
+                            <div className="flex items-center gap-4 mb-3">
+                                <div className="p-3 rounded-full bg-blue-100 text-brand">
+                                    <FaRocket className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900">Our Mission</h3>
+                            </div>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                To empower businesses with high-speed, SEO-driven websites that function as powerful revenue engines, not just digital brochures.
+                            </p>
                         </motion.div>
-                    </motion.div>
-                </div>
-            </div>
 
-            {/* Decorative Blobs */}
-            <div className="absolute -top-20 -left-20 w-72 h-72 bg-cyan-200/40 blur-3xl rounded-full pointer-events-none" />
-            <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-200/40 blur-3xl rounded-full pointer-events-none" />
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="p-8 rounded-3xl bg-gradient-to-br from-white to-cyan-50/50 border border-slate-200 hover:border-cyan-400/30 transition-colors shadow-lg"
+                        >
+                            <div className="flex items-center gap-4 mb-3">
+                                <div className="p-3 rounded-full bg-cyan-100 text-cyan-600">
+                                    <FaLightbulb className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900">Our Vision</h3>
+                            </div>
+                            <p className="text-slate-600 text-sm leading-relaxed">
+                                To be Kerala's #1 digital transformation partner, setting the benchmark for performance, aesthetics, and ROI.
+                            </p>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* --- Stats Banner --- */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="bg-slate-900 rounded-3xl p-10 md:p-14 mb-24 relative overflow-hidden text-center md:text-left"
+                >
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand/20 blur-[80px] rounded-full pointer-events-none" />
+                    <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+                        {stats.map((stat, i) => (
+                            <div key={i} className="flex flex-col items-center md:items-start">
+                                <span className="text-4xl md:text-5xl font-black text-white mb-2">{stat.value}</span>
+                                <span className="text-sm md:text-base text-slate-400 font-medium uppercase tracking-wider">{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* --- Core Values --- */}
+                <div className="mb-12">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-slate-900">Our Core Values</h2>
+                        <div className="w-20 h-1 bg-brand mx-auto mt-4 rounded-full" />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {values.map((v, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                            >
+                                <v.icon className="w-10 h-10 text-brand mb-4" />
+                                <h3 className="font-bold text-lg text-slate-900 mb-2">{v.title}</h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">{v.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
         </section>
     );
 }
