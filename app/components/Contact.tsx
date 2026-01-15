@@ -71,7 +71,7 @@ export default function Contact() {
             Get In Touch
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight">
-            Let's Build Something <span className="text-brand">Extraordinary</span>
+            Contact <span className="text-brand">Spabrix</span> — Web Design Agency in Kerala
           </h2>
           <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg">
             Ready to transform your digital presence? We are here to help you grow.

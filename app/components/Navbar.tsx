@@ -81,9 +81,11 @@ export default function Navbar() {
               <div className="relative w-14 h-14">
                 <Image
                   src="/spabrix-logo-new.png"
-                  alt="Spabrix Logo"
+                  alt="Spabrix Digital Agency Logo"
                   fill
                   className="object-contain"
+                  priority
+                  sizes="56px"
                 />
               </div>
               <span className={`text-2xl font-bold bg-clip-text text-transparent bg-blue-600 leading-none ${scrolled ? 'opacity-100' : 'opacity-90'}`}>

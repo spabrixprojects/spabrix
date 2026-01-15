@@ -1,107 +1,164 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaRocket, FaLightbulb, FaUsers, FaArrowRight } from 'react-icons/fa';
+import { Sparkles, Target, Zap, Heart, ArrowRight } from 'lucide-react';
 
-export default function About() {
-  const steps = [
-    {
-      icon: <FaLightbulb className="text-2xl text-white" />,
-      title: "Strategy First",
-      description: "We dive deep into your goals. Before writing a line of code, we blueprint a strategy that targets your audience and outpaces competitors.",
-      color: "from-amber-400 to-orange-500"
-    },
-    {
-      icon: <FaRocket className="text-2xl text-white" />,
-      title: "High-Performance Build",
-      description: "Speed matches scale. We engine websites with Next.js and React that load instantly, rank higher on Google, and convert visitors.",
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: <FaUsers className="text-2xl text-white" />,
-      title: "Growth Ecosystem",
-      description: "Launch is just day one. We integrate analytics, SEO hooks, and marketing channels to turn your site into a revenue-generating asset.",
-      color: "from-purple-500 to-indigo-500"
-    }
-  ];
+const About = () => {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
 
-  return (
-    <section id="about" className="py-24 relative overflow-hidden bg-slate-50">
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            },
+        },
+    };
 
-      {/* Background Blobs for Atmosphere */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-100/40 rounded-full blur-[120px] pointer-events-none" />
+    const cards = [
+        {
+            icon: Target,
+            title: "Our Mission",
+            desc: "To empower businesses with digital solutions that drive real growth and tangible results.",
+            color: "bg-blue-50 text-blue-600",
+        },
+        {
+            icon: Zap,
+            title: "The Vision",
+            desc: "Creating a future where technology and design merge seamlessly to enhance human potential.",
+            color: "bg-amber-50 text-amber-600",
+        },
+        {
+            icon: Heart,
+            title: "Core Values",
+            desc: "Integrity, innovation, and a relentless commitment to excellence in everything we do.",
+            color: "bg-rose-50 text-rose-600",
+        }
+    ];
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    return (
+        <section id="about" className="py-32 bg-white relative overflow-hidden">
+            {/* Decorative Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 90, 0],
+                    }}
+                    transition={{
+                        duration: 20,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                    className="absolute -top-[10%] -right-[5%] w-[800px] h-[800px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-60"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1, 1.1, 1],
+                        x: [0, 50, 0],
+                    }}
+                    transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="absolute -bottom-[10%] -left-[5%] w-[600px] h-[600px] bg-gradient-to-tr from-emerald-50 to-teal-50 rounded-full blur-3xl opacity-60"
+                />
+            </div>
 
-        {/* Header Section */}
-        <div className="text-center mb-20">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block py-1 px-3 rounded-full bg-blue-50 border border-blue-100 text-brand text-xs font-bold tracking-wider uppercase mb-4"
-          >
-            The Spabrix Difference
-          </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight"
-          >
-            Why Partner With Us?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed font-medium"
-          >
-            We bridge the gap between <span className="text-slate-900 border-b-2 border-brand/20">creative design</span> and <span className="text-slate-900 border-b-2 border-brand/20">business logic</span>.
-            Spabrix doesn't just deliver files; we deliver results that impact your bottom line.
-          </motion.p>
-        </div>
+            <div className="container mx-auto px-4 relative z-10">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="max-w-7xl mx-auto"
+                >
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        {/* Left Content */}
+                        <motion.div variants={itemVariants} className="space-y-8">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold tracking-wide uppercase">
+                                <Sparkles size={16} className="text-blue-600" />
+                                <span>Our Story</span>
+                            </div>
 
-        {/* Value Props Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="relative p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group overflow-hidden"
-            >
-              {/* Card Gradient Overlay (Hover) */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
+                                Crafting Digital <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                                    Experiences
+                                </span>
+                            </h2>
 
-              <div className="relative z-10">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 mb-6`}>
-                  {step.icon}
-                </div>
+                            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
+                                We started with a simple idea: to make the web more beautiful and functional. Today, we are a team of passionate creators, developers, and strategists dedicated to helping brands find their voice in the digital noise.
+                            </p>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-brand transition-colors">
-                  {step.title}
-                </h3>
+                            <div className="flex flex-wrap gap-4 pt-4">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="px-8 py-4 bg-slate-900 text-white rounded-full font-bold shadow-lg shadow-slate-200 hover:shadow-xl transition-all flex items-center gap-2 group"
+                                >
+                                    Read More
+                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                </motion.button>
+                            </div>
 
-                <p className="text-slate-600 leading-relaxed text-base mb-6">
-                  {step.description}
-                </p>
+                            {/* Stats Row */}
+                            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-slate-100">
+                                {[
+                                    { label: "Projects", value: "150+" },
+                                    { label: "Clients", value: "80+" },
+                                    { label: "Awards", value: "12" },
+                                ].map((stat, idx) => (
+                                    <div key={idx}>
+                                        <p className="text-3xl font-bold text-slate-900">{stat.value}</p>
+                                        <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
 
-                <div className="flex items-center text-sm font-bold text-slate-400 group-hover:text-brand transition-colors cursor-pointer">
-                  Learn More <FaArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                        {/* Right Interactive Cards */}
+                        <div className="grid grid-cols-1 gap-6">
+                            {cards.map((card, index) => (
+                                <motion.div
+                                    key={index}
+                                    variants={itemVariants}
+                                    whileHover={{ scale: 1.02, x: 10 }}
+                                    className="p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group cursor-default"
+                                >
+                                    <div className="flex items-start gap-6">
+                                        <div className={`p-4 rounded-2xl ${card.color} group-hover:scale-110 transition-transform duration-300`}>
+                                            <card.icon size={28} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-bold text-slate-900 mb-2">{card.title}</h3>
+                                            <p className="text-slate-600 leading-relaxed">
+                                                {card.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+};
 
-      </div>
-    </section>
-  );
-}
+export default About;

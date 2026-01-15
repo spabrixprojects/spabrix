@@ -3,6 +3,12 @@
 
 @theme {
   --color-brand: #026dfd;
+  --font-outfit: 'Outfit', sans-serif;
+}
+
+/* Outfit Font Utility */
+.font-outfit {
+  font-family: var(--font-outfit);
 }
 
 :root {

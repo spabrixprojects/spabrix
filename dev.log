@@ -1,0 +1,29 @@
+
+> fozecode@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.1.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.13.6.208:3000
+
+✓ Starting...
+✓ Ready in 1580ms
+⨯ ./app/page.tsx:3:1
+Module not found: Can't resolve './components/About'
+[0m [90m 1 |[39m [36mimport[39m [33mReact[39m [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m [33mHero[39m [36mfrom[39m [32m"./components/Hero"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m [33mAbout[39m [36mfrom[39m [32m"./components/About"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m [33mContact[39m [36mfrom[39m [32m"./components/Contact"[39m[33m;[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mconst[39m [33mPage[39m [33m=[39m () [33m=>[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 1502ms (compile: 1290ms, render: 213ms)
+Terminate batch job (Y/N)? [?25h
+
+^C
