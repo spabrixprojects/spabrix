@@ -12,10 +12,10 @@ const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 export const metadata: Metadata = {
   metadataBase: new URL('https://spabrix.in'),
   title: {
-    default: 'Spabrix - Best Web Design & Digital Marketing Agency in Malappuram, Kerala',
-    template: '%s | Spabrix Digital Agency'
+    default: 'Spabrix: Top Web Design & SEO Agency Malappuram, Kerala',
+    template: '%s | Spabrix Agency'
   },
-  description: 'Spabrix is the leading web development, SEO & digital marketing agency in Malappuram, Kerala. We build high-performance websites, boost Google rankings, and deliver measurable business growth. Get a free quote today!',
+  description: 'Spabrix is the top web design & digital marketing agency in Malappuram, Kerala. We build SEO-friendly websites & strategies to grow your business online.',
   keywords: [
     'web design company Kerala',
     'best web development agency Malappuram',
@@ -75,6 +75,10 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-verification-code', // Add your Google Search Console verification
+  },
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/spabrix-logo-new.png',
   },
 };
 

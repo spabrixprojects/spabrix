@@ -101,6 +101,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
+                  title={`Navigate to ${link.name} Page`}
                   className={`text-sm font-medium transition-colors hover:text-brand relative group ${scrolled ? 'text-slate-700' : 'text-slate-800'
                     }`}
                 >

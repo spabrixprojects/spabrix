@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="text-3xl font-bold flex items-center gap-3">
               <Image
                 src="/spabrix-logo-new.png"
-                alt="Spabrix Logo"
+                alt="Spabrix Digital Agency Logo - Web Design Malappuram"
                 width={64}
                 height={64}
                 className="object-contain"
