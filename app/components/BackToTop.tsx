@@ -9,18 +9,11 @@ export default function BackToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show button when scrolled down 75% of the page height
+      // Show button when scrolled down 300px
       const scrollPosition = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      const documentHeight = document.body.scrollHeight;
-      
-      // Calculate how far down the page the user has scrolled
-      const scrollPercentage = scrollPosition / (documentHeight - viewportHeight);
-      
-      // Show when scrolled down 80% or more
-      setVisible(scrollPercentage > 0.8);
+      setVisible(scrollPosition > 300);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -42,7 +35,7 @@ export default function BackToTop() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={scrollToTop}
-          className="fixed bottom-36 right-5 backdrop-blur-md p-t   p-3 rounded-full shadow-lg z-50"
+          className="fixed bottom-28 right-6 backdrop-blur-md bg-white/80 border border-white/20 text-slate-800 p-3 rounded-full shadow-lg z-50 hover:bg-white hover:text-brand transition-colors"
           aria-label="Back to top"
         >
           <ArrowUp size={24} />
