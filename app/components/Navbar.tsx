@@ -7,7 +7,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   X,
-  Menu, // Corrected import
+  Menu,
+  Home,
   Info,
   Code,
   Briefcase,
@@ -47,6 +48,7 @@ export default function Navbar() {
 
   // Define navLinks locally to match usage
   const navLinks = [
+    { name: 'Home', href: '/', icon: Home },
     { name: 'About', href: '/about', icon: Info },
     { name: 'Services', href: '/services', icon: Code },
     { name: 'Projects', href: '/projects', icon: Briefcase },
@@ -180,11 +182,11 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                <div className="pt-6 mt-auto border-t border-slate-200/50 shrink-0">
+                <div className="pt-4 mt-auto border-t border-slate-200/50 shrink-0">
                   <Link
                     href="/contact"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-lg shadow-blue-500/25 active:scale-[0.98] transition-all text-center text-lg hover:shadow-blue-500/40"
+                    className="block w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md shadow-blue-500/25 active:scale-[0.98] transition-all text-center text-base hover:shadow-blue-500/40"
                   >
                     Get Started
                   </Link>
