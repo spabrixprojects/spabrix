@@ -6,7 +6,6 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import BackToTop from './components/BackToTop';
 import WhatsAppButton from './components/WhatsAppButton';
-import Preloader from './components/Preloader';
 
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
@@ -188,7 +187,6 @@ export default function RootLayout({
           Skip to main content
         </a>
         <CustomCursor />
-        <Preloader />
         <Navbar />
         <BackToTop />
         <WhatsAppButton />
