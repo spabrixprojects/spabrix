@@ -12,36 +12,42 @@ const services = [
         title: 'Custom Web Development',
         description: 'High-performance websites built with Next.js & React. Fast, secure, and scalable solutions.',
         color: 'from-blue-500 to-cyan-500',
+        slug: 'web-development',
     },
     {
         icon: FaSearch,
         title: 'SEO & Google Ranking',
-        description: 'Dominate search results with our proven SEO strategies. Get found by customers in Kerala.',
+        description: 'Dominate search results with data-driven SEO strategies. Get found by customers in Kerala.',
         color: 'from-emerald-500 to-teal-500',
+        slug: 'seo',
     },
     {
         icon: FaPaintBrush,
         title: 'Logo & Brand Design',
         description: 'Memorable brand identities that make your business stand out from competition.',
         color: 'from-purple-500 to-pink-500',
+        slug: 'branding',
     },
     {
         icon: FaShoppingCart,
         title: 'E-commerce Solutions',
         description: 'Online stores with secure payments, inventory management, and seamless user experience.',
         color: 'from-orange-500 to-red-500',
+        slug: 'ecommerce',
     },
     {
         icon: FaChartLine,
         title: 'Digital Marketing',
         description: 'Data-driven marketing campaigns on Google, Facebook, and Instagram that convert.',
         color: 'from-indigo-500 to-blue-500',
+        slug: 'digital-marketing',
     },
     {
         icon: FaMobileAlt,
         title: 'Social Media Marketing',
         description: 'Engaging content and strategic posting to build your brand presence online.',
         color: 'from-pink-500 to-rose-500',
+        slug: 'social-media',
     },
 ];
 
@@ -99,24 +105,28 @@ export default function ServicesSection() {
                 {/* Services Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     {services.map((service, index) => (
-                        <motion.div
-                            key={service.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            viewport={{ once: true }}
-                            className="group p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-brand/30 transition-all duration-300"
-                        >
-                            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                <service.icon className="w-7 h-7 text-white" />
-                            </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">
-                                {service.title}
-                            </h3>
-                            <p className="text-slate-600 text-sm leading-relaxed">
-                                {service.description}
-                            </p>
-                        </motion.div>
+                        <Link key={service.title} href={`/services#${service.slug}`}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                viewport={{ once: true }}
+                                className="group p-6 bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-brand/30 transition-all duration-300 cursor-pointer h-full"
+                            >
+                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                                    <service.icon className="w-7 h-7 text-white" aria-hidden="true" />
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p className="text-slate-600 text-sm leading-relaxed">
+                                    {service.description}
+                                </p>
+                                <span className="inline-flex items-center gap-1 text-brand text-sm font-semibold mt-4 group-hover:gap-2 transition-all">
+                                    Learn more <ArrowRight className="w-4 h-4" />
+                                </span>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
 

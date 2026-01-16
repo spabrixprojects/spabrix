@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { Sparkles, Target, Zap, Heart, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const About = () => {
     const containerVariants: Variants = {
@@ -106,14 +107,13 @@ const About = () => {
                             </p>
 
                             <div className="flex flex-wrap gap-4 pt-4">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="px-8 py-4 bg-slate-900 text-white rounded-full font-bold shadow-lg shadow-slate-200 hover:shadow-xl transition-all flex items-center gap-2 group"
+                                <Link
+                                    href="/about"
+                                    className="px-8 py-4 bg-slate-900 text-white rounded-full font-bold shadow-lg shadow-slate-200 hover:shadow-xl transition-all flex items-center gap-2 group hover:scale-105"
                                 >
                                     Read More
                                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </motion.button>
+                                </Link>
                             </div>
 
                             {/* Stats Row */}

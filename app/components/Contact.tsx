@@ -86,7 +86,7 @@ export default function Contact() {
               <div>
                 <h3 className="text-lg font-bold text-slate-900 mb-1">Email Us</h3>
                 <p className="text-slate-600 group-hover:text-brand transition-colors">spabrix@gmail.com</p>
-                <p className="text-sm text-slate-400 mt-1">We rely within 24 hours</p>
+                <p className="text-sm text-slate-400 mt-1">We reply within 24 hours</p>
               </div>
             </div>
 
@@ -136,6 +136,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder=" "
                   required
+                  autoComplete="name"
                   className="block py-3 px-0 w-full text-base text-slate-900 bg-transparent border-0 border-b-2 border-slate-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer transition-colors"
                 />
                 <label
@@ -155,6 +156,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder=" "
                   required
+                  autoComplete="email"
                   className="block py-3 px-0 w-full text-base text-slate-900 bg-transparent border-0 border-b-2 border-slate-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer transition-colors"
                 />
                 <label
