@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Navbar';
@@ -10,14 +10,20 @@ import WhatsAppButton from './components/WhatsAppButton';
 const inter = Inter({ subsets: ['latin'] });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 // SEO-Optimized Metadata for GEO & AEO
 export const metadata: Metadata = {
   metadataBase: new URL('https://spabrix.in'),
   title: {
-    default: 'Spabrix: Top Web Design & SEO Agency Malappuram, Kerala',
+    default: 'Best Web Design & SEO Agency in Kerala | Spabrix',
     template: '%s | Spabrix Agency'
   },
-  description: 'Spabrix is the top web design & digital marketing agency in Malappuram, Kerala. We build SEO-friendly websites & strategies to grow your business online.',
+  description: 'Top web design & digital marketing agency in Malappuram, Kerala. We build fast, SEO-driven websites to grow your business.',
   keywords: [
     'web design company Kerala',
     'best web development agency Malappuram',
@@ -69,11 +75,8 @@ export const metadata: Metadata = {
       follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
-      'max-snippet': -1,
+        'max-snippet': -1,
     },
-  },
-  alternates: {
-    canonical: 'https://spabrix.in',
   },
   verification: {
     google: '6f9381d394c102e5', // Google Search Console verification (from google6f9381d394c102e5.html)
@@ -138,7 +141,7 @@ const jsonLd = {
         { '@type': 'City', name: 'Malappuram' },
         { '@type': 'City', name: 'Calicut' },
         { '@type': 'City', name: 'Kochi' },
-        { '@type': 'State', name: 'Kerala' },
+        { '@type': 'AdministrativeArea', name: 'Kerala' },
       ],
       openingHoursSpecification: [
         {
@@ -174,7 +177,7 @@ const jsonLd = {
       name: 'Custom Web Development',
       description: 'High-performance websites built with Next.js & React. Fast, secure, and scalable solutions for businesses in Kerala.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
     {
       '@type': 'Service',
@@ -183,7 +186,7 @@ const jsonLd = {
       name: 'SEO & Google Ranking',
       description: 'Data-driven SEO strategies to help your business rank on Google Page 1 in Kerala.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
     {
       '@type': 'Service',
@@ -192,7 +195,7 @@ const jsonLd = {
       name: 'Logo & Brand Design',
       description: 'Memorable brand identities that make your business stand out from competition.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
     {
       '@type': 'Service',
@@ -201,7 +204,7 @@ const jsonLd = {
       name: 'E-commerce Solutions',
       description: 'Online stores with secure payments, inventory management, and seamless user experience.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
     {
       '@type': 'Service',
@@ -210,7 +213,7 @@ const jsonLd = {
       name: 'Digital Marketing',
       description: 'Data-driven marketing campaigns on Google, Facebook, and Instagram that convert.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
     {
       '@type': 'Service',
@@ -219,7 +222,7 @@ const jsonLd = {
       name: 'Social Media Marketing',
       description: 'Engaging content and strategic posting to build your brand presence online.',
       provider: { '@id': 'https://spabrix.in/#organization' },
-      areaServed: { '@type': 'State', name: 'Kerala' },
+      areaServed: { '@type': 'AdministrativeArea', name: 'Kerala' },
     },
   ],
 };

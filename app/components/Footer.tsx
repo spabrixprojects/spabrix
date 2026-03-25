@@ -1,4 +1,4 @@
-import { FaFacebookF, FaWhatsapp, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter } from "react-icons/fa";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -47,6 +47,16 @@ export default function Footer() {
                   href: "https://www.linkedin.com/company/spabrix",
                   icon: <FaLinkedinIn size={18} />,
                   label: "Connect with Spabrix on LinkedIn",
+                },
+                {
+                  href: "https://youtube.com/@spabrix",
+                  icon: <FaYoutube size={18} />,
+                  label: "Subscribe to Spabrix on YouTube",
+                },
+                {
+                  href: "https://twitter.com/spabrix",
+                  icon: <FaTwitter size={18} />,
+                  label: "Follow Spabrix on X (Twitter)",
                 },
               ].map((social, i) => (
                 <a

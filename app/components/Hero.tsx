@@ -8,7 +8,7 @@ import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative h-screen min-h-[700px] max-h-[900px] flex items-center overflow-hidden bg-white ">
+    <section className="relative min-h-[100svh] py-20 lg:py-0 flex items-center overflow-hidden bg-white">
       {/* --- Background Effects --- */}
       <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
@@ -47,13 +47,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-outfit text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-black tracking-tight text-slate-900 mb-3 leading-[1.15]"
+              className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 mb-4 leading-[1.15]"
             >
-              Best{' '}
+              Top{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand via-blue-600 to-cyan-500">
                 Web Design
               </span>{' '}
-              & Digital Marketing Agency in{' '}
+              & SEO Agency in{' '}
               <span className="text-brand">Kerala</span>
             </motion.h1>
 
@@ -62,9 +62,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xs sm:text-sm md:text-base text-slate-600 max-w-lg mx-auto lg:mx-0 mb-4 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-slate-600 max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed"
             >
-              We build <strong>high-performance websites</strong>, boost your{' '}
+              We build <strong>high-converting websites</strong>, boost your{' '}
               <strong>Google rankings</strong>, and create stunning brand identities.
             </motion.p>
 
@@ -102,21 +102,21 @@ export default function Hero() {
             >
               <Link
                 href="/contact"
-                className="group relative w-full sm:w-auto px-6 py-3 bg-slate-900 text-white font-bold text-sm rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+                className="group relative w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold text-base rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
               >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <Sparkles className="w-5 h-5 text-amber-300" />
                   Get Free Quote
                 </span>
               </Link>
 
               <Link
                 href="/projects"
-                className="group w-full sm:w-auto px-6 py-3 rounded-xl bg-white text-slate-700 font-bold text-sm border-2 border-slate-200 hover:border-brand/50 transition-all flex items-center justify-center gap-2"
+                className="group w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-700 font-bold text-base border-2 border-slate-200 hover:border-brand/50 transition-all flex items-center justify-center gap-2"
               >
                 View Our Work
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
