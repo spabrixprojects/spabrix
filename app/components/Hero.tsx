@@ -27,20 +27,7 @@ export default function Hero() {
             className="text-center lg:text-left order-2 lg:order-1"
           >
             {/* Badge - Local SEO Signal */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-emerald-50 border border-emerald-200 mb-4"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-emerald-700 text-[11px] sm:text-xs font-semibold">
-                🏆 Trusted by 80+ Businesses in Kerala
-              </span>
-            </motion.div>
+           
 
             {/* H1 Heading - SEO Optimized */}
             <motion.h1
@@ -53,7 +40,7 @@ export default function Hero() {
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand via-blue-600 to-cyan-500">
                 Web Design
               </span>{' '}
-              & SEO Agency in{' '}
+              & Digital marketing Agency in{' '}
               <span className="text-brand">Kerala</span>
             </motion.h1>
 
