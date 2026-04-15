@@ -71,9 +71,9 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed z-50 transition-all duration-300 ease-in-out ${scrolled
-          ? 'w-[92%] sm:w-[85%] md:w-[80%] max-w-5xl left-1/2 -translate-x-1/2 top-4 rounded-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg py-2.5 px-6'
-          : 'w-full top-0 left-0 bg-transparent py-6 px-4 sm:px-6 lg:px-8'
+        className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${scrolled
+          ? 'w-[92%] sm:w-[85%] md:w-[80%] max-w-5xl top-4 rounded-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg py-2.5 px-6'
+          : 'w-full top-0 bg-transparent py-6 px-4 sm:px-6 lg:px-8'
           }`}
       >
         <div className={`w-full h-full ${!scrolled ? 'max-w-7xl mx-auto' : ''}`}>
