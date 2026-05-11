@@ -1,71 +1,43 @@
 import { FaFacebookF, FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter } from "react-icons/fa";
-
 import Link from "next/link";
 import Image from "next/image";
+
 export default function Footer() {
   return (
-    <footer className="relative bg-slate-50 text-slate-700 py-16 px-6 overflow-hidden border-t border-slate-200">
-      {/* Main Container */}
+    <footer className="relative bg-[#050505] text-white py-20 px-6 overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Branding */}
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          
+          <div className="md:col-span-2">
             <div className="text-3xl font-bold flex items-center gap-3">
               <Image
                 src="/spabrix-logo-new.png"
                 alt="Spabrix Digital Agency Logo - Web Design Malappuram"
-                width={64}
-                height={64}
-                className="object-contain"
+                width={48}
+                height={48}
+                className="object-contain filter brightness-0 invert"
               />
-              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand to-blue-600">Spabrix</span>
+              <span className="text-2xl font-bold tracking-widest uppercase">Spabrix</span>
             </div>
-            <p className="mt-4 text-slate-500 leading-relaxed max-w-sm">
-              Spabrix is a web development and digital marketing agency in Malappuram, Kerala.
-              We specialize in creating SEO-friendly websites and online solutions for
-              local businesses looking to grow online.
+            <p className="mt-6 text-slate-400 font-light leading-relaxed max-w-sm">
+              We are an independent creative studio operating at the intersection of design, technology, and strategy, crafting premium digital experiences.
             </p>
-            {/* Social Media */}
-            <div className="flex space-x-4 mt-6">
+            
+            <div className="flex space-x-4 mt-8">
               {[
-                {
-                  href: "https://www.facebook.com/spabrix",
-                  icon: <FaFacebookF size={18} />,
-                  label: "Follow Spabrix on Facebook",
-                },
-                {
-                  href: "https://wa.me/919946972210?text=Hello%20Spabrix!",
-                  icon: <FaWhatsapp size={18} />,
-                  label: "Chat with Spabrix on WhatsApp",
-                },
-                {
-                  href: "https://www.instagram.com/spabrix",
-                  icon: <FaInstagram size={18} />,
-                  label: "Follow Spabrix on Instagram",
-                },
-                {
-                  href: "https://www.linkedin.com/company/spabrix",
-                  icon: <FaLinkedinIn size={18} />,
-                  label: "Connect with Spabrix on LinkedIn",
-                },
-                {
-                  href: "https://youtube.com/@spabrix",
-                  icon: <FaYoutube size={18} />,
-                  label: "Subscribe to Spabrix on YouTube",
-                },
-                {
-                  href: "https://twitter.com/spabrix",
-                  icon: <FaTwitter size={18} />,
-                  label: "Follow Spabrix on X (Twitter)",
-                },
+                { href: "https://www.facebook.com/spabrix", icon: <FaFacebookF size={18} /> },
+                { href: "https://wa.me/919946972210", icon: <FaWhatsapp size={18} /> },
+                { href: "https://www.instagram.com/spabrix", icon: <FaInstagram size={18} /> },
+                { href: "https://www.linkedin.com/company/spabrix", icon: <FaLinkedinIn size={18} /> },
+                { href: "https://youtube.com/@spabrix", icon: <FaYoutube size={18} /> },
+                { href: "https://twitter.com/spabrix", icon: <FaTwitter size={18} /> },
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="p-3 bg-white border border-slate-200 rounded-full text-slate-600 hover:text-white hover:bg-gradient-to-r hover:from-brand hover:to-blue-600 hover:shadow-lg hover:shadow-brand/30 transition-all duration-300"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-slate-300 hover:text-black hover:bg-white hover:border-white transition-all duration-300"
                 >
                   {social.icon}
                 </a>
@@ -73,17 +45,16 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <nav aria-label="Footer Navigation">
-            <h4 className="text-xl font-bold mb-6 text-slate-800">
-              Quick Links
+            <h4 className="text-sm font-mono tracking-widest text-slate-500 uppercase mb-6">
+              Navigation
             </h4>
-            <ul className="space-y-3 text-slate-600">
+            <ul className="space-y-4">
               {["About", "Services", "Projects", "Contact", "Blog", "FAQ"].map((item) => (
                 <li key={item}>
                   <Link
                     href={`/${item.toLowerCase()}`}
-                    className="hover:text-brand transition-colors font-medium"
+                    className="text-slate-300 hover:text-white transition-colors font-light text-lg"
                   >
                     {item}
                   </Link>
@@ -92,32 +63,22 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-xl font-bold mb-6 text-slate-800">
-              Contact Us
+            <h4 className="text-sm font-mono tracking-widest text-slate-500 uppercase mb-6">
+              Contact
             </h4>
-            <address className="not-italic text-slate-600 space-y-2">
+            <address className="not-italic text-slate-300 space-y-4 font-light text-lg">
               <p>
-                <strong>Email:</strong>{" "}
-                <a
-                  href="mailto:spabrix@gmail.com"
-                  className="text-slate-700 hover:text-brand hover:underline font-medium"
-                >
+                <a href="mailto:spabrix@gmail.com" className="hover:text-white transition-colors">
                   spabrix@gmail.com
                 </a>
               </p>
               <p>
-                <strong>Phone:</strong>{" "}
-                <a
-                  href="tel:+919946972210"
-                  className="text-slate-700 hover:text-brand hover:underline font-medium"
-                >
+                <a href="tel:+919946972210" className="hover:text-white transition-colors">
                   +91 9946972210
                 </a>
               </p>
-              <p className="pt-2">
-                <strong>Location:</strong><br />
+              <p className="pt-2 text-slate-400">
                 Malappuram, Kerala 676505<br />
                 India
               </p>
@@ -125,17 +86,13 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="mt-12 pt-6 border-t border-slate-200 text-center text-slate-500 text-sm">
+        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-sm font-light">
           <p suppressHydrationWarning>© {new Date().getFullYear()} Spabrix. All rights reserved.</p>
-          <div className="mt-3 flex justify-center space-x-6">
-            <Link
-              href="/privacy-policy"
-              className="hover:text-brand transition-colors"
-            >
+          <div className="flex space-x-6">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-brand transition-colors">
+            <Link href="/terms" className="hover:text-white transition-colors">
               Terms & Conditions
             </Link>
           </div>

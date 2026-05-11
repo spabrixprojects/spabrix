@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Outfit } from 'next/font/google';
+import { Inter, Outfit, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,8 +7,9 @@ import CustomCursor from './components/CustomCursor';
 import BackToTop from './components/BackToTop';
 import WhatsAppButton from './components/WhatsAppButton';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -240,7 +241,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} ${outfit.variable}`}>
+      <body className={`${inter.variable} ${outfit.variable} ${playfair.variable} font-sans`}>
         {/* Skip to content link for accessibility */}
         <a
           href="#main-content"

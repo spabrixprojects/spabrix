@@ -1,200 +1,242 @@
 'use client';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
 
-export default function Hero() {
-  return (
-    <section className="relative min-h-[100svh] py-20 lg:py-0 flex items-center overflow-hidden bg-white">
-      {/* --- Background Effects --- */}
-      <div className="absolute inset-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+// Utility for scramble text effect
+const scrambleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&*";
 
-      {/* Aurora Gradients */}
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-blue-500/10 rounded-full blur-[120px] animate-pulse" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-cyan-400/10 rounded-full blur-[120px] animate-pulse delay-700" />
+function ScrambleText({ text, delay }: { text: string, delay: number }) {
+    const [displayText, setDisplayText] = useState(text.replace(/./g, '-'));
+    
+    useEffect(() => {
+        let iterations = 0;
+        const interval = setInterval(() => {
+            setDisplayText((prev) => 
+                prev.split('').map((letter, index) => {
+                    if (index < iterations) return text[index];
+                    return scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)];
+                }).join('')
+            );
+            if (iterations >= text.length) clearInterval(interval);
+            iterations += 1 / 3; 
+        }, 30);
+        
+        const timeout = setTimeout(() => interval, delay * 1000);
+        return () => { clearInterval(interval); clearTimeout(timeout); };
+    }, [text, delay]);
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6 lg:gap-12">
-
-          {/* Left Column: Text Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left order-2 lg:order-1"
-          >
-            {/* Badge - Local SEO Signal */}
-           
-
-            {/* H1 Heading - SEO Optimized */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="font-outfit text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 mb-4 leading-[1.15]"
-            >
-              Top{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand via-blue-600 to-cyan-500">
-                Web Design
-              </span>{' '}
-              & Digital marketing Agency in{' '}
-              <span className="text-brand">Kerala</span>
-            </motion.h1>
-
-            {/* Subtext - Keyword Rich */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm sm:text-base md:text-lg text-slate-600 max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed"
-            >
-              We build <strong>high-converting websites</strong>, boost your{' '}
-              <strong>Google rankings</strong>, and create stunning brand identities.
-            </motion.p>
-
-            {/* Type Animation - Service Keywords */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="h-6 mb-5 text-slate-500 font-medium text-xs sm:text-sm"
-            >
-              <TypeAnimation
-                sequence={[
-                  '🚀 Custom Website Development',
-                  2000,
-                  '📈 SEO & Google Ranking',
-                  2000,
-                  '🎨 Logo & Brand Design',
-                  2000,
-                  '📱 Social Media Marketing',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-                cursor={true}
-              />
-            </motion.div>
-
-            {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-5"
-            >
-              <Link
-                href="/contact"
-                className="group relative w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold text-base rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
-              >
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-brand opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  <Sparkles className="w-5 h-5 text-amber-300" />
-                  Get Free Quote
-                </span>
-              </Link>
-
-              <Link
-                href="/projects"
-                className="group w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-700 font-bold text-base border-2 border-slate-200 hover:border-brand/50 transition-all flex items-center justify-center gap-2"
-              >
-                View Our Work
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-
-            {/* Trust Signals */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1 text-[10px] sm:text-xs font-semibold text-slate-500"
-            >
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>100% Satisfaction</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Quick Response</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Fast Delivery</span>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column: 3D Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="order-1 lg:order-2 flex justify-center"
-          >
-            <TiltImage />
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+    return <span>{displayText}</span>;
 }
 
-function TiltImage() {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  
+  // Smooth scroll parallax
+  const opacityText = useTransform(scrollY, [0, 600], [1, 0]);
+  const yHero = useTransform(scrollY, [0, 800], [0, 250]);
 
-  const rotateX = useTransform(y, [-100, 100], [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+  // Mouse tracking for the custom floating orb
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  
+  const springConfig = { damping: 25, stiffness: 120 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX - 150);
+      cursorY.set(e.clientY - 150);
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, [cursorX, cursorY]);
+
+  // Framer Motion staggered character reveal
+  const titleVariants = {
+    hidden: { y: "150%", rotateZ: 10, opacity: 0 },
+    visible: (i: number) => ({
+      y: "0%", 
+      rotateZ: 0, 
+      opacity: 1,
+      transition: { duration: 1.4, delay: 1 + (i * 0.04), ease: [0.16, 1, 0.3, 1] }
+    })
+  };
 
   return (
-    <motion.div
-      style={{ x, y, rotateX, rotateY, z: 100 }}
-      drag
-      dragElastic={0.08}
-      dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-      whileTap={{ cursor: "grabbing" }}
-      className="relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[420px] xl:h-[420px] cursor-grab"
-    >
-      {/* Glow Behind Image */}
-      <motion.div
-        animate={{
-          scale: [0.85, 1.05, 0.85],
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 to-cyan-400/40 blur-[50px] rounded-full"
-      />
-
-      {/* Floating Image Animation */}
-      <motion.div
-        animate={{
-          y: [0, -15, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="relative w-full h-full"
+    <>
+      {/* Premium Curtain Intro Animation */}
+      <motion.div 
+        initial={{ height: "100vh", top: 0 }}
+        animate={{ height: "0vh", top: 0 }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className="fixed inset-0 z-[200] bg-[#050505] flex items-center justify-center pointer-events-none"
       >
-        <Image
-          src="/hero-3d-Photoroom.webp"
-          alt="Web Design & Digital Marketing Services - Spabrix Kerala"
-          fill
-          className="object-contain drop-shadow-2xl pointer-events-none"
-          priority
-          sizes="(max-width: 640px) 200px, (max-width: 768px) 280px, (max-width: 1024px) 320px, 420px"
-        />
+        <motion.div 
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-white font-mono tracking-[0.5em] text-xs uppercase"
+        >
+            <ScrambleText text="INITIALIZING_ENVIRONMENT" delay={0} />
+        </motion.div>
       </motion.div>
-    </motion.div>
+
+      <section ref={containerRef} className="relative min-h-[100svh] bg-[#030303] text-white overflow-hidden selection:bg-white selection:text-black">
+        
+        {/* Abstract Animated Background Gradients */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] blur-[100px]" 
+          />
+          <motion.div 
+            animate={{ scale: [1, 1.5, 1], rotate: [0, -90, 0] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] blur-[100px]" 
+          />
+        </div>
+
+        {/* Architectural Grid Lines */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.15]">
+          <motion.div initial={{ height: 0 }} animate={{ height: "100%" }} transition={{ duration: 2, delay: 1 }} className="absolute top-0 left-[10%] w-[1px] bg-gradient-to-b from-transparent via-white to-transparent" />
+          <motion.div initial={{ height: 0 }} animate={{ height: "100%" }} transition={{ duration: 2, delay: 1.2 }} className="absolute top-0 right-[10%] w-[1px] bg-gradient-to-b from-transparent via-white to-transparent" />
+          <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 2, delay: 1.4 }} className="absolute top-[20%] left-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
+          <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 2, delay: 1.6 }} className="absolute bottom-[20%] left-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
+        </div>
+
+        {/* Custom Mouse Follower (Glowing Orb) */}
+        <motion.div
+          className="fixed top-0 left-0 w-[300px] h-[300px] bg-white/[0.04] rounded-full blur-[40px] pointer-events-none z-0 hidden md:block"
+          style={{ x: cursorXSpring, y: cursorYSpring }}
+        />
+
+        <motion.div style={{ y: yHero }} className="relative z-10 w-full h-[100svh] flex flex-col justify-center px-4 sm:px-10 lg:px-[10%]">
+          
+          {/* Top Meta Info */}
+          <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 2.5 }}
+              className="absolute top-[25%] left-[10%] lg:left-[12%] flex items-center gap-4 text-[10px] font-mono tracking-[0.3em] uppercase text-slate-500"
+          >
+              <span className="flex h-1.5 w-1.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+              </span>
+              <ScrambleText text="KERALA, INDIA — GLOBAL" delay={2} />
+          </motion.div>
+
+          <motion.div style={{ opacity: opacityText }} className="flex flex-col mt-20">
+              
+              {/* Row 1: Left Aligned */}
+              <div className="overflow-hidden flex">
+                  <motion.div className="flex">
+                      {"We".split('').map((char, i) => (
+                          <motion.h1 key={`we-${i}`} custom={i} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair tracking-tight leading-[0.85] pr-2 md:pr-4">
+                              {char}
+                          </motion.h1>
+                      ))}
+                  </motion.div>
+                  <motion.div className="flex ml-4 md:ml-8">
+                      {"Architect".split('').map((char, i) => (
+                          <motion.h1 key={`arc-${i}`} custom={i + 2} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair italic tracking-tight leading-[0.85] text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-500">
+                              {char}
+                          </motion.h1>
+                      ))}
+                  </motion.div>
+              </div>
+
+              {/* Row 2: Right Aligned with Image integration */}
+              <div className="overflow-hidden flex justify-end items-center gap-6 mt-2 md:mt-4">
+                  <motion.div 
+                      initial={{ scale: 0, rotate: -15, filter: "blur(10px)" }}
+                      animate={{ scale: 1, rotate: 0, filter: "blur(0px)" }}
+                      transition={{ duration: 1.4, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+                      className="hidden md:block w-[18vw] h-[7vw] rounded-[4rem] overflow-hidden relative border border-white/20 bg-[#111] group cursor-pointer"
+                  >
+                      <Image src="/pr2.png" alt="Creative Design" fill className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 mix-blend-overlay" />
+                  </motion.div>
+                  <motion.div className="flex">
+                      {"Digital".split('').map((char, i) => (
+                          <motion.h1 key={`dig-${i}`} custom={i + 9} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair tracking-tight leading-[0.85] text-white">
+                              {char}
+                          </motion.h1>
+                      ))}
+                  </motion.div>
+              </div>
+
+              {/* Row 3: Left Aligned */}
+              <div className="overflow-hidden mt-2 md:mt-4 flex items-end justify-between">
+                  <motion.div className="flex">
+                      {"Empires.".split('').map((char, i) => (
+                          <motion.h1 key={`emp-${i}`} custom={i + 16} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair italic tracking-tight leading-[0.85] text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-white to-slate-400">
+                              {char}
+                          </motion.h1>
+                      ))}
+                  </motion.div>
+
+                  {/* Circular Call to action */}
+                  <motion.div 
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 1.5, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="hidden lg:flex"
+                  >
+                      <Link href="/contact" className="relative flex items-center justify-center w-32 h-32 rounded-full border border-white/20 group hover:bg-white transition-colors duration-500">
+                          <motion.div 
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                              className="absolute inset-2 border border-dashed border-white/30 rounded-full group-hover:border-black/30 transition-colors duration-500"
+                          />
+                          <ArrowUpRight className="w-8 h-8 text-white group-hover:text-black transition-colors duration-500" />
+                          
+                          {/* Magnetic Hover Text Ring */}
+                          <div className="absolute inset-[-20px] rounded-full border border-white/0 group-hover:border-white/10 group-hover:scale-110 transition-all duration-700 pointer-events-none" />
+                      </Link>
+                  </motion.div>
+              </div>
+
+          </motion.div>
+
+          {/* Bottom Details */}
+          <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute bottom-[10%] left-[10%] right-[10%] flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
+          >
+              <div className="text-slate-400 font-light max-w-sm text-sm sm:text-base leading-relaxed overflow-hidden">
+                <motion.p initial={{ y: 50 }} animate={{ y: 0 }} transition={{ duration: 1, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}>
+                    An independent creative engineering studio merging high-end aesthetics with bleeding-edge technology to elevate premium brands above the noise.
+                </motion.p>
+              </div>
+
+              <div className="flex gap-12 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+                  <div className="flex flex-col gap-2 overflow-hidden">
+                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.7 }} className="text-white">Services</motion.span>
+                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.8 }}>Development</motion.span>
+                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.9 }}>Design</motion.span>
+                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 3.0 }}>SEO</motion.span>
+                  </div>
+                  <div className="flex flex-col gap-2 overflow-hidden">
+                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.7 }} className="text-white">Connect</motion.span>
+                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.8 }} href="mailto:spabrix@gmail.com" className="hover:text-white transition-colors">Email</motion.a>
+                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.9 }} href="https://instagram.com" className="hover:text-white transition-colors">Instagram</motion.a>
+                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 3.0 }} href="https://linkedin.com" className="hover:text-white transition-colors">LinkedIn</motion.a>
+                  </div>
+              </div>
+          </motion.div>
+
+        </motion.div>
+      </section>
+    </>
   );
 }

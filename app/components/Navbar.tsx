@@ -5,204 +5,187 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  X,
-  Menu,
-  Home,
-  Info,
-  Code,
-  Briefcase,
-  Phone,
-  BookOpen,
-  HelpCircle
-} from 'lucide-react';
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Services', href: '/services' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Journal', href: '/blog' },
+  { name: 'FAQ', href: '/faq' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll logic remains similar if needed, or simplified
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     }
-
-    // Cleanup function to ensure scroll is restored if component unmounts
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-    };
+    return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  // Define navLinks locally to match usage
-  const navLinks = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'About', href: '/about', icon: Info },
-    { name: 'Services', href: '/services', icon: Code },
-    { name: 'Projects', href: '/projects', icon: Briefcase },
-    { name: 'Contact', href: '/contact', icon: Phone },
-    { name: 'Blog', href: '/blog', icon: BookOpen },
-    { name: 'FAQ', href: '/faq', icon: HelpCircle },
-  ];
-
-  const scrollToContact = () => {
-    // Basic scroll logic if on home, or navigate to contact
-    if (pathname === '/') {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-      }
+  // Framer Motion variants
+  const menuVariants = {
+    closed: { 
+        clipPath: "circle(0% at calc(100% - 3rem) 3rem)",
+        transition: { type: "spring", stiffness: 400, damping: 40 }
+    },
+    open: { 
+        clipPath: "circle(150% at calc(100% - 3rem) 3rem)",
+        transition: { type: "spring", stiffness: 20, restDelta: 2 }
     }
-    // If not on home, Link to contact will handle it
+  };
+
+  const staggerVariants = {
+    closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
+    open: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+  };
+
+  const itemVariants = {
+    closed: { y: 50, opacity: 0 },
+    open: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
   };
 
   return (
     <>
-      <nav
-        className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all duration-300 ease-in-out ${scrolled
-          ? 'w-[92%] sm:w-[85%] md:w-[80%] max-w-5xl top-4 rounded-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-lg py-2.5 px-6'
-          : 'w-full top-0 bg-transparent py-6 px-4 sm:px-6 lg:px-8'
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed z-[100] left-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled
+          ? 'w-[95%] sm:w-[90%] md:w-[85%] max-w-6xl top-6 rounded-full bg-[#0a0a0a]/70 backdrop-blur-2xl border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4)] py-4 px-8'
+          : 'w-full top-0 bg-transparent py-8 px-6 sm:px-12'
           }`}
       >
-        <div className={`w-full h-full ${!scrolled ? 'max-w-7xl mx-auto' : ''}`}>
-          <div className="flex justify-between items-center h-full">
-            {/* Logo */}
-            <Link href="/" aria-label="Spabrix Home" className="flex items-center  group">
-              <div className="relative w-14 h-14">
-                <Image
-                  src="/spabrix-logo-new.png"
-                  alt="Spabrix Digital Agency Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                  sizes="56px"
-                />
-              </div>
-              <span className={`text-2xl font-bold bg-clip-text text-transparent bg-blue-600 leading-none ${scrolled ? 'opacity-100' : 'opacity-90'}`}>
-                Spabrix
-              </span>
-            </Link>
+        <div className="w-full h-full flex justify-between items-center">
+          <Link href="/" aria-label="Spabrix Home" className="flex items-center gap-3 relative z-[110]">
+            <div className="relative w-8 h-8">
+              <Image
+                src="/spabrix-logo-new.png"
+                alt="Spabrix Logo"
+                fill
+                className="object-contain filter brightness-0 invert"
+                priority
+                sizes="32px"
+              />
+            </div>
+            <span className="text-xl font-outfit font-bold tracking-widest text-white">
+              SPABRIX
+            </span>
+          </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  title={`Navigate to ${link.name} Page`}
-                  className={`text-sm font-medium transition-colors hover:text-brand relative group ${scrolled ? 'text-slate-700' : 'text-slate-800'
-                    }`}
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand transition-all group-hover:w-full" />
-                </Link>
-              ))}
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link) => (
               <Link
-                href="/contact"
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-brand to-blue-600 text-white font-semibold shadow-lg shadow-brand/30 hover:shadow-brand/50 hover:scale-105 transition-all active:scale-95"
+                key={link.name}
+                href={link.href}
+                onMouseEnter={() => setHoveredLink(link.name)}
+                onMouseLeave={() => setHoveredLink(null)}
+                className="relative px-6 py-2"
               >
-                Get Started
+                <span className={`relative z-10 text-xs font-mono tracking-widest uppercase transition-colors duration-300 ${pathname === link.href ? 'text-white' : 'text-slate-400 hover:text-white'}`}>
+                  {link.name}
+                </span>
+                {hoveredLink === link.name && (
+                  <motion.div
+                    layoutId="navbar-hover"
+                    className="absolute inset-0 bg-white/10 rounded-full"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
               </Link>
-            </div>
-
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`p-2 rounded-lg transition-colors ${scrolled ? 'text-slate-800 hover:bg-slate-100' : 'text-slate-900 hover:bg-white/20'}`}
-                aria-label="Toggle Navigation"
-              >
-                {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay & Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-sm"
-              aria-hidden="true"
-            />
-
-            {/* Sidebar Drawer */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 h-[100dvh] w-[80%] max-w-sm bg-white/60 backdrop-blur-3xl border-l border-white/40 shadow-2xl z-[60] md:hidden flex flex-col"
+            ))}
+            
+            <Link
+              href="/contact"
+              className="ml-4 px-8 py-3 rounded-full bg-white text-black text-xs font-mono tracking-widest uppercase font-semibold hover:bg-slate-200 hover:scale-105 transition-all duration-300"
             >
-              <div className="p-6 flex flex-col h-full overflow-hidden">
-                <div className="flex justify-end mb-8 shrink-0">
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-2.5 rounded-full bg-white/40 border border-white/50 hover:bg-white/60 transition-colors shadow-sm"
-                    aria-label="Close Menu"
-                  >
-                    <X size={24} className="text-slate-800" />
-                  </button>
-                </div>
+              Initiate
+            </Link>
+          </div>
 
-                <div className="flex flex-col space-y-4 overflow-y-auto flex-1 no-scrollbar pb-6">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="group flex items-center space-x-4 p-3 rounded-2xl hover:bg-white/40 transition-all duration-300 border border-transparent hover:border-white/40"
-                    >
-                      <div className="p-3 rounded-xl bg-white/50 text-slate-700 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                        <link.icon size={20} />
-                      </div>
-                      <span className="text-lg font-semibold text-slate-800 group-hover:text-blue-700 transition-colors">
-                        {link.name}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden relative z-[110] w-12 h-12 rounded-full flex flex-col items-center justify-center gap-[6px] group"
+            aria-label="Toggle Navigation"
+          >
+            <motion.div 
+                animate={mobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }} 
+                className="w-6 h-[2px] bg-white origin-center transition-all duration-300"
+            />
+            <motion.div 
+                animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }} 
+                className="w-6 h-[2px] bg-white transition-all duration-300"
+            />
+            <motion.div 
+                animate={mobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }} 
+                className="w-6 h-[2px] bg-white origin-center transition-all duration-300"
+            />
+          </button>
+        </div>
+      </motion.nav>
 
-                <div className="pt-4 mt-auto border-t border-slate-200/50 shrink-0">
-                  <Link
-                    href="/contact"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold shadow-md shadow-blue-500/25 active:scale-[0.98] transition-all text-center text-base hover:shadow-blue-500/40"
-                  >
-                    Get Started
-                  </Link>
-
-                  <div className="mt-6 text-center">
-                    <p className="text-xs text-slate-500 font-medium">
-                      © {new Date().getFullYear()} Spabrix Agency
-                    </p>
-                  </div>
-                </div>
-              </div>
+      {/* Full Screen Mobile Menu */}
+      <motion.div
+        initial="closed"
+        animate={mobileMenuOpen ? "open" : "closed"}
+        variants={menuVariants}
+        className="fixed inset-0 bg-[#050505] z-[90] md:hidden flex flex-col justify-center px-8 pointer-events-auto"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent pointer-events-none" />
+        
+        <motion.div variants={staggerVariants} className="flex flex-col gap-6 relative z-10">
+          {navLinks.map((link, i) => (
+            <motion.div key={link.name} variants={itemVariants} className="overflow-hidden">
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block text-5xl sm:text-6xl font-outfit font-light tracking-tight text-slate-400 hover:text-white transition-colors"
+                >
+                  <span className="text-sm font-mono text-white/20 mr-4">0{i + 1}</span>
+                  {link.name}
+                </Link>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          ))}
+          
+          <motion.div variants={itemVariants} className="mt-12 overflow-hidden">
+            <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-block px-10 py-5 rounded-full bg-white text-black font-semibold uppercase tracking-widest text-sm"
+            >
+                Start a Project
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+            variants={itemVariants}
+            className="absolute bottom-10 left-8 right-8 flex justify-between items-end border-t border-white/10 pt-6"
+        >
+            <div className="flex flex-col gap-2 text-slate-500 font-mono text-xs uppercase tracking-widest">
+                <span>spabrix@gmail.com</span>
+                <span>+91 9946972210</span>
+            </div>
+            <span className="text-slate-600 font-mono text-xs uppercase tracking-widest">
+                © {new Date().getFullYear()}
+            </span>
+        </motion.div>
+      </motion.div>
     </>
   );
 }

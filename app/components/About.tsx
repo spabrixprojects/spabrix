@@ -1,164 +1,116 @@
 'use client';
 
-import React from 'react';
-import { motion, Variants } from 'framer-motion';
-import { Sparkles, Target, Zap, Heart, ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-const About = () => {
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
-    };
+export default function About() {
+    const containerRef = useRef<HTMLElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
 
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: "easeOut"
-            },
-        },
-    };
-
-    const cards = [
-        {
-            icon: Target,
-            title: "Our Mission",
-            desc: "To empower businesses with digital solutions that drive real growth and tangible results.",
-            color: "bg-blue-50 text-blue-600",
-        },
-        {
-            icon: Zap,
-            title: "The Vision",
-            desc: "Creating a future where technology and design merge seamlessly to enhance human potential.",
-            color: "bg-amber-50 text-amber-600",
-        },
-        {
-            icon: Heart,
-            title: "Core Values",
-            desc: "Integrity, innovation, and a relentless commitment to excellence in everything we do.",
-            color: "bg-rose-50 text-rose-600",
-        }
-    ];
+    const yImg = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+    const scaleImg = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
     return (
-        <section id="about" className="py-32 bg-white relative overflow-hidden">
-            {/* Decorative Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <motion.div
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 90, 0],
-                    }}
-                    transition={{
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear"
-                    }}
-                    className="absolute -top-[10%] -right-[5%] w-[800px] h-[800px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-60"
-                />
-                <motion.div
-                    animate={{
-                        scale: [1, 1.1, 1],
-                        x: [0, 50, 0],
-                    }}
-                    transition={{
-                        duration: 15,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                    className="absolute -bottom-[10%] -left-[5%] w-[600px] h-[600px] bg-gradient-to-tr from-emerald-50 to-teal-50 rounded-full blur-3xl opacity-60"
-                />
-            </div>
-
-            <div className="container mx-auto px-4 relative z-10">
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="max-w-7xl mx-auto"
-                >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        {/* Left Content */}
-                        <motion.div variants={itemVariants} className="space-y-8">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold tracking-wide uppercase">
-                                <Sparkles size={16} className="text-blue-600" />
-                                <span>Our Story</span>
-                            </div>
-
-                            <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
-                                Crafting Digital <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                                    Experiences
-                                </span>
-                            </h2>
-
-                            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-                                We started with a simple idea: to make the web more beautiful and functional. Today, we are a team of passionate creators, developers, and strategists dedicated to helping brands find their voice in the digital noise.
-                            </p>
-
-                            <div className="flex flex-wrap gap-4 pt-4">
-                                <Link
-                                    href="/about"
-                                    className="px-8 py-4 bg-slate-900 text-white rounded-full font-bold shadow-lg shadow-slate-200 hover:shadow-xl transition-all flex items-center gap-2 group hover:scale-105"
-                                >
-                                    Read More
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </Link>
-                            </div>
-
-                            {/* Stats Row */}
-                            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-slate-100">
-                                {[
-                                    { label: "Projects", value: "150+" },
-                                    { label: "Clients", value: "80+" },
-                                    { label: "Awards", value: "12" },
-                                ].map((stat, idx) => (
-                                    <div key={idx}>
-                                        <p className="text-3xl font-bold text-slate-900">{stat.value}</p>
-                                        <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </motion.div>
-
-                        {/* Right Interactive Cards */}
-                        <div className="grid grid-cols-1 gap-6">
-                            {cards.map((card, index) => (
-                                <motion.div
-                                    key={index}
-                                    variants={itemVariants}
-                                    whileHover={{ scale: 1.02, x: 10 }}
-                                    className="p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group cursor-default"
-                                >
-                                    <div className="flex items-start gap-6">
-                                        <div className={`p-4 rounded-2xl ${card.color} group-hover:scale-110 transition-transform duration-300`}>
-                                            <card.icon size={28} />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-900 mb-2">{card.title}</h3>
-                                            <p className="text-slate-600 leading-relaxed">
-                                                {card.desc}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
+        <section ref={containerRef} id="about" className="py-40 bg-[#050505] text-white relative border-t border-white/5 overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                    
+                    {/* Left Content */}
+                    <div className="flex flex-col">
+                        <div className="overflow-hidden mb-8">
+                            <motion.h2 
+                                initial={{ opacity: 0, y: 100, rotateZ: 5 }}
+                                whileInView={{ opacity: 1, y: 0, rotateZ: 0 }}
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                                className="text-6xl sm:text-7xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
+                            >
+                                Beyond <br/>
+                                <span className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Boundaries</span>
+                            </motion.h2>
                         </div>
+
+                        <div className="space-y-8 text-slate-400 text-xl font-light leading-relaxed border-l border-white/20 pl-6 ml-2">
+                            <motion.p
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                            >
+                                We are an independent creative studio operating at the intersection of design, technology, and strategy. We refuse to rely on templates or AI-generated mediocrity.
+                            </motion.p>
+                            <motion.p
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                            >
+                                Every pixel, every animation, and every line of code is meticulously crafted to elevate your brand above the noise, offering an unparalleled digital experience.
+                            </motion.p>
+                        </div>
+                        
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="mt-16"
+                        >
+                            <Link href="/about" className="group relative inline-flex items-center gap-4 text-white uppercase tracking-widest text-sm font-semibold">
+                                <span className="relative z-10">Discover Our Story</span>
+                                <span className="w-10 h-[1px] bg-white relative z-10 group-hover:w-16 transition-all duration-300" />
+                                <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
+                            </Link>
+                        </motion.div>
                     </div>
-                </motion.div>
+                    
+                    {/* Right Parallax Image/Abstract */}
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative h-[700px] w-full rounded-[2rem] overflow-hidden group border border-white/10"
+                    >
+                        <motion.div style={{ y: yImg, scale: scaleImg }} className="absolute inset-0 w-full h-full">
+                            <div className="absolute inset-0 bg-[#0a0a0a]" />
+                            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-[#050505] to-[#050505]" />
+                            
+                            {/* Abstract animated lines for premium tech feel */}
+                            <motion.div 
+                                animate={{ y: ['-100%', '100%'] }}
+                                transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                                className="absolute inset-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/20 to-transparent left-1/4"
+                            />
+                            <motion.div 
+                                animate={{ y: ['100%', '-100%'] }}
+                                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                                className="absolute inset-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/20 to-transparent left-1/2"
+                            />
+                            <motion.div 
+                                animate={{ y: ['-100%', '100%'] }}
+                                transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                                className="absolute inset-0 w-[1px] h-full bg-gradient-to-b from-transparent via-white/20 to-transparent left-3/4"
+                            />
+                        </motion.div>
+                        
+                        <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)] pointer-events-none" />
+                        
+                        <motion.div 
+                            className="absolute bottom-12 left-12 text-white z-10 mix-blend-difference"
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <p className="text-7xl font-outfit font-black mb-3 tabular-nums tracking-tighter">150+</p>
+                            <p className="text-xs tracking-widest uppercase text-slate-400 font-mono">Digital Platforms Engineered</p>
+                        </motion.div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );
-};
-
-export default About;
+}

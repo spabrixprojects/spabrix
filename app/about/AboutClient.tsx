@@ -1,178 +1,221 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { FaRocket, FaLightbulb, FaUsers, FaHandshake, FaShieldAlt, FaChartLine } from 'react-icons/fa';
-import Breadcrumbs from '../components/Breadcrumbs';
+import { motion, useScroll, useTransform, animate } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+
+function Counter({ from, to, duration = 2 }: { from: number; to: number; duration?: number }) {
+    const nodeRef = useRef<HTMLSpanElement>(null);
+    const [inView, setInView] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setInView(true);
+            }
+        });
+        if (nodeRef.current) observer.observe(nodeRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (inView) {
+            const node = nodeRef.current;
+            if (node) {
+                const controls = animate(from, to, {
+                    duration: duration,
+                    ease: [0.16, 1, 0.3, 1],
+                    onUpdate(value) {
+                        node.textContent = value.toFixed(0) + (to === 100 ? '%' : '+');
+                    },
+                });
+                return () => controls.stop();
+            }
+        }
+    }, [from, to, duration, inView]);
+
+    return <span ref={nodeRef}>{from}+</span>;
+}
 
 export default function AboutClient() {
-    const stats = [
-        { label: 'Projects Completed', value: '50+' },
-        { label: 'Client Satisfaction', value: '100%' },
-        { label: 'Years Experience', value: '5+' },
-        { label: 'Support Available', value: '24/7' },
-    ];
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    const scaleLine = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const yHero = useTransform(scrollYProgress, [0, 1], [0, 300]);
 
     const values = [
         {
-            icon: FaShieldAlt,
-            title: "Integrity",
-            desc: "We believe in honest, transparent communication. No hidden fees, no false promises."
+            title: "Transparency",
+            desc: "Honest, direct communication. No hidden fees, no false promises. Pure engineering.",
+            number: "01"
         },
         {
-            icon: FaLightbulb,
             title: "Innovation",
-            desc: "We stay ahead of the curve, using the latest tech (Next.js, AI) to give you a competitive edge."
+            desc: "We stay ahead of the curve, utilizing bleeding-edge technology to give you an unfair advantage.",
+            number: "02"
         },
         {
-            icon: FaChartLine,
-            title: "Results",
-            desc: "Beautiful code is useless if it doesn't sell. We focus on ROI and conversion-driven design."
+            title: "Performance",
+            desc: "Beautiful design is obsolete if it doesn't perform. We architect for speed and conversion.",
+            number: "03"
         },
         {
-            icon: FaHandshake,
             title: "Partnership",
-            desc: "We are not just vendors; we are your long-term digital growth partners."
+            desc: "We aren't just an agency; we are the strategic digital extension of your business.",
+            number: "04"
         }
     ];
 
     return (
-        <section className="min-h-screen pt-24 pb-20 relative bg-slate-50 overflow-hidden font-sans">
-
-            {/* --- Background Aurora --- */}
-            <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-blue-50/80 to-transparent pointer-events-none" />
-            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-100/40 rounded-full blur-[100px] pointer-events-none animate-pulse" />
-            <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-cyan-100/40 rounded-full blur-[100px] pointer-events-none" />
-
+        <section ref={containerRef} className="min-h-screen pt-40 pb-32 relative bg-[#050505] text-white overflow-hidden font-sans">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-                {/* Breadcrumbs & Header */}
-                <div className="flex flex-col items-center text-center mb-16">
-                    <Breadcrumbs />
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="mt-6 text-4xl md:text-6xl font-black text-slate-900 tracking-tight"
-                    >
-                        We Are <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand via-blue-600 to-cyan-500">Spabrix</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="mt-4 text-lg text-slate-600 max-w-2xl font-medium"
-                    >
-                        The digital agency that fuses creative design with engineering excellence.
-                    </motion.p>
-                </div>
-
-                {/* --- Our Story Section --- */}
-                <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+                <motion.div style={{ y: yHero }} className="flex flex-col mb-40 pt-10">
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="relative"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-flex items-center gap-4 border border-white/10 rounded-full px-6 py-2 mb-10 w-fit bg-white/[0.02]"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-3xl rotate-2 opacity-10" />
-                        <div className="relative bg-white p-8 md:p-10 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/50">
-                            <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Story</h2>
-                            <p className="text-slate-600 leading-relaxed mb-4">
-                                Born in the heart of Malappuram, Spabrix started with a simple belief:
-                                <span className="font-semibold text-slate-800"> businesses in Kerala deserve world-class digital solutions.</span>
-                            </p>
-                            <p className="text-slate-600 leading-relaxed">
-                                We saw too many generic, slow, and ineffective websites holding great businesses back.
-                                So, we built a team of elite developers and strategists to change that. Today, we are proud
-                                to be the go-to agency for brands that want to dominate their market.
-                            </p>
+                        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                        <span className="text-xs font-mono tracking-widest text-slate-300 uppercase">Our Story</span>
+                    </motion.div>
+
+                    <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12">
+                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>Engineering</motion.div>
+                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Excellence</motion.div>
+                    </h2>
+                    
+                    <motion.p 
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="text-2xl text-slate-400 font-light max-w-3xl leading-relaxed border-l-2 border-white/20 pl-8"
+                    >
+                        We are a collective of elite developers and strategists committed to redefining the digital landscape for premium brands globally.
+                    </motion.p>
+                </motion.div>
+
+                <div className="grid lg:grid-cols-2 gap-20 items-center mb-40">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative h-[600px] rounded-[2rem] overflow-hidden border border-white/10 group"
+                    >
+                        <div className="absolute inset-0 bg-[#0a0a0a]" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-[#050505] to-[#1a1a1a] opacity-80" />
+                        <motion.div 
+                            animate={{ x: ['-100%', '100%'] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                            className="absolute top-1/3 left-0 w-full h-[1px] bg-white/10"
+                        />
+                        <motion.div 
+                            animate={{ y: ['-100%', '100%'] }}
+                            transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+                            className="absolute top-0 left-1/3 w-[1px] h-full bg-white/10"
+                        />
+                        
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <motion.div 
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                className="w-64 h-64 border border-white/5 rounded-full border-dashed opacity-50"
+                            />
                         </div>
                     </motion.div>
 
-                    {/* Mission & Vision Column */}
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-16">
                         <motion.div
-                            initial={{ opacity: 0, x: 30 }}
+                            initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            className="p-8 rounded-3xl bg-gradient-to-br from-white to-blue-50/50 border border-slate-200 hover:border-brand/30 transition-colors shadow-lg"
+                            transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            <div className="flex items-center gap-4 mb-3">
-                                <div className="p-3 rounded-full bg-blue-100 text-brand">
-                                    <FaRocket className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900">Our Mission</h3>
-                            </div>
-                            <p className="text-slate-600 text-sm leading-relaxed">
-                                To empower businesses with high-speed, SEO-driven websites that function as powerful revenue engines, not just digital brochures.
+                            <h3 className="text-4xl font-outfit font-medium mb-6">The Mission</h3>
+                            <p className="text-slate-400 font-light leading-relaxed text-xl">
+                                To empower forward-thinking businesses with high-speed, SEO-driven digital platforms that function as powerful revenue engines, moving far beyond traditional brochure websites.
                             </p>
                         </motion.div>
-
+                        <motion.div style={{ scaleX: scaleLine, transformOrigin: 'left' }} className="w-full h-[1px] bg-white/20" />
                         <motion.div
-                            initial={{ opacity: 0, x: 30 }}
+                            initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="p-8 rounded-3xl bg-gradient-to-br from-white to-cyan-50/50 border border-slate-200 hover:border-cyan-400/30 transition-colors shadow-lg"
+                            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                         >
-                            <div className="flex items-center gap-4 mb-3">
-                                <div className="p-3 rounded-full bg-cyan-100 text-cyan-600">
-                                    <FaLightbulb className="w-6 h-6" />
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-900">Our Vision</h3>
-                            </div>
-                            <p className="text-slate-600 text-sm leading-relaxed">
-                                To be Kerala's #1 digital transformation partner, setting the benchmark for performance, aesthetics, and ROI.
+                            <h3 className="text-4xl font-outfit font-medium mb-6">The Vision</h3>
+                            <p className="text-slate-400 font-light leading-relaxed text-xl">
+                                To become the ultimate digital transformation partner, setting a new global benchmark for aesthetic precision, performance engineering, and measurable ROI.
                             </p>
                         </motion.div>
                     </div>
                 </div>
 
-                {/* --- Stats Banner --- */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="bg-slate-900 rounded-3xl p-10 md:p-14 mb-24 relative overflow-hidden text-center md:text-left"
-                >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand/20 blur-[80px] rounded-full pointer-events-none" />
-                    <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                        {stats.map((stat, i) => (
-                            <div key={i} className="flex flex-col items-center md:items-start">
-                                <span className="text-4xl md:text-5xl font-black text-white mb-2">{stat.value}</span>
-                                <span className="text-sm md:text-base text-slate-400 font-medium uppercase tracking-wider">{stat.label}</span>
-                            </div>
-                        ))}
+                <div className="mb-40 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-3xl overflow-hidden">
+                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                        <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
+                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={50} /></span>
+                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Platforms Built</span>
                     </div>
-                </motion.div>
-
-                {/* --- Core Values --- */}
-                <div className="mb-12">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-slate-900">Our Core Values</h2>
-                        <div className="w-20 h-1 bg-brand mx-auto mt-4 rounded-full" />
+                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                        <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
+                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={100} /></span>
+                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Client Retention</span>
                     </div>
+                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                        <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
+                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={5} /></span>
+                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Years Active</span>
+                    </div>
+                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                        <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
+                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10">24/7</span>
+                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Global Reach</span>
+                    </div>
+                </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mb-20"
+                    >
+                        <span className="text-sm font-mono tracking-widest text-slate-500 uppercase block mb-6">Principles</span>
+                        <h2 className="text-6xl md:text-8xl font-outfit font-light tracking-tight">Core <span className="font-bold">Values</span></h2>
+                    </motion.div>
+
+                    <div className="grid md:grid-cols-2 gap-x-16 gap-y-20">
                         {values.map((v, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                className="group relative border-t border-white/20 pt-8"
                             >
-                                <v.icon className="w-10 h-10 text-brand mb-4" />
-                                <h3 className="font-bold text-lg text-slate-900 mb-2">{v.title}</h3>
-                                <p className="text-slate-600 text-sm leading-relaxed">{v.desc}</p>
+                                <motion.div 
+                                    className="absolute top-0 left-0 h-[2px] bg-white origin-left"
+                                    initial={{ scaleX: 0 }}
+                                    whileInView={{ scaleX: 1 }}
+                                    transition={{ duration: 1, delay: i * 0.1 + 0.3 }}
+                                />
+                                <div className="flex justify-between items-end mb-6">
+                                    <h3 className="text-4xl font-outfit font-medium group-hover:text-slate-300 transition-colors transform group-hover:translate-x-2 duration-300">{v.title}</h3>
+                                    <span className="text-sm font-mono text-slate-600 tracking-widest">{v.number}</span>
+                                </div>
+                                <p className="text-slate-400 font-light leading-relaxed text-xl max-w-md">{v.desc}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
-
             </div>
         </section>
     );

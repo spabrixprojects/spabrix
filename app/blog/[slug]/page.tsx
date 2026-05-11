@@ -95,60 +95,58 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
             />
-            <article className="min-h-screen py-24 bg-slate-50 text-slate-800">
-                {/* Scroll Progress Bar (Optional - could be added in a client wrapper) */}
-
-                <div className="max-w-3xl mx-auto px-6 relative z-10">
+            <article className="min-h-screen py-32 bg-[#050505] text-slate-300 font-light">
+                <div className="max-w-4xl mx-auto px-6 relative z-10 pt-10">
                     <Breadcrumbs />
 
-                    {/* Header */}
-                    <header className="mb-10">
+                    <header className="mb-16 mt-8">
                         <Link
                             href="/blog"
-                            className="inline-flex items-center gap-2 text-sm text-cyan-600 hover:text-cyan-700 mb-6 transition-colors"
+                            className="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-slate-500 uppercase hover:text-white transition-colors mb-12"
                         >
-                            <ArrowLeft size={16} /> Back to Blog
+                            <ArrowLeft size={14} /> Return to Journal
                         </Link>
 
-                        <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6 text-slate-900">
+                        <h1 className="text-4xl md:text-6xl font-outfit font-light leading-tight mb-8 text-white">
                             {post.title}
                         </h1>
 
-                        <div className="flex flex-wrap items-center gap-6 text-sm text-slate-500 border-b border-slate-200 pb-8">
+                        <div className="flex flex-wrap items-center gap-8 text-xs font-mono uppercase tracking-widest text-slate-500 border-b border-white/10 pb-8">
                             <div className="flex items-center gap-2">
-                                <User size={16} className="text-cyan-600" />
+                                <User size={14} />
                                 <span>{post.author}</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Calendar size={16} className="text-cyan-600" />
+                                <Calendar size={14} />
                                 <span>{post.date}</span>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Tag size={16} className="text-cyan-600" />
+                                <Tag size={14} />
                                 <span>{post.tags.join(', ')}</span>
                             </div>
                         </div>
                     </header>
 
-                    {/* Content Body */}
                     <div
-                        className="prose prose-lg prose-slate max-w-none 
-            prose-headings:text-slate-900 prose-p:text-slate-700 prose-li:text-slate-700
-            prose-strong:text-slate-900 prose-a:text-cyan-600 hover:prose-a:text-cyan-700 transition-colors"
+                        className="prose prose-lg prose-invert max-w-none 
+                            prose-headings:font-outfit prose-headings:font-light prose-headings:text-white 
+                            prose-p:text-slate-400 prose-p:leading-relaxed prose-li:text-slate-400
+                            prose-strong:text-white prose-a:text-white hover:prose-a:text-slate-300 transition-colors"
                         dangerouslySetInnerHTML={{ __html: post.content }}
                     />
 
-                    {/* Footer/CTA */}
-                    <div className="mt-16 pt-10 border-t border-slate-200">
-                        <h3 className="text-2xl font-bold mb-4 text-slate-900">Want to grow your business?</h3>
-                        <p className="text-slate-600 mb-6">
-                            Spabrix helps businesses like yours build professional websites and reach more customers online.
-                        </p>
+                    <div className="mt-24 pt-12 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                        <div>
+                            <h3 className="text-3xl font-outfit font-light text-white mb-2">Architect your vision.</h3>
+                            <p className="text-slate-400">
+                                Partner with Spabrix to build an uncompromising digital platform.
+                            </p>
+                        </div>
                         <Link
                             href="/contact"
-                            className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-700 rounded-full font-bold text-white shadow-lg shadow-cyan-500/20 hover:scale-105 transition-transform"
+                            className="inline-block px-8 py-4 bg-white text-black font-semibold rounded-full hover:scale-105 transition-transform"
                         >
-                            Get a Free Consultation
+                            Initiate Project
                         </Link>
                     </div>
 
