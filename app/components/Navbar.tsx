@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -37,7 +37,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   // Framer Motion variants
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: { 
         clipPath: "circle(0% at calc(100% - 3rem) 3rem)",
         transition: { type: "spring", stiffness: 400, damping: 40 }
@@ -48,14 +48,14 @@ export default function Navbar() {
     }
   };
 
-  const staggerVariants = {
+  const staggerVariants: Variants = {
     closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
     open: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     closed: { y: 50, opacity: 0 },
-    open: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+    open: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any } }
   };
 
   return (
@@ -63,7 +63,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
         className={`fixed z-[100] left-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled
           ? 'w-[95%] sm:w-[90%] md:w-[85%] max-w-6xl top-6 rounded-full bg-[#0a0a0a]/70 backdrop-blur-2xl border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.4)] py-4 px-8'
           : 'w-full top-0 bg-transparent py-8 px-6 sm:px-12'

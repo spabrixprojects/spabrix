@@ -36,7 +36,7 @@ export default function BlogClient() {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
                         className="inline-flex items-center gap-4 border border-white/10 rounded-full px-6 py-2 mb-10 w-fit bg-white/[0.02] backdrop-blur-md"
                     >
                         <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -50,7 +50,7 @@ export default function BlogClient() {
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                                     animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                                    transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="block text-slate-100"
                                 >
                                     {char}
@@ -63,7 +63,7 @@ export default function BlogClient() {
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                                     animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                                    transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="block text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-slate-500 to-neutral-600 italic font-black"
                                 >
                                     {char}
@@ -78,7 +78,7 @@ export default function BlogClient() {
                                 <motion.span
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.8 + index * 0.02, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 0.8, delay: 0.8 + index * 0.02, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="inline-block text-2xl text-slate-400 font-light leading-relaxed"
                                 >
                                     {word}
@@ -95,7 +95,7 @@ export default function BlogClient() {
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
                             className="group flex flex-col relative"
                         >
                             <Link href={`/blog/${post.slug}`} className="flex flex-col flex-grow h-full p-10 bg-white/[0.01] rounded-3xl border border-white/5 overflow-hidden z-10">

@@ -23,7 +23,7 @@ function Counter({ from, to, duration = 2 }: { from: number; to: number; duratio
             if (node) {
                 const controls = animate(from, to, {
                     duration: duration,
-                    ease: [0.16, 1, 0.3, 1],
+                    ease: [0.16, 1, 0.3, 1] as any,
                     onUpdate(value) {
                         node.textContent = value.toFixed(0) + (to === 100 ? '%' : '+');
                     },
@@ -78,7 +78,7 @@ export default function AboutClient() {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
                         className="inline-flex items-center gap-4 border border-white/10 rounded-full px-6 py-2 mb-10 w-fit bg-white/[0.02]"
                     >
                         <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -86,8 +86,8 @@ export default function AboutClient() {
                     </motion.div>
 
                     <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12">
-                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>Engineering</motion.div>
-                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Excellence</motion.div>
+                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}>Engineering</motion.div>
+                        <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }} className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Excellence</motion.div>
                     </h2>
                     
                     <motion.p 
@@ -105,7 +105,7 @@ export default function AboutClient() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
                         className="relative h-[600px] rounded-[2rem] overflow-hidden border border-white/10 group"
                     >
                         <div className="absolute inset-0 bg-[#0a0a0a]" />
@@ -198,7 +198,7 @@ export default function AboutClient() {
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                                 className="group relative border-t border-white/20 pt-8"
                             >
                                 <motion.div 

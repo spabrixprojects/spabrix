@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
@@ -58,13 +58,13 @@ export default function Hero() {
   }, [cursorX, cursorY]);
 
   // Framer Motion staggered character reveal
-  const titleVariants = {
+  const titleVariants: Variants = {
     hidden: { y: "150%", rotateZ: 10, opacity: 0 },
     visible: (i: number) => ({
       y: "0%", 
       rotateZ: 0, 
       opacity: 1,
-      transition: { duration: 1.4, delay: 1 + (i * 0.04), ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 1.4, delay: 1 + (i * 0.04), ease: [0.16, 1, 0.3, 1] as any }
     })
   };
 
@@ -74,7 +74,7 @@ export default function Hero() {
       <motion.div 
         initial={{ height: "100vh", top: 0 }}
         animate={{ height: "0vh", top: 0 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as any, delay: 0.2 }}
         className="fixed inset-0 z-[200] bg-[#050505] flex items-center justify-center pointer-events-none"
       >
         <motion.div 
@@ -158,7 +158,7 @@ export default function Hero() {
                   <motion.div 
                       initial={{ scale: 0, rotate: -15, filter: "blur(10px)" }}
                       animate={{ scale: 1, rotate: 0, filter: "blur(0px)" }}
-                      transition={{ duration: 1.4, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 1.4, delay: 1.8, ease: [0.16, 1, 0.3, 1] as any }}
                       className="hidden md:block w-[18vw] h-[7vw] rounded-[4rem] overflow-hidden relative border border-white/20 bg-[#111] group cursor-pointer"
                   >
                       <Image src="/pr2.png" alt="Creative Design" fill className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" />
@@ -187,7 +187,7 @@ export default function Hero() {
                   <motion.div 
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 1.5, delay: 2.2, ease: [0.16, 1, 0.3, 1] as any }}
                       className="hidden lg:flex"
                   >
                       <Link href="/contact" className="relative flex items-center justify-center w-32 h-32 rounded-full border border-white/20 group hover:bg-white transition-colors duration-500">
@@ -210,11 +210,11 @@ export default function Hero() {
           <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] as any }}
               className="absolute bottom-[10%] left-[10%] right-[10%] flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
           >
               <div className="text-slate-400 font-light max-w-sm text-sm sm:text-base leading-relaxed overflow-hidden">
-                <motion.p initial={{ y: 50 }} animate={{ y: 0 }} transition={{ duration: 1, delay: 2.6, ease: [0.16, 1, 0.3, 1] }}>
+                <motion.p initial={{ y: 50 }} animate={{ y: 0 }} transition={{ duration: 1, delay: 2.6, ease: [0.16, 1, 0.3, 1] as any }}>
                     An independent creative engineering studio merging high-end aesthetics with bleeding-edge technology to elevate premium brands above the noise.
                 </motion.p>
               </div>

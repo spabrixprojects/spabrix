@@ -57,7 +57,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] as any }}
         >
             <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-white/5 mb-8">
                 <motion.div style={{ y: yImg }} className="absolute inset-0 w-full h-[120%] -top-[10%]">
@@ -88,7 +88,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                         className="absolute top-0 left-0 h-full bg-white origin-left"
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
-                        transition={{ duration: 1, delay: 0.5 + index * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, delay: 0.5 + index * 0.2, ease: [0.16, 1, 0.3, 1] as any }}
                     />
                 </div>
                 
@@ -130,7 +130,7 @@ export default function ProjectsClient() {
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
                         className="inline-flex items-center gap-4 border border-white/10 rounded-full px-6 py-2 mb-8 bg-white/[0.02] backdrop-blur-md"
                     >
                         <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -144,7 +144,7 @@ export default function ProjectsClient() {
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                                     animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                                    transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="block text-slate-100"
                                 >
                                     {char}
@@ -157,7 +157,7 @@ export default function ProjectsClient() {
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                                     animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                                    transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="block text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-slate-500 to-neutral-600 italic font-black"
                                 >
                                     {char}
@@ -172,7 +172,7 @@ export default function ProjectsClient() {
                                 <motion.span
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.8 + index * 0.02, ease: [0.16, 1, 0.3, 1] }}
+                                    transition={{ duration: 0.8, delay: 0.8 + index * 0.02, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="inline-block text-xl text-slate-400 font-light leading-relaxed"
                                 >
                                     {word}

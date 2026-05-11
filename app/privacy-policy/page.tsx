@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
         <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
             className="inline-flex items-center gap-4 border border-white/10 rounded-full px-6 py-2 mb-16 w-fit bg-white/[0.02] backdrop-blur-md"
         >
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -44,7 +44,7 @@ export default function PrivacyPolicy() {
                         key={index}
                         initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                         animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                        transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, delay: 0.1 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                         className="block"
                     >
                         {char}
@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
                         key={index}
                         initial={{ y: 150, opacity: 0, rotateZ: 10 }}
                         animate={{ y: 0, opacity: 1, rotateZ: 0 }}
-                        transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                         className="block text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-slate-500 to-neutral-600 italic font-black"
                     >
                         {char}
@@ -71,7 +71,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">Introduction</h2>
@@ -87,7 +87,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">Information We Collect</h2>
@@ -106,7 +106,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">How We Use Your Information</h2>
@@ -125,7 +125,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">
@@ -143,7 +143,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">Data Security</h2>
@@ -159,7 +159,7 @@ export default function PrivacyPolicy() {
                 initial={{ opacity: 0, y: 50 }} 
                 whileInView={{ opacity: 1, y: 0 }} 
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
                 className="border-l border-white/20 pl-8"
             >
                 <h2 className="text-3xl font-outfit font-medium text-white mb-6">

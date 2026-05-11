@@ -65,7 +65,7 @@ export default function ContactClient() {
                             <motion.h2 
                                 initial={{ y: 100 }}
                                 whileInView={{ y: 0 }}
-                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
                                 className="text-6xl md:text-8xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
                             >
                                 Start a <br/>
@@ -168,7 +168,7 @@ export default function ContactClient() {
                                         className="absolute inset-0 bg-slate-200 origin-bottom"
                                         initial={{ scaleY: 0 }}
                                         whileHover={{ scaleY: 1 }}
-                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as any }}
                                     />
                                     <span className="relative z-10 mix-blend-exclusion text-white">{loading ? "Transmitting..." : "Submit Inquiry"}</span>
                                     <span className="relative z-10 mix-blend-exclusion text-white group-hover:translate-x-2 transition-transform">→</span>
