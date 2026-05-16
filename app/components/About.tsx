@@ -28,14 +28,14 @@ export default function About() {
                                 whileInView={{ opacity: 1, y: 0, rotateZ: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
                                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-6xl sm:text-7xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
+                                className="text-5xl sm:text-6xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
                             >
                                 Beyond <br/>
                                 <span className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Boundaries</span>
                             </motion.h2>
                         </div>
 
-                        <div className="space-y-8 text-slate-400 text-xl font-light leading-relaxed border-l border-white/20 pl-6 ml-2">
+                        <div className="space-y-8 text-slate-400 text-base md:text-xl font-light leading-relaxed border-l border-white/20 pl-6 ml-2">
                             <motion.p
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -75,7 +75,7 @@ export default function About() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative h-[700px] w-full rounded-[2rem] overflow-hidden group border border-white/10"
+                        className="relative h-[360px] sm:h-[500px] lg:h-[700px] w-full rounded-[2rem] overflow-hidden group border border-white/10"
                     >
                         <motion.div style={{ y: yImg, scale: scaleImg }} className="absolute inset-0 w-full h-full">
                             <div className="absolute inset-0 bg-[#0a0a0a]" />

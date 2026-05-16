@@ -201,7 +201,7 @@ export default function Hero() {
           {/* ── Bottom row: description + CTA + stats ── */}
           <motion.div
             variants={fadeIn}
-            className="mt-10 md:mt-14 flex flex-col md:flex-row md:items-end gap-10 md:gap-0 justify-between"
+            className="mt-10 md:mt-14 flex flex-col md:flex-row md:items-end gap-8 md:gap-6 lg:gap-0 justify-between"
           >
             {/* Description */}
             <p className="max-w-xs text-sm md:text-base text-white/40 leading-relaxed font-light">
@@ -212,7 +212,7 @@ export default function Hero() {
             {/* CTA */}
             <Link
               href="/contact"
-              className="group relative inline-flex items-center gap-4 self-start md:self-auto"
+              className="group relative inline-flex items-center gap-4 self-start md:self-center"
             >
               <span className="relative z-10 font-mono text-xs tracking-[0.25em] uppercase text-white/80 group-hover:text-white transition-colors duration-300">
                 Start a Project
@@ -221,7 +221,7 @@ export default function Hero() {
                 <svg
                   viewBox="0 0 16 16"
                   fill="none"
-                  className="w-4 h-4 stroke-white/60 group-hover:stroke-[#d4af37] transition-all duration-300 translate-x-0 translate-y-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="w-4 h-4 stroke-white/60 group-hover:stroke-[#d4af37] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   strokeWidth={1.5}
                 >
                   <path d="M2 14L14 2M14 2H5M14 2v9" strokeLinecap="round" strokeLinejoin="round" />
@@ -231,14 +231,14 @@ export default function Hero() {
             </Link>
 
             {/* Stats */}
-            <div className="flex gap-8 md:gap-12">
+            <div className="flex gap-8 md:gap-10">
               {[
                 { value: 80, suffix: '+', label: 'Projects' },
                 { value: 4, suffix: 'yr', label: 'Experience' },
                 { value: 100, suffix: '%', label: 'Satisfaction' },
               ].map(({ value, suffix, label }) => (
                 <div key={label} className="flex flex-col gap-1">
-                  <span className="font-playfair text-3xl md:text-4xl text-white/90 leading-none">
+                  <span className="font-playfair text-2xl sm:text-3xl md:text-4xl text-white/90 leading-none">
                     <Counter to={value} />{suffix}
                   </span>
                   <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/30">{label}</span>
@@ -269,12 +269,12 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* ── Scroll indicator ── */}
+      {/* ── Scroll indicator — hidden on small screens to avoid overlap ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 right-8 md:right-12 flex flex-col items-center gap-2 z-20"
+        className="absolute bottom-6 right-6 md:bottom-8 md:right-12 hidden sm:flex flex-col items-center gap-2 z-20"
       >
         <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 rotate-90 origin-center mb-4">
           Scroll
@@ -287,8 +287,8 @@ export default function Hero() {
       </motion.div>
 
       {/* ── Decorative large index number ── */}
-      <div className="pointer-events-none absolute top-[30%] right-4 md:right-8 z-0 select-none">
-        <span className="font-playfair text-[22vw] md:text-[15vw] text-white/[0.025] leading-none font-bold">
+      <div className="pointer-events-none absolute top-[28%] right-2 md:right-8 z-0 select-none overflow-hidden">
+        <span className="font-playfair text-[18vw] md:text-[13vw] text-white/[0.025] leading-none font-bold">
           01
         </span>
       </div>

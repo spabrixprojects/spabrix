@@ -66,28 +66,28 @@ export default function ContactClient() {
                                 initial={{ y: 100 }}
                                 whileInView={{ y: 0 }}
                                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
-                                className="text-6xl md:text-8xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
+                                className="text-5xl sm:text-6xl md:text-8xl lg:text-[7rem] font-outfit font-light tracking-tight leading-[0.9]"
                             >
                                 Start a <br/>
                                 <span className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Conversation</span>
                             </motion.h2>
                         </div>
-                        <p className="text-2xl text-slate-400 font-light mb-20 max-w-md leading-relaxed">
+                        <p className="text-base md:text-2xl text-slate-400 font-light mb-12 md:mb-20 max-w-md leading-relaxed">
                             Whether you require a complete digital transformation or strategic technical consultation, we are ready to listen.
                         </p>
                         
                         <div className="space-y-12">
                             <motion.div className="group border-t border-white/10 pt-6" whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
                                 <h3 className="text-xs font-mono tracking-widest text-slate-600 mb-2 uppercase">Direct Email</h3>
-                                <a href="mailto:spabrix@gmail.com" className="text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors">spabrix@gmail.com</a>
+                                <a href="mailto:spabrix@gmail.com" className="text-xl md:text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors break-all">spabrix@gmail.com</a>
                             </motion.div>
                             <motion.div className="group border-t border-white/10 pt-6" whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
                                 <h3 className="text-xs font-mono tracking-widest text-slate-600 mb-2 uppercase">Headquarters</h3>
-                                <p className="text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors">Malappuram, Kerala</p>
+                                <p className="text-xl md:text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors">Malappuram, Kerala</p>
                             </motion.div>
                             <motion.div className="group border-t border-white/10 pt-6" whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
                                 <h3 className="text-xs font-mono tracking-widest text-slate-600 mb-2 uppercase">Direct Line</h3>
-                                <p className="text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors">+91 9946972210</p>
+                                <p className="text-xl md:text-3xl font-outfit font-light group-hover:text-slate-300 transition-colors">+91 9946972210</p>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -98,7 +98,7 @@ export default function ContactClient() {
                         viewport={{ once: true }} 
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                     >
-                        <form onSubmit={handleSubmit} className="relative bg-[#0a0a0a] p-10 md:p-16 rounded-[2rem] border border-white/5 shadow-2xl overflow-hidden group">
+                        <form onSubmit={handleSubmit} className="relative bg-[#0a0a0a] p-6 sm:p-10 md:p-16 rounded-[2rem] border border-white/5 shadow-2xl overflow-hidden group">
                             {/* Form background glow */}
                             <motion.div 
                                 className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500"

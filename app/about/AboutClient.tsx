@@ -85,7 +85,7 @@ export default function AboutClient() {
                         <span className="text-xs font-mono tracking-widest text-slate-300 uppercase">Our Story</span>
                     </motion.div>
 
-                    <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12">
+                    <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12">
                         <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}>Engineering</motion.div>
                         <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] as any }} className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Excellence</motion.div>
                     </h2>
@@ -94,7 +94,7 @@ export default function AboutClient() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 0.3 }}
-                        className="text-2xl text-slate-400 font-light max-w-3xl leading-relaxed border-l-2 border-white/20 pl-8"
+                        className="text-base md:text-2xl text-slate-400 font-light max-w-3xl leading-relaxed border-l-2 border-white/20 pl-6 md:pl-8"
                     >
                         We are a collective of elite developers and strategists committed to redefining the digital landscape for premium brands globally.
                     </motion.p>
@@ -158,25 +158,25 @@ export default function AboutClient() {
                 </div>
 
                 <div className="mb-40 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-3xl overflow-hidden">
-                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                    <div className="bg-[#050505] p-6 md:p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
                         <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
-                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={50} /></span>
-                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Platforms Built</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-black mb-2 md:mb-4 relative z-10"><Counter from={0} to={50} /></span>
+                        <span className="text-[9px] md:text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Platforms Built</span>
                     </div>
-                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                    <div className="bg-[#050505] p-6 md:p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
                         <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
-                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={100} /></span>
-                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Client Retention</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-black mb-2 md:mb-4 relative z-10"><Counter from={0} to={100} /></span>
+                        <span className="text-[9px] md:text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Client Retention</span>
                     </div>
-                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                    <div className="bg-[#050505] p-6 md:p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
                         <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
-                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10"><Counter from={0} to={5} /></span>
-                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Years Active</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-black mb-2 md:mb-4 relative z-10"><Counter from={0} to={5} /></span>
+                        <span className="text-[9px] md:text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Years Active</span>
                     </div>
-                    <div className="bg-[#050505] p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
+                    <div className="bg-[#050505] p-6 md:p-12 flex flex-col items-center justify-center group hover:bg-[#0a0a0a] transition-colors relative overflow-hidden">
                         <motion.div className="absolute inset-0 bg-white/[0.02] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-500" />
-                        <span className="text-6xl md:text-7xl font-outfit font-black mb-4 relative z-10">24/7</span>
-                        <span className="text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Global Reach</span>
+                        <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-black mb-2 md:mb-4 relative z-10">24/7</span>
+                        <span className="text-[9px] md:text-xs tracking-widest text-slate-500 uppercase font-mono relative z-10 text-center">Global Reach</span>
                     </div>
                 </div>
 
@@ -188,7 +188,7 @@ export default function AboutClient() {
                         className="mb-20"
                     >
                         <span className="text-sm font-mono tracking-widest text-slate-500 uppercase block mb-6">Principles</span>
-                        <h2 className="text-6xl md:text-8xl font-outfit font-light tracking-tight">Core <span className="font-bold">Values</span></h2>
+                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-outfit font-light tracking-tight">Core <span className="font-bold">Values</span></h2>
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 gap-x-16 gap-y-20">
@@ -208,10 +208,10 @@ export default function AboutClient() {
                                     transition={{ duration: 1, delay: i * 0.1 + 0.3 }}
                                 />
                                 <div className="flex justify-between items-end mb-6">
-                                    <h3 className="text-4xl font-outfit font-medium group-hover:text-slate-300 transition-colors transform group-hover:translate-x-2 duration-300">{v.title}</h3>
+                                    <h3 className="text-2xl md:text-4xl font-outfit font-medium group-hover:text-slate-300 transition-colors transform group-hover:translate-x-2 duration-300">{v.title}</h3>
                                     <span className="text-sm font-mono text-slate-600 tracking-widest">{v.number}</span>
                                 </div>
-                                <p className="text-slate-400 font-light leading-relaxed text-xl max-w-md">{v.desc}</p>
+                                <p className="text-slate-400 font-light leading-relaxed text-base md:text-xl max-w-md">{v.desc}</p>
                             </motion.div>
                         ))}
                     </div>

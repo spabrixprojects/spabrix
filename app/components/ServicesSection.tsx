@@ -57,14 +57,14 @@ export default function ServicesSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <motion.div style={{ y }} className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-32 gap-8">
+        <motion.div style={{ y }} className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-32 gap-8">
           <div className="max-w-3xl overflow-hidden">
             <motion.h2 
               initial={{ opacity: 0, y: 100, rotateZ: 5 }}
               whileInView={{ opacity: 1, y: 0, rotateZ: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-6xl md:text-8xl font-outfit font-light tracking-tight leading-[0.9]"
+              className="text-5xl sm:text-6xl md:text-8xl font-outfit font-light tracking-tight leading-[0.9]"
             >
               Our <span className="font-black italic">Expertise</span>
             </motion.h2>
@@ -74,9 +74,9 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-            className="text-slate-400 font-light max-w-md text-xl border-l border-white/20 pl-6"
+            className="text-slate-400 font-light max-w-md text-base md:text-xl border-l border-white/20 pl-6"
           >
-            We don't just build websites; we architect digital ecosystems that drive growth and command attention in competitive markets.
+            We don’t just build websites; we architect digital ecosystems that drive growth and command attention in competitive markets.
           </motion.p>
         </motion.div>
 
@@ -92,7 +92,7 @@ export default function ServicesSection() {
               onMouseLeave={() => setHoveredIndex(null)}
               className="group border-b border-white/10 relative"
             >
-              <Link href={`/services#${service.slug}`} className="py-12 md:py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden z-10">
+              <Link href={`/services#${service.slug}`} className="py-8 md:py-12 lg:py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 relative overflow-hidden z-10">
                 
                 {/* Hover Background fill */}
                 <motion.div 
@@ -118,7 +118,7 @@ export default function ServicesSection() {
                     </motion.span>
                   </span>
                   
-                  <h3 className="text-4xl md:text-6xl font-outfit font-medium text-slate-400 group-hover:text-white transition-all duration-500 origin-left">
+                  <h3 className="text-3xl sm:text-4xl md:text-6xl font-outfit font-medium text-slate-400 group-hover:text-white transition-all duration-500 origin-left">
                     <motion.span 
                         animate={{ x: hoveredIndex === index ? 20 : 0, scale: hoveredIndex === index ? 1.05 : 1 }}
                         transition={{ duration: 0.5, ease: "easeOut" }}

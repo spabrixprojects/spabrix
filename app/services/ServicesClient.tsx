@@ -62,7 +62,7 @@ export default function ServicesClient() {
                         <span className="text-xs font-mono tracking-widest text-slate-300 uppercase">Capabilities</span>
                     </motion.div>
 
-                    <h2 className="text-6xl md:text-8xl lg:text-[11rem] font-outfit font-light tracking-tight leading-[0.85] mb-12 flex flex-col">
+                    <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[11rem] font-outfit font-light tracking-tight leading-[0.85] mb-12 flex flex-col">
                         <div className="overflow-hidden flex">
                             {"SERVICE".split('').map((char, index) => (
                                 <motion.span 
@@ -98,7 +98,7 @@ export default function ServicesClient() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.8 + index * 0.02, ease: [0.16, 1, 0.3, 1] as any }}
-                                    className="inline-block text-2xl text-slate-400 font-light leading-relaxed"
+                                    className="inline-block text-base md:text-2xl text-slate-400 font-light leading-relaxed"
                                 >
                                     {word}
                                 </motion.span>
@@ -126,8 +126,8 @@ export default function ServicesClient() {
                                 className="absolute bottom-0 left-0 w-full bg-white/[0.03] pointer-events-none" 
                             />
 
-                            <div className="flex flex-col lg:flex-row py-16 lg:py-24 items-start lg:items-center justify-between gap-8 lg:gap-16 px-6 -mx-6 relative z-10">
-                                <div className="flex items-center gap-12 lg:w-1/2">
+                            <div className="flex flex-col lg:flex-row py-10 md:py-16 lg:py-24 items-start lg:items-center justify-between gap-6 lg:gap-16 px-0 relative z-10">
+                                <div className="flex items-center gap-6 md:gap-12 lg:w-1/2">
                                     <div className="text-slate-600 font-mono text-sm shrink-0 uppercase tracking-widest overflow-hidden h-6 w-8">
                                         <motion.span animate={{ y: hoveredIndex === index ? -24 : 0 }} className="block transition-transform duration-500">{service.num}</motion.span>
                                         <motion.span animate={{ y: hoveredIndex === index ? -24 : 0 }} className="block transition-transform duration-500 text-white">{service.num}</motion.span>
@@ -135,16 +135,16 @@ export default function ServicesClient() {
                                     <motion.h3 
                                         animate={{ x: hoveredIndex === index ? 20 : 0 }}
                                         transition={{ duration: 0.5, ease: "easeOut" }}
-                                        className="text-4xl md:text-5xl lg:text-6xl font-outfit font-medium text-slate-400 group-hover:text-white transition-colors"
+                                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-outfit font-medium text-slate-400 group-hover:text-white transition-colors"
                                     >
                                         {service.title}
                                     </motion.h3>
                                 </div>
                                 
-                                <div className="lg:w-1/2 pl-20 lg:pl-0">
+                                <div className="lg:w-1/2 pl-10 md:pl-20 lg:pl-0">
                                     <motion.p 
                                         animate={{ opacity: hoveredIndex === index ? 1 : 0.6 }}
-                                        className="text-slate-400 font-light leading-relaxed text-xl"
+                                        className="text-slate-400 font-light leading-relaxed text-base md:text-xl"
                                     >
                                         {service.description}
                                     </motion.p>

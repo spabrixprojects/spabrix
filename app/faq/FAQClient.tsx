@@ -68,7 +68,7 @@ export default function FAQClient() {
                 <span className="text-xs font-mono tracking-widest text-slate-300 uppercase">Intelligence</span>
             </motion.div>
 
-            <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12 flex flex-col">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12 flex flex-col">
                 <div className="overflow-hidden flex">
                     {"COMMON".split('').map((char, index) => (
                         <motion.span 
@@ -102,7 +102,7 @@ export default function FAQClient() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.8 }}
-                    className="text-slate-400 max-w-2xl text-2xl font-light leading-relaxed border-l border-white/20 pl-6"
+                    className="text-slate-400 max-w-2xl text-base md:text-2xl font-light leading-relaxed border-l border-white/20 pl-6"
                 >
                     Clarity is key. Below you will find detailed insights into our operational methodology, engineering stacks, and strategic approaches.
                 </motion.p>
@@ -131,15 +131,15 @@ export default function FAQClient() {
                   <button
                     aria-expanded={isOpen}
                     onClick={() => toggleFAQ(index)}
-                    className="flex justify-between items-center w-full py-10 cursor-pointer text-left focus:outline-none relative z-10"
+                    className="flex justify-between items-center w-full py-7 md:py-10 cursor-pointer text-left focus:outline-none relative z-10 gap-4"
                   >
-                    <span className={`text-3xl md:text-4xl font-outfit font-light transition-colors duration-500 ${isOpen ? 'text-white' : 'text-slate-500 group-hover:text-slate-300'}`}>
+                    <span className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-outfit font-light transition-colors duration-500 ${isOpen ? 'text-white' : 'text-slate-500 group-hover:text-slate-300'}`}>
                         {question}
                     </span>
                     <motion.span 
                         animate={{ rotate: isOpen ? 180 : 0 }}
                         transition={{ duration: 0.5, ease: "backOut" }}
-                        className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center shrink-0"
+                        className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center shrink-0"
                     >
                       <span className="text-white font-mono text-xl leading-none font-light">
                         {isOpen ? '—' : '+'}
@@ -160,7 +160,7 @@ export default function FAQClient() {
                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden relative z-10"
                       >
-                        <p className="text-slate-400 font-light text-xl leading-relaxed max-w-4xl pr-12">
+                        <p className="text-slate-400 font-light text-base md:text-xl leading-relaxed max-w-4xl pr-4 md:pr-12">
                           {answer}
                         </p>
                       </motion.div>
