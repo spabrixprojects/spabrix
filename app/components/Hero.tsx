@@ -1,242 +1,297 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue, Variants } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 
-// Utility for scramble text effect
-const scrambleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&*";
+/* ─── Animated Counter ─── */
+function Counter({ to, duration = 2.2 }: { to: number; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
 
-function ScrambleText({ text, delay }: { text: string, delay: number }) {
-    const [displayText, setDisplayText] = useState(text.replace(/./g, '-'));
-    
-    useEffect(() => {
-        let iterations = 0;
-        const interval = setInterval(() => {
-            setDisplayText((prev) => 
-                prev.split('').map((letter, index) => {
-                    if (index < iterations) return text[index];
-                    return scrambleCharacters[Math.floor(Math.random() * scrambleCharacters.length)];
-                }).join('')
-            );
-            if (iterations >= text.length) clearInterval(interval);
-            iterations += 1 / 3; 
-        }, 30);
-        
-        const timeout = setTimeout(() => interval, delay * 1000);
-        return () => { clearInterval(interval); clearTimeout(timeout); };
-    }, [text, delay]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const start = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - start) / (duration * 1000), 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * to));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [to, duration]);
 
-    return <span>{displayText}</span>;
+  return <span ref={ref}>{count}</span>;
 }
+
+/* ─── Marquee Strip ─── */
+const marqueeItems = ['WEB DESIGN', '·', 'DEVELOPMENT', '·', 'SEO', '·', 'BRANDING', '·', 'DIGITAL MARKETING', '·'];
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  
-  // Smooth scroll parallax
-  const opacityText = useTransform(scrollY, [0, 600], [1, 0]);
-  const yHero = useTransform(scrollY, [0, 800], [0, 250]);
 
-  // Mouse tracking for the custom floating orb
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  
-  const springConfig = { damping: 25, stiffness: 120 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  // Parallax — text shifts upward on scroll
+  const yText = useTransform(scrollY, [0, 700], [0, -120]);
+  const opacitySection = useTransform(scrollY, [0, 500], [1, 0]);
+
+  // Mouse-reactive gradient spotlight
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
 
   useEffect(() => {
-    const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 150);
-      cursorY.set(e.clientY - 150);
+    const handle = (e: MouseEvent) => {
+      mouseX.set(e.clientX / window.innerWidth);
+      mouseY.set(e.clientY / window.innerHeight);
     };
-    window.addEventListener("mousemove", moveCursor);
-    return () => window.removeEventListener("mousemove", moveCursor);
-  }, [cursorX, cursorY]);
+    window.addEventListener('mousemove', handle);
+    return () => window.removeEventListener('mousemove', handle);
+  }, [mouseX, mouseY]);
 
-  // Framer Motion staggered character reveal
-  const titleVariants: Variants = {
-    hidden: { y: "150%", rotateZ: 10, opacity: 0 },
-    visible: (i: number) => ({
-      y: "0%", 
-      rotateZ: 0, 
-      opacity: 1,
-      transition: { duration: 1.4, delay: 1 + (i * 0.04), ease: [0.16, 1, 0.3, 1] as any }
-    })
+  // Build gradient string from spring values
+  const [gradientPos, setGradientPos] = useState({ x: 50, y: 50 });
+  useEffect(() => {
+    const unsubX = springX.on('change', (v) =>
+      setGradientPos((p) => ({ ...p, x: v * 100 }))
+    );
+    const unsubY = springY.on('change', (v) =>
+      setGradientPos((p) => ({ ...p, y: v * 100 }))
+    );
+    return () => { unsubX(); unsubY(); };
+  }, [springX, springY]);
+
+  // Page-load reveal: single stagger parent
+  const reveal = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+  };
+  const lineUp = {
+    hidden: { y: '100%', opacity: 0 },
+    visible: { y: '0%', opacity: 1, transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as any } },
+  };
+  const fadeIn = {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] as any } },
   };
 
   return (
-    <>
-      {/* Premium Curtain Intro Animation */}
-      <motion.div 
-        initial={{ height: "100vh", top: 0 }}
-        animate={{ height: "0vh", top: 0 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as any, delay: 0.2 }}
-        className="fixed inset-0 z-[200] bg-[#050505] flex items-center justify-center pointer-events-none"
+    <section
+      ref={containerRef}
+      className="relative bg-[#080808] text-white min-h-[100svh] overflow-hidden"
+    >
+      {/* ── Mouse-reactive gradient backdrop ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 transition-none"
+        style={{
+          background: `radial-gradient(600px circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(212,175,55,0.06) 0%, transparent 65%), radial-gradient(900px circle at 80% 20%, rgba(255,255,255,0.025) 0%, transparent 60%)`,
+        }}
+      />
+
+      {/* ── Subtle noise texture ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.025]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '128px 128px',
+        }}
+      />
+
+      {/* ── Fine horizontal rule ── */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+        className="absolute top-0 left-0 right-0 h-px bg-white/10 origin-left z-10"
+      />
+
+      {/* ── Main content ── */}
+      <motion.div
+        variants={reveal}
+        initial="hidden"
+        animate="visible"
+        style={{ y: yText, opacity: opacitySection }}
+        className="relative z-10 flex flex-col min-h-[100svh]"
       >
-        <motion.div 
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-white font-mono tracking-[0.5em] text-xs uppercase"
-        >
-            <ScrambleText text="INITIALIZING_ENVIRONMENT" delay={0} />
-        </motion.div>
+        {/* ── Top bar ── */}
+        <div className="flex justify-between items-center px-6 md:px-12 pt-32 pb-0">
+          <motion.div variants={fadeIn} className="flex items-center gap-3">
+            <span className="block w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
+            <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/40">
+              Est. 2022 — Kerala, India
+            </span>
+          </motion.div>
+          <motion.div variants={fadeIn} className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30 hidden md:block">
+            Creative Engineering Studio
+          </motion.div>
+        </div>
+
+        {/* ── Hero headline ── */}
+        <div className="flex-1 flex flex-col justify-center px-6 md:px-12 pt-10 md:pt-0">
+
+          {/* Overline */}
+          <div className="overflow-hidden mb-6 md:mb-10">
+            <motion.p
+              variants={lineUp}
+              className="font-mono text-[10px] md:text-xs tracking-[0.35em] uppercase text-[#d4af37]/70"
+            >
+              Digital Agency &nbsp;/&nbsp; 80+ Projects Delivered
+            </motion.p>
+          </div>
+
+          {/* Giant headline — two lines */}
+          <div className="overflow-hidden">
+            <motion.h1
+              variants={lineUp}
+              className="text-[13vw] sm:text-[11vw] md:text-[9.5vw] font-playfair leading-[0.88] tracking-tight text-white"
+            >
+              We Build
+            </motion.h1>
+          </div>
+
+          {/* Second line — italic + accent colour + embedded image pill */}
+          <div className="overflow-hidden mt-1 md:mt-2 flex flex-wrap items-center gap-4 md:gap-6">
+            <motion.h1
+              variants={lineUp}
+              className="text-[13vw] sm:text-[11vw] md:text-[9.5vw] font-playfair italic leading-[0.88] tracking-tight text-transparent bg-clip-text"
+              style={{ backgroundImage: 'linear-gradient(95deg, #d4af37 0%, #f5e09f 40%, #d4af37 100%)' }}
+            >
+              Digital
+            </motion.h1>
+
+            {/* Image pill — hidden on mobile */}
+            <motion.div
+              variants={{
+                hidden: { scale: 0.8, opacity: 0, rotate: -6 },
+                visible: { scale: 1, opacity: 1, rotate: 0, transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as any, delay: 0.6 } },
+              }}
+              className="hidden md:block relative w-[14vw] h-[6.5vw] rounded-full overflow-hidden border border-white/10 bg-white/5 shrink-0"
+            >
+              <Image
+                src="/pr2.png"
+                alt="Spabrix project preview"
+                fill
+                className="object-cover opacity-70 hover:opacity-100 transition-opacity duration-700 scale-110"
+              />
+            </motion.div>
+          </div>
+
+          <div className="overflow-hidden mt-1 md:mt-2">
+            <motion.h1
+              variants={lineUp}
+              className="text-[13vw] sm:text-[11vw] md:text-[9.5vw] font-playfair leading-[0.88] tracking-tight text-white/90"
+            >
+              Empires.
+            </motion.h1>
+          </div>
+
+          {/* ── Bottom row: description + CTA + stats ── */}
+          <motion.div
+            variants={fadeIn}
+            className="mt-10 md:mt-14 flex flex-col md:flex-row md:items-end gap-10 md:gap-0 justify-between"
+          >
+            {/* Description */}
+            <p className="max-w-xs text-sm md:text-base text-white/40 leading-relaxed font-light">
+              An independent creative studio merging high-end aesthetics with
+              bleeding-edge technology — built to elevate premium brands.
+            </p>
+
+            {/* CTA */}
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center gap-4 self-start md:self-auto"
+            >
+              <span className="relative z-10 font-mono text-xs tracking-[0.25em] uppercase text-white/80 group-hover:text-white transition-colors duration-300">
+                Start a Project
+              </span>
+              <span className="relative overflow-hidden flex items-center justify-center w-10 h-10 rounded-full border border-white/20 group-hover:border-[#d4af37]/60 transition-colors duration-500">
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  className="w-4 h-4 stroke-white/60 group-hover:stroke-[#d4af37] transition-all duration-300 translate-x-0 translate-y-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  strokeWidth={1.5}
+                >
+                  <path d="M2 14L14 2M14 2H5M14 2v9" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#d4af37]/50 group-hover:w-full transition-all duration-500 ease-out" />
+            </Link>
+
+            {/* Stats */}
+            <div className="flex gap-8 md:gap-12">
+              {[
+                { value: 80, suffix: '+', label: 'Projects' },
+                { value: 4, suffix: 'yr', label: 'Experience' },
+                { value: 100, suffix: '%', label: 'Satisfaction' },
+              ].map(({ value, suffix, label }) => (
+                <div key={label} className="flex flex-col gap-1">
+                  <span className="font-playfair text-3xl md:text-4xl text-white/90 leading-none">
+                    <Counter to={value} />{suffix}
+                  </span>
+                  <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-white/30">{label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Marquee strip ── */}
+        <div className="relative mt-14 border-t border-white/[0.07] overflow-hidden py-4">
+          <motion.div
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+            className="flex gap-12 whitespace-nowrap w-max"
+          >
+            {[...marqueeItems, ...marqueeItems].map((item, i) => (
+              <span
+                key={i}
+                className={`font-mono text-[10px] tracking-[0.3em] uppercase ${
+                  item === '·' ? 'text-[#d4af37]/60' : 'text-white/20'
+                }`}
+              >
+                {item}
+              </span>
+            ))}
+          </motion.div>
+        </div>
       </motion.div>
 
-      <section ref={containerRef} className="relative min-h-[100svh] bg-[#030303] text-white overflow-hidden selection:bg-white selection:text-black">
-        
-        {/* Abstract Animated Background Gradients */}
-        <div className="absolute inset-0 z-0 opacity-40">
-          <motion.div 
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] blur-[100px]" 
-          />
-          <motion.div 
-            animate={{ scale: [1, 1.5, 1], rotate: [0, -90, 0] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] blur-[100px]" 
-          />
-        </div>
-
-        {/* Architectural Grid Lines */}
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.15]">
-          <motion.div initial={{ height: 0 }} animate={{ height: "100%" }} transition={{ duration: 2, delay: 1 }} className="absolute top-0 left-[10%] w-[1px] bg-gradient-to-b from-transparent via-white to-transparent" />
-          <motion.div initial={{ height: 0 }} animate={{ height: "100%" }} transition={{ duration: 2, delay: 1.2 }} className="absolute top-0 right-[10%] w-[1px] bg-gradient-to-b from-transparent via-white to-transparent" />
-          <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 2, delay: 1.4 }} className="absolute top-[20%] left-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
-          <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} transition={{ duration: 2, delay: 1.6 }} className="absolute bottom-[20%] left-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent" />
-        </div>
-
-        {/* Custom Mouse Follower (Glowing Orb) */}
+      {/* ── Scroll indicator ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-8 right-8 md:right-12 flex flex-col items-center gap-2 z-20"
+      >
+        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 rotate-90 origin-center mb-4">
+          Scroll
+        </span>
         <motion.div
-          className="fixed top-0 left-0 w-[300px] h-[300px] bg-white/[0.04] rounded-full blur-[40px] pointer-events-none z-0 hidden md:block"
-          style={{ x: cursorXSpring, y: cursorYSpring }}
+          animate={{ scaleY: [0.3, 1, 0.3] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-10 bg-gradient-to-b from-white/5 to-white/30 origin-top"
         />
+      </motion.div>
 
-        <motion.div style={{ y: yHero }} className="relative z-10 w-full h-[100svh] flex flex-col justify-center px-4 sm:px-10 lg:px-[10%]">
-          
-          {/* Top Meta Info */}
-          <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 2.5 }}
-              className="absolute top-[25%] left-[10%] lg:left-[12%] flex items-center gap-4 text-[10px] font-mono tracking-[0.3em] uppercase text-slate-500"
-          >
-              <span className="flex h-1.5 w-1.5 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-              </span>
-              <ScrambleText text="KERALA, INDIA — GLOBAL" delay={2} />
-          </motion.div>
-
-          <motion.div style={{ opacity: opacityText }} className="flex flex-col mt-20">
-              
-              {/* Row 1: Left Aligned */}
-              <div className="overflow-hidden flex">
-                  <motion.div className="flex">
-                      {"We".split('').map((char, i) => (
-                          <motion.h1 key={`we-${i}`} custom={i} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair tracking-tight leading-[0.85] pr-2 md:pr-4">
-                              {char}
-                          </motion.h1>
-                      ))}
-                  </motion.div>
-                  <motion.div className="flex ml-4 md:ml-8">
-                      {"Architect".split('').map((char, i) => (
-                          <motion.h1 key={`arc-${i}`} custom={i + 2} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair italic tracking-tight leading-[0.85] text-transparent bg-clip-text bg-gradient-to-r from-slate-100 to-slate-500">
-                              {char}
-                          </motion.h1>
-                      ))}
-                  </motion.div>
-              </div>
-
-              {/* Row 2: Right Aligned with Image integration */}
-              <div className="overflow-hidden flex justify-end items-center gap-6 mt-2 md:mt-4">
-                  <motion.div 
-                      initial={{ scale: 0, rotate: -15, filter: "blur(10px)" }}
-                      animate={{ scale: 1, rotate: 0, filter: "blur(0px)" }}
-                      transition={{ duration: 1.4, delay: 1.8, ease: [0.16, 1, 0.3, 1] as any }}
-                      className="hidden md:block w-[18vw] h-[7vw] rounded-[4rem] overflow-hidden relative border border-white/20 bg-[#111] group cursor-pointer"
-                  >
-                      <Image src="/pr2.png" alt="Creative Design" fill className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" />
-                      <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-700 mix-blend-overlay" />
-                  </motion.div>
-                  <motion.div className="flex">
-                      {"Digital".split('').map((char, i) => (
-                          <motion.h1 key={`dig-${i}`} custom={i + 9} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair tracking-tight leading-[0.85] text-white">
-                              {char}
-                          </motion.h1>
-                      ))}
-                  </motion.div>
-              </div>
-
-              {/* Row 3: Left Aligned */}
-              <div className="overflow-hidden mt-2 md:mt-4 flex items-end justify-between">
-                  <motion.div className="flex">
-                      {"Empires.".split('').map((char, i) => (
-                          <motion.h1 key={`emp-${i}`} custom={i + 16} variants={titleVariants} initial="hidden" animate="visible" className="text-[4rem] sm:text-[6rem] md:text-[8.5rem] lg:text-[11vw] font-playfair italic tracking-tight leading-[0.85] text-transparent bg-clip-text bg-gradient-to-r from-slate-300 via-white to-slate-400">
-                              {char}
-                          </motion.h1>
-                      ))}
-                  </motion.div>
-
-                  {/* Circular Call to action */}
-                  <motion.div 
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 1.5, delay: 2.2, ease: [0.16, 1, 0.3, 1] as any }}
-                      className="hidden lg:flex"
-                  >
-                      <Link href="/contact" className="relative flex items-center justify-center w-32 h-32 rounded-full border border-white/20 group hover:bg-white transition-colors duration-500">
-                          <motion.div 
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                              className="absolute inset-2 border border-dashed border-white/30 rounded-full group-hover:border-black/30 transition-colors duration-500"
-                          />
-                          <ArrowUpRight className="w-8 h-8 text-white group-hover:text-black transition-colors duration-500" />
-                          
-                          {/* Magnetic Hover Text Ring */}
-                          <div className="absolute inset-[-20px] rounded-full border border-white/0 group-hover:border-white/10 group-hover:scale-110 transition-all duration-700 pointer-events-none" />
-                      </Link>
-                  </motion.div>
-              </div>
-
-          </motion.div>
-
-          {/* Bottom Details */}
-          <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.5, ease: [0.16, 1, 0.3, 1] as any }}
-              className="absolute bottom-[10%] left-[10%] right-[10%] flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
-          >
-              <div className="text-slate-400 font-light max-w-sm text-sm sm:text-base leading-relaxed overflow-hidden">
-                <motion.p initial={{ y: 50 }} animate={{ y: 0 }} transition={{ duration: 1, delay: 2.6, ease: [0.16, 1, 0.3, 1] as any }}>
-                    An independent creative engineering studio merging high-end aesthetics with bleeding-edge technology to elevate premium brands above the noise.
-                </motion.p>
-              </div>
-
-              <div className="flex gap-12 font-mono text-[10px] uppercase tracking-widest text-slate-500">
-                  <div className="flex flex-col gap-2 overflow-hidden">
-                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.7 }} className="text-white">Services</motion.span>
-                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.8 }}>Development</motion.span>
-                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.9 }}>Design</motion.span>
-                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 3.0 }}>SEO</motion.span>
-                  </div>
-                  <div className="flex flex-col gap-2 overflow-hidden">
-                      <motion.span initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.7 }} className="text-white">Connect</motion.span>
-                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.8 }} href="mailto:spabrix@gmail.com" className="hover:text-white transition-colors">Email</motion.a>
-                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 2.9 }} href="https://instagram.com" className="hover:text-white transition-colors">Instagram</motion.a>
-                      <motion.a initial={{ y: 20 }} animate={{ y: 0 }} transition={{ delay: 3.0 }} href="https://linkedin.com" className="hover:text-white transition-colors">LinkedIn</motion.a>
-                  </div>
-              </div>
-          </motion.div>
-
-        </motion.div>
-      </section>
-    </>
+      {/* ── Decorative large index number ── */}
+      <div className="pointer-events-none absolute top-[30%] right-4 md:right-8 z-0 select-none">
+        <span className="font-playfair text-[22vw] md:text-[15vw] text-white/[0.025] leading-none font-bold">
+          01
+        </span>
+      </div>
+    </section>
   );
 }
