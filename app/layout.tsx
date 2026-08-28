@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     google: '6f9381d394c102e5', // Google Search Console verification (from google6f9381d394c102e5.html)
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: '/newlogoo.webp',
     apple: '/spabrix-logo-new.png',
   },
 };
