@@ -66,14 +66,14 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as any }}
-        className={`fixed z-[100] left-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled
-          ? 'w-[95%] sm:w-[90%] md:w-[85%] max-w-6xl top-6 rounded-full bg-white/90 backdrop-blur-2xl border border-black/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] py-4 px-8'
+        className={`fixed z-[100] left-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center ${scrolled
+          ? 'w-[95%] sm:w-[90%] md:w-[85%] max-w-6xl top-4 rounded-full bg-white/90 backdrop-blur-2xl border border-black/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] py-2 px-8'
           : 'w-full top-0 bg-transparent py-8 px-6 sm:px-12'
           }`}
       >
         <div className="w-full h-full flex justify-between items-center">
           <Link href="/" aria-label="Spabrix Home" className="flex items-center relative z-[10]">
-            <div className="relative w-16 h-16">
+            <div className={`relative transition-all duration-300 ${scrolled ? 'w-10 h-10' : 'w-16 h-16'}`}>
               <Image
                 src="/logonew.png"
                 alt="Spabrix Logo"
@@ -83,7 +83,7 @@ export default function Navbar() {
                 sizes="82px"
               />
             </div>
-            <span className={`-ml-3 text-3xl font-outfit font-bold tracking-widest transition-colors duration-300 ${isDarkText ? 'text-black' : 'text-white'}`}>
+            <span className={`-ml-3 font-outfit font-bold tracking-widest transition-all duration-300 ${isDarkText ? 'text-black' : 'text-white'} ${scrolled ? 'text-2xl' : 'text-3xl'}`}>
               spabrix
             </span>
           </Link>
