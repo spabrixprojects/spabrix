@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col items-start gap-8">
           <div className="text-3xl font-bold flex items-center">
             <Image
-              src="/logonew.png"
+              src="/newlogoo.webp"
               alt="Spabrix Logo"
               width={72}
               height={72}

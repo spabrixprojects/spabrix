@@ -73,9 +73,9 @@ export default function Navbar() {
       >
         <div className="w-full h-full flex justify-between items-center">
           <Link href="/" aria-label="Spabrix Home" className="flex items-center relative z-[10]">
-            <div className={`relative transition-all duration-300 ${scrolled ? 'w-10 h-10' : 'w-16 h-16'}`}>
+            <div className={`relative transition-all duration-300 ${scrolled ? 'w-14 h-14' : 'w-24 h-24'}`}>
               <Image
-                src="/logonew.png"
+                src="/newlogoo.webp"
                 alt="Spabrix Logo"
                 fill
                 className="object-contain"
