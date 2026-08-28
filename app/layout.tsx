@@ -21,21 +21,21 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://spabrix.in'),
   title: {
-    default: 'Best Web Design & SEO Agency in Kerala | Spabrix',
-    template: '%s | Spabrix Agency'
+    default: 'Best Website Development Company in Kerala | Spabrix',
+    template: '%s | Spabrix'
   },
-  description: 'Top web design & digital marketing agency in Malappuram, Kerala. We build fast, SEO-driven websites to grow your business.',
+  description: 'Top website development company in Malappuram, Kerala. We build fast, SEO-optimised, high-converting websites using Next.js & React for businesses across India.',
   keywords: [
-    'web design company Kerala',
-    'best web development agency Malappuram',
-    'SEO services Kerala',
-    'digital marketing agency Malappuram',
+    'website development company Kerala',
+    'best website developer Malappuram',
+    'Next.js developer Kerala',
+    'custom website design Malappuram',
+    'React developer Kerala',
     'website design Calicut',
-    'Next.js development India',
-    'ecommerce website Kerala',
-    'logo design Malappuram',
-    'social media marketing Kerala',
-    'affordable web design India'
+    'e-commerce website development Kerala',
+    'affordable website development India',
+    'SEO website developer Malappuram',
+    'professional web developer Kerala'
   ],
   authors: [{ name: 'Spabrix Digital Agency', url: 'https://spabrix.in' }],
   creator: 'Spabrix',
@@ -49,22 +49,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: 'https://spabrix.in',
-    siteName: 'Spabrix Digital Agency',
-    title: 'Spabrix - Top Web Design & Digital Marketing Agency in Kerala',
-    description: 'Transform your business with stunning websites and result-driven digital marketing. Trusted by 80+ clients across Kerala.',
+    siteName: 'Spabrix - Website Development',
+    title: 'Spabrix - Best Website Development Company in Kerala',
+    description: 'We build blazing-fast, SEO-optimised, high-converting websites using Next.js & React. 80+ websites delivered across Kerala and India.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Spabrix Digital Agency - Web Design & Marketing',
+        alt: 'Spabrix - Website Development Company Kerala',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Spabrix - Best Web Design Agency in Kerala',
-    description: 'Custom websites, SEO, and digital marketing solutions for businesses in Malappuram & Kerala.',
+    title: 'Spabrix - Best Website Development Company in Kerala',
+    description: 'Custom websites built with Next.js & React. Fast, SEO-optimised, and designed to convert — for businesses in Malappuram & Kerala.',
     images: ['/og-image.png'],
     creator: '@spabrix',
   },
@@ -119,7 +119,7 @@ const jsonLd = {
     {
       '@type': 'LocalBusiness',
       '@id': 'https://spabrix.in/#localbusiness',
-      name: 'Spabrix - Web Design Agency Malappuram',
+      name: 'Spabrix - Website Development',
       image: 'https://spabrix.in/og-image.png',
       telephone: '+91-9946972210',
       email: 'spabrix@gmail.com',

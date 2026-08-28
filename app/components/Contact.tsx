@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,9 +9,6 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
-
-  const { scrollYProgress } = useScroll();
-  const marqueeX = useTransform(scrollYProgress, [0, 1], [0, -1000]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,148 +33,101 @@ export default function Contact() {
       const result = await response.json();
       
       if (result.success) {
-        toast.success("Transmission successful.");
+        toast.success("Message sent successfully.");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        toast.error("Transmission failed. Please try again.");
+        toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
-        toast.error("Transmission failed. Please try again.");
+        toast.error("Failed to send message. Please try again.");
     } finally {
         setLoading(false);
     }
   };
 
   return (
-    <section id="contact" className="py-40 bg-[#050505] text-white relative border-t border-white/5 overflow-hidden">
-      
-      {/* Background Marquee */}
-      <div className="absolute top-20 left-0 w-full whitespace-nowrap opacity-[0.02] pointer-events-none overflow-hidden font-outfit font-black text-[15vw] leading-none">
-        <motion.div style={{ x: marqueeX }} className="inline-block">
-            INITIATE CONTACT INITIATE CONTACT INITIATE CONTACT
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20 lg:gap-24 items-start">
+    <section id="contact" className="py-24 px-6 sm:px-12 md:px-24 bg-[#111] text-white">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+        
+        {/* Left Side */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-1"
+        >
+          <span className="text-brand text-xs font-bold tracking-widest uppercase mb-4 block">READY TO START?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-8">
+            Let's Work<br/>Together.
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed mb-12 max-w-md">
+            Ready to take your digital presence to the next level? Get in touch with us to discuss your project.
+          </p>
           
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="overflow-hidden mb-8">
-                <motion.h2 
-                    initial={{ y: 100 }}
-                    whileInView={{ y: 0 }}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-6xl md:text-8xl font-outfit font-light tracking-tight leading-[0.9]"
-                >
-                Start a <br/><span className="font-black italic text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Conversation</span>
-                </motion.h2>
+          <div className="space-y-6">
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-widest mb-1">EMAIL</p>
+              <a href="mailto:spabrix@gmail.com" className="text-xl font-medium hover:text-brand transition-colors">spabrix@gmail.com</a>
             </div>
-            
-            <p className="text-xl text-slate-400 font-light mb-20 max-w-md">
-              Whether you have a specific project in mind or simply want to explore possibilities, our engineers and strategists are ready to listen.
-            </p>
-            
-            <div className="space-y-12 border-l border-white/10 pl-8">
-                <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                    <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 mb-2">Direct Email</h3>
-                    <a href="mailto:spabrix@gmail.com" className="text-3xl font-outfit font-light hover:text-slate-300 transition-colors">spabrix@gmail.com</a>
-                </motion.div>
-                <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                    <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 mb-2">Headquarters</h3>
-                    <p className="text-3xl font-outfit font-light">Malappuram, Kerala</p>
-                </motion.div>
-                <motion.div whileHover={{ x: 10 }} transition={{ type: "spring", stiffness: 300 }}>
-                    <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 mb-2">Direct Line</h3>
-                    <p className="text-3xl font-outfit font-light">+91 9946972210</p>
-                </motion.div>
+            <div>
+              <p className="text-gray-500 text-sm font-bold uppercase tracking-widest mb-1">PHONE</p>
+              <p className="text-xl font-medium">+91 9946972210</p>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            whileInView={{ opacity: 1, scale: 1 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          >
-            <form onSubmit={handleSubmit} className="relative bg-[#0a0a0a] p-10 md:p-14 rounded-[2rem] border border-white/5 shadow-2xl overflow-hidden group">
-              {/* Form background glow */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-500"
-                animate={{ opacity: focusedInput ? 1 : 0 }}
+        {/* Right Side: Form */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-1 w-full"
+        >
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="relative">
+              <input
+                type="text" name="name" value={formData.name} onChange={handleChange} required
+                onFocus={() => setFocusedInput('name')} onBlur={() => setFocusedInput(null)}
+                className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-medium focus:outline-none focus:border-brand transition-colors peer relative z-10"
+                placeholder=" "
               />
+              <label className="absolute left-0 top-4 text-gray-500 text-xl font-medium pointer-events-none peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-brand peer-[&:not(:placeholder-shown)]:-translate-y-6 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-brand transition-all duration-300">
+                Name
+              </label>
+            </div>
 
-              <div className="space-y-14 relative z-10">
-                <div className="relative">
-                    <input
-                    type="text" name="name" value={formData.name} onChange={handleChange} required
-                    onFocus={() => setFocusedInput('name')} onBlur={() => setFocusedInput(null)}
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-2xl font-light focus:outline-none transition-colors peer relative z-10"
-                    placeholder=" "
-                    />
-                    <motion.div 
-                        className="absolute bottom-0 left-0 h-[2px] bg-white origin-left z-20"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: focusedInput === 'name' ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        style={{ width: '100%' }}
-                    />
-                    <label className="absolute left-0 top-4 text-slate-500 text-2xl font-light pointer-events-none peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-mono peer-focus:tracking-widest peer-focus:uppercase peer-focus:text-white peer-[&:not(:placeholder-shown)]:-translate-y-8 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:font-mono peer-[&:not(:placeholder-shown)]:tracking-widest peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:text-white transition-all duration-300">
-                    Full Name
-                    </label>
-                </div>
+            <div className="relative">
+              <input
+                type="email" name="email" value={formData.email} onChange={handleChange} required
+                onFocus={() => setFocusedInput('email')} onBlur={() => setFocusedInput(null)}
+                className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-medium focus:outline-none focus:border-brand transition-colors peer relative z-10"
+                placeholder=" "
+              />
+              <label className="absolute left-0 top-4 text-gray-500 text-xl font-medium pointer-events-none peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-brand peer-[&:not(:placeholder-shown)]:-translate-y-6 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-brand transition-all duration-300">
+                Email
+              </label>
+            </div>
 
-                <div className="relative">
-                    <input
-                    type="email" name="email" value={formData.email} onChange={handleChange} required
-                    onFocus={() => setFocusedInput('email')} onBlur={() => setFocusedInput(null)}
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-2xl font-light focus:outline-none transition-colors peer relative z-10"
-                    placeholder=" "
-                    />
-                    <motion.div 
-                        className="absolute bottom-0 left-0 h-[2px] bg-white origin-left z-20"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: focusedInput === 'email' ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        style={{ width: '100%' }}
-                    />
-                    <label className="absolute left-0 top-4 text-slate-500 text-2xl font-light pointer-events-none peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-mono peer-focus:tracking-widest peer-focus:uppercase peer-focus:text-white peer-[&:not(:placeholder-shown)]:-translate-y-8 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:font-mono peer-[&:not(:placeholder-shown)]:tracking-widest peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:text-white transition-all duration-300">
-                    Email Address
-                    </label>
-                </div>
+            <div className="relative">
+              <textarea
+                name="message" value={formData.message} onChange={handleChange} required rows={3}
+                onFocus={() => setFocusedInput('message')} onBlur={() => setFocusedInput(null)}
+                className="w-full bg-transparent border-b border-white/20 py-4 text-xl font-medium focus:outline-none focus:border-brand transition-colors peer resize-none relative z-10"
+                placeholder=" "
+              />
+              <label className="absolute left-0 top-4 text-gray-500 text-xl font-medium pointer-events-none peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-brand peer-[&:not(:placeholder-shown)]:-translate-y-6 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:text-brand transition-all duration-300">
+                Project Details
+              </label>
+            </div>
 
-                <div className="relative">
-                    <textarea
-                    name="message" value={formData.message} onChange={handleChange} required rows={3}
-                    onFocus={() => setFocusedInput('message')} onBlur={() => setFocusedInput(null)}
-                    className="w-full bg-transparent border-b border-white/20 py-4 text-2xl font-light focus:outline-none transition-colors peer resize-none relative z-10"
-                    placeholder=" "
-                    />
-                    <motion.div 
-                        className="absolute bottom-0 left-0 h-[2px] bg-white origin-left z-20"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: focusedInput === 'message' ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        style={{ width: '100%' }}
-                    />
-                    <label className="absolute left-0 top-4 text-slate-500 text-2xl font-light pointer-events-none peer-focus:-translate-y-8 peer-focus:text-xs peer-focus:font-mono peer-focus:tracking-widest peer-focus:uppercase peer-focus:text-white peer-[&:not(:placeholder-shown)]:-translate-y-8 peer-[&:not(:placeholder-shown)]:text-xs peer-[&:not(:placeholder-shown)]:font-mono peer-[&:not(:placeholder-shown)]:tracking-widest peer-[&:not(:placeholder-shown)]:uppercase peer-[&:not(:placeholder-shown)]:text-white transition-all duration-300">
-                    Project Details
-                    </label>
-                </div>
-
-                <button disabled={loading} className="group w-full relative overflow-hidden bg-white text-black px-10 py-6 rounded-full font-medium text-lg disabled:opacity-50 mt-12 flex items-center justify-between">
-                    <motion.div 
-                        className="absolute inset-0 bg-slate-200 origin-bottom"
-                        initial={{ scaleY: 0 }}
-                        whileHover={{ scaleY: 1 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    />
-                    <span className="relative z-10 mix-blend-exclusion text-white">{loading ? "Transmitting..." : "Submit Inquiry"}</span>
-                    <span className="relative z-10 mix-blend-exclusion text-white group-hover:translate-x-2 transition-transform">→</span>
-                </button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
+            <button disabled={loading} className="group w-full md:w-auto bg-brand hover:bg-brand/90 text-white px-8 py-4 rounded-sm font-bold text-sm tracking-widest uppercase disabled:opacity-50 mt-8 transition-colors flex items-center justify-center gap-3">
+              {loading ? "SENDING..." : "SEND MESSAGE"} 
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+        </motion.div>
       </div>
       <ToastContainer position="bottom-right" autoClose={4000} theme="dark" hideProgressBar={false} />
     </section>

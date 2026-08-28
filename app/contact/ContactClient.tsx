@@ -73,7 +73,7 @@ export default function ContactClient() {
                             </motion.h2>
                         </div>
                         <p className="text-base md:text-2xl text-slate-400 font-light mb-12 md:mb-20 max-w-md leading-relaxed">
-                            Whether you require a complete digital transformation or strategic technical consultation, we are ready to listen.
+                            Ready to build your next website? Whether it is a brand-new site, an e-commerce store, or a full digital platform, we are here to engineer something remarkable.
                         </p>
                         
                         <div className="space-y-12">

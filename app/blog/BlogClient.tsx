@@ -6,7 +6,7 @@ import { Calendar, User } from 'lucide-react';
 import { blogPostsData } from '../lib/blogData';
 import { useRef } from 'react';
 
-const sentence = "Insights on software engineering, technical SEO, and architectural design from our core team of developers and strategists.";
+const sentence = "Expert insights on website development, Next.js, SEO, and conversion design from the engineers and strategists at Spabrix.";
 
 export default function BlogClient() {
     const containerRef = useRef<HTMLElement>(null);
@@ -45,7 +45,7 @@ export default function BlogClient() {
 
                     <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-outfit font-light tracking-tight leading-[0.85] mb-12 flex flex-col">
                         <div className="overflow-hidden flex">
-                            {"DIGITAL".split('').map((char, index) => (
+                            {"WEBSITE".split('').map((char, index) => (
                                 <motion.span 
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
@@ -58,7 +58,7 @@ export default function BlogClient() {
                             ))}
                         </div>
                         <div className="overflow-hidden flex">
-                            {"PERSPECTIVES".split('').map((char, index) => (
+                            {"DEV JOURNAL".split('').map((char, index) => (
                                 <motion.span 
                                     key={index}
                                     initial={{ y: 150, opacity: 0, rotateZ: 10 }}
@@ -66,7 +66,7 @@ export default function BlogClient() {
                                     transition={{ duration: 1, delay: 0.3 + index * 0.04, ease: [0.16, 1, 0.3, 1] as any }}
                                     className="block text-transparent bg-clip-text bg-gradient-to-r from-neutral-300 via-slate-500 to-neutral-600 italic font-black"
                                 >
-                                    {char}
+                                    {char === ' ' ? '\u00A0' : char}
                                 </motion.span>
                             ))}
                         </div>

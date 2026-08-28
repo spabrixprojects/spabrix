@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-brand: #d4af37;
+  --color-brand: #ff5722;
   --font-outfit: 'Outfit', sans-serif;
   --font-playfair: 'Playfair Display', serif;
 }
@@ -16,10 +16,10 @@
 }
 
 :root {
-  --foreground-rgb: 245, 245, 245;
-  --background-start-rgb: 5, 5, 5;
-  --background-end-rgb: 5, 5, 5;
-  --cursor-color: 255, 255, 255;
+  --foreground-rgb: 26, 26, 26;
+  --background-start-rgb: 253, 253, 253;
+  --background-end-rgb: 253, 253, 253;
+  --cursor-color: 255, 87, 34;
   --cursor-size: 30px;
 }
 
@@ -56,5 +56,5 @@
 html, body {
   margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth;
   color: rgb(var(--foreground-rgb));
-  background: #050505;
+  background: #fdfdfd;
 }

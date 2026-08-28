@@ -1,101 +1,68 @@
-import { FaFacebookF, FaWhatsapp, FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaTwitter, FaDribbble, FaBehance, FaLinkedinIn } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#050505] text-white py-20 px-6 overflow-hidden border-t border-white/5">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          
-          <div className="md:col-span-2">
-            <div className="text-3xl font-bold flex items-center gap-3">
-              <Image
-                src="/spabrix-logo-new.png"
-                alt="Spabrix Digital Agency Logo - Web Design Malappuram"
-                width={48}
-                height={48}
-                className="object-contain filter brightness-0 invert"
-              />
-              <span className="text-2xl font-bold tracking-widest uppercase">Spabrix</span>
-            </div>
-            <p className="mt-6 text-slate-400 font-light leading-relaxed max-w-sm">
-              We are an independent creative studio operating at the intersection of design, technology, and strategy, crafting premium digital experiences.
-            </p>
-            
-            <div className="flex space-x-4 mt-8">
-              {[
-                { href: "https://www.facebook.com/spabrix", icon: <FaFacebookF size={18} /> },
-                { href: "https://wa.me/919946972210", icon: <FaWhatsapp size={18} /> },
-                { href: "https://www.instagram.com/spabrix", icon: <FaInstagram size={18} /> },
-                { href: "https://www.linkedin.com/company/spabrix", icon: <FaLinkedinIn size={18} /> },
-                { href: "https://youtube.com/@spabrix", icon: <FaYoutube size={18} /> },
-                { href: "https://twitter.com/spabrix", icon: <FaTwitter size={18} /> },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/20 text-slate-300 hover:text-black hover:bg-white hover:border-white transition-all duration-300"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+    <footer className="bg-[#fdfdfd] text-black py-16 px-6 sm:px-12 md:px-24 border-t border-black/10">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+        
+        {/* Left Side: Logo & Socials */}
+        <div className="flex flex-col items-start gap-8">
+          <div className="text-3xl font-bold flex items-center gap-3">
+            <Image
+              src="/spabrix-logo-new.png"
+              alt="Spabrix Logo"
+              width={40}
+              height={40}
+              className="object-contain"
+            />
+            <span className="text-3xl font-bold tracking-widest text-black">Spabrix</span>
           </div>
-
-          <nav aria-label="Footer Navigation">
-            <h4 className="text-sm font-mono tracking-widest text-slate-500 uppercase mb-6">
-              Navigation
-            </h4>
-            <ul className="space-y-4">
-              {["About", "Services", "Projects", "Contact", "Blog", "FAQ"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`/${item.toLowerCase()}`}
-                    className="text-slate-300 hover:text-white transition-colors font-light text-lg"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div>
-            <h4 className="text-sm font-mono tracking-widest text-slate-500 uppercase mb-6">
-              Contact
-            </h4>
-            <address className="not-italic text-slate-300 space-y-4 font-light text-lg">
-              <p>
-                <a href="mailto:spabrix@gmail.com" className="hover:text-white transition-colors">
-                  spabrix@gmail.com
-                </a>
-              </p>
-              <p>
-                <a href="tel:+919946972210" className="hover:text-white transition-colors">
-                  +91 9946972210
-                </a>
-              </p>
-              <p className="pt-2 text-slate-400">
-                Malappuram, Kerala 676505<br />
-                India
-              </p>
-            </address>
+          
+          <div className="flex items-center gap-4 text-gray-800">
+            <a href="https://instagram.com/spabrix" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaInstagram size={18} /></a>
+            <a href="https://twitter.com/spabrix" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaTwitter size={18} /></a>
+            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaDribbble size={18} /></a>
+            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaBehance size={18} /></a>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500 text-sm font-light">
-          <p suppressHydrationWarning>© {new Date().getFullYear()} Spabrix. All rights reserved.</p>
-          <div className="flex space-x-6">
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-white transition-colors">
-              Terms & Conditions
-            </Link>
+        {/* Middle: Menu */}
+        <div className="flex flex-col items-start gap-6">
+          <h4 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">MENU</h4>
+          <nav className="flex flex-col gap-4">
+            <Link href="/" className="text-lg font-medium text-black hover:text-brand transition-colors">Home</Link>
+            <Link href="/about" className="text-lg font-medium text-black hover:text-brand transition-colors">About</Link>
+            <Link href="/services" className="text-lg font-medium text-black hover:text-brand transition-colors">Services</Link>
+            <Link href="/projects" className="text-lg font-medium text-black hover:text-brand transition-colors">Projects</Link>
+          </nav>
+        </div>
+
+        {/* Right Side: Contact Info */}
+        <div className="flex flex-col items-start md:items-end gap-6 text-right">
+          <div>
+            <h4 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">START A PROJECT</h4>
+            <a href="mailto:hello@spabrix.com" className="text-xl font-medium text-black hover:text-brand transition-colors">hello@spabrix.com</a>
           </div>
+          <div>
+            <h4 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2 mt-4">PHONE</h4>
+            <p className="text-xl font-medium text-black">+91 9946972210</p>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-4 text-gray-500 text-sm">
+        <p suppressHydrationWarning>© {new Date().getFullYear()} Spabrix. All rights reserved.</p>
+        <div className="flex space-x-6">
+          <Link href="/terms" className="hover:text-black transition-colors">
+            Terms of Service
+          </Link>
+          <Link href="/privacy-policy" className="hover:text-black transition-colors">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

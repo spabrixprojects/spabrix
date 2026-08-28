@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
 const Page = () => {
   return (
-    <main className="overflow-hidden bg-[#030303]">
+    <main className="overflow-hidden bg-[#fdfdfd]">
       <Hero />
       {/* We use the full, highly animated client pages directly on the home page */}
-      <div className="relative z-10 bg-[#050505]">
+      <div className="relative z-10">
         <AboutClient />
       </div>
       
@@ -27,7 +27,7 @@ const Page = () => {
         <ServicesClient />
       </div>
 
-      <div className="relative z-10 bg-[#050505]">
+      <div className="relative z-10">
         <ProjectsClient />
       </div>
       
