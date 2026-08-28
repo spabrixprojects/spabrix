@@ -5,15 +5,14 @@ import Link from 'next/link';
 
 const services = [
   {
-    title: 'Website Design',
-    description: 'We design clean, modern websites that reflect your brand and create lasting impressions.',
+    title: 'Digital Marketing',
+    description: 'We create data-driven marketing strategies to increase your online visibility, drive traffic, and boost conversions.',
     icon: (
       <svg className="w-10 h-10 stroke-white stroke-[1.5] fill-none" viewBox="0 0 24 24">
-        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-        <path d="M6 8h.01M10 8h.01M14 8h.01M2 12h20" strokeLinecap="round" strokeLinejoin="round"/>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
       </svg>
     ),
-    href: '/services/design'
+    href: '/services/digital-marketing'
   },
   {
     title: 'Website Development',
@@ -40,7 +39,7 @@ const services = [
 
 export default function ServicesClient() {
   return (
-    <section className="bg-[#111111] text-white py-24 px-6 sm:px-12 md:px-24">
+    <section className="bg-[#fdfdfd] text-black py-24 px-6 sm:px-12 md:px-24">
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
@@ -52,7 +51,7 @@ export default function ServicesClient() {
           className="mb-16"
         >
           <span className="text-brand text-xs font-bold tracking-widest uppercase mb-4 block">SERVICES</span>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">What We Do</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#111]">What We Do</h2>
         </motion.div>
 
         {/* Services Grid */}
@@ -64,13 +63,20 @@ export default function ServicesClient() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-[#1a1a1a] border border-white/10 rounded-xl p-8 lg:p-10 hover:border-brand/50 transition-colors group flex flex-col items-start"
+              className="bg-white border border-black/5 rounded-xl p-8 lg:p-10 hover:border-brand/50 transition-colors group flex flex-col items-start shadow-sm hover:shadow-md"
             >
-              <div className="mb-8">
-                {service.icon}
+              <div className="mb-8 p-3 bg-brand/10 rounded-lg text-brand">
+                {/* Clone the icon but change its stroke color */}
+                {typeof service.icon === 'object' && {
+                  ...service.icon,
+                  props: {
+                    ...service.icon.props,
+                    className: service.icon.props.className.replace('stroke-white', 'stroke-brand')
+                  }
+                }}
               </div>
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+              <h3 className="text-2xl font-bold mb-4 text-[#111]">{service.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed mb-8 flex-grow">
                 {service.description}
               </p>
               <Link 

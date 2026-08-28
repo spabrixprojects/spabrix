@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ContactClient from './ContactClient';
+import Contact from '../components/Contact';
 
 export const metadata: Metadata = {
   title: "Contact Spabrix | Get a Free Web Design Quote in Kerala",
@@ -11,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactClient />;
+  return (
+    <div className="pt-24 min-h-[80vh] bg-[#fdfdfd]">
+      <Contact />
+    </div>
+  );
 }

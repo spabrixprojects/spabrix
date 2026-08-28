@@ -69,18 +69,18 @@ export default function Navbar() {
           }`}
       >
         <div className="w-full h-full flex justify-between items-center">
-          <Link href="/" aria-label="Spabrix Home" className="flex items-center gap-3 relative z-[110]">
-            <div className="relative w-8 h-8">
+          <Link href="/" aria-label="Spabrix Home" className="flex items-center relative z-[10]">
+            <div className="relative w-16 h-16">
               <Image
-                src="/logo.png"
+                src="/logonew.png"
                 alt="Spabrix Logo"
                 fill
                 className="object-contain"
                 priority
-                sizes="32px"
+                sizes="82px"
               />
             </div>
-            <span className="text-xl font-outfit font-bold tracking-widest text-black">
+            <span className="-ml-3 text-3xl font-outfit font-bold tracking-widest text-black">
               spabrix
             </span>
           </Link>
@@ -124,7 +124,7 @@ export default function Navbar() {
             aria-label="Toggle Navigation"
           >
             <motion.div 
-                animate={mobileMenuOpen ? { rotate: 45, y: 8, backgroundColor: "#fff" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
+                animate={mobileMenuOpen ? { rotate: 45, y: 8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
                 className="w-6 h-[2px] origin-center transition-all duration-300"
             />
             <motion.div 
@@ -132,7 +132,7 @@ export default function Navbar() {
                 className="w-6 h-[2px] transition-all duration-300"
             />
             <motion.div 
-                animate={mobileMenuOpen ? { rotate: -45, y: -8, backgroundColor: "#fff" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
+                animate={mobileMenuOpen ? { rotate: -45, y: -8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
                 className="w-6 h-[2px] origin-center transition-all duration-300"
             />
           </button>
@@ -144,9 +144,9 @@ export default function Navbar() {
         initial="closed"
         animate={mobileMenuOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed inset-0 bg-[#050505] z-[90] md:hidden flex flex-col justify-center px-8 pointer-events-auto"
+        className="fixed inset-0 bg-[#fdfdfd] z-[90] md:hidden flex flex-col justify-center px-8 pointer-events-auto"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/[0.03] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/[0.02] to-transparent pointer-events-none" />
         
         <motion.div variants={staggerVariants} className="flex flex-col gap-6 relative z-10">
           {navLinks.map((link, i) => (
@@ -154,9 +154,9 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block text-5xl sm:text-6xl font-outfit font-light tracking-tight text-slate-400 hover:text-white transition-colors"
+                  className="block text-3xl sm:text-4xl font-outfit font-bold tracking-tight text-slate-700 hover:text-brand transition-colors"
                 >
-                  <span className="text-sm font-mono text-white/20 mr-4">0{i + 1}</span>
+                  <span className="text-sm font-mono text-black/20 mr-4">0{i + 1}</span>
                   {link.name}
                 </Link>
             </motion.div>
@@ -166,7 +166,7 @@ export default function Navbar() {
             <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-brand text-white font-semibold uppercase tracking-widest text-sm"
+                className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#111] text-white font-semibold uppercase tracking-widest text-sm hover:bg-brand transition-colors"
             >
                 LET'S TALK
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 16.8V7H7.2"/></svg>

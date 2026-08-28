@@ -1,4 +1,4 @@
-import { FaInstagram, FaTwitter, FaDribbble, FaBehance, FaLinkedinIn } from "react-icons/fa";
+import { FaInstagram, FaTwitter, FaDribbble, FaBehance, FaLinkedinIn, FaFacebookF } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,22 +9,23 @@ export default function Footer() {
         
         {/* Left Side: Logo & Socials */}
         <div className="flex flex-col items-start gap-8">
-          <div className="text-3xl font-bold flex items-center gap-3">
+          <div className="text-3xl font-bold flex items-center">
             <Image
-              src="/spabrix-logo-new.png"
+              src="/logonew.png"
               alt="Spabrix Logo"
-              width={40}
-              height={40}
+              width={72}
+              height={72}
               className="object-contain"
             />
-            <span className="text-3xl font-bold tracking-widest text-black">Spabrix</span>
+            <span className="-ml-3 text-3xl font-bold tracking-widest text-black">Spabrix</span>
           </div>
           
           <div className="flex items-center gap-4 text-gray-800">
             <a href="https://instagram.com/spabrix" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaInstagram size={18} /></a>
             <a href="https://twitter.com/spabrix" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaTwitter size={18} /></a>
-            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaDribbble size={18} /></a>
-            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaBehance size={18} /></a>
+            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaLinkedinIn size={18} /></a>
+            <a href="#" className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-brand hover:text-white hover:border-brand transition-colors"><FaFacebookF size={18} /></a>
+      
           </div>
         </div>
 
