@@ -83,7 +83,7 @@ export default function Navbar() {
                 sizes="82px"
               />
             </div>
-            <span className={`-ml-3 font-outfit font-bold tracking-widest transition-all duration-300 ${isDarkText ? 'text-black' : 'text-white'} ${scrolled ? 'text-2xl' : 'text-3xl'}`}>
+            <span className={`font-outfit font-bold tracking-widest transition-all duration-300 ${isDarkText ? 'text-black' : 'text-white'} ${scrolled ? 'text-2xl -ml-3' : 'text-3xl -ml-6'}`}>
               spabrix
             </span>
           </Link>
