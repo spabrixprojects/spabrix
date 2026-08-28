@@ -11,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <AboutClient />;
+  return (
+    <div className="pt-24 min-h-screen bg-[#fdfdfd]">
+      <AboutClient />
+    </div>
+  );
 }

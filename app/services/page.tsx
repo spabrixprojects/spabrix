@@ -11,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return <ServicesClient />;
+  return (
+    <div className="pt-24 min-h-screen bg-[#fdfdfd]">
+      <ServicesClient />
+    </div>
+  );
 }

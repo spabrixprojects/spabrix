@@ -26,6 +26,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isHomePage = pathname === '/';
+  const isDarkText = !isHomePage || scrolled;
+
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -80,7 +83,7 @@ export default function Navbar() {
                 sizes="82px"
               />
             </div>
-            <span className="-ml-3 text-3xl font-outfit font-bold tracking-widest text-black">
+            <span className={`-ml-3 text-3xl font-outfit font-bold tracking-widest transition-colors duration-300 ${isDarkText ? 'text-black' : 'text-white'}`}>
               spabrix
             </span>
           </Link>
@@ -95,26 +98,24 @@ export default function Navbar() {
                 onMouseLeave={() => setHoveredLink(null)}
                 className="relative px-6 py-2"
               >
-                <span className={`relative z-10 text-xs font-mono tracking-widest uppercase transition-colors duration-300 ${pathname === link.href ? 'text-black font-bold border-b-2 border-brand pb-1' : 'text-slate-600 hover:text-black'}`}>
+                <span className={`relative z-10 text-xs font-mono tracking-widest uppercase transition-colors duration-300 ${
+                  pathname === link.href 
+                    ? (isDarkText ? 'text-black font-bold border-b-2 border-brand pb-1' : 'text-white font-bold border-b-2 border-brand pb-1') 
+                    : (isDarkText ? 'text-slate-600 hover:text-black' : 'text-slate-300 hover:text-white')
+                }`}>
                   {link.name}
                 </span>
                 {hoveredLink === link.name && (
                   <motion.div
                     layoutId="navbar-hover"
-                    className="absolute inset-0 bg-black/5 rounded-full"
+                    className={`absolute inset-0 rounded-full ${isDarkText ? 'bg-black/5' : 'bg-white/10'}`}
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
               </Link>
             ))}
             
-            <Link
-              href="/contact"
-              className="ml-4 px-6 py-2.5 rounded-full bg-[#111] text-white text-xs font-mono tracking-widest uppercase font-semibold hover:bg-brand hover:scale-105 transition-all duration-300 flex items-center gap-2"
-            >
-              LET'S TALK
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 16.8V7H7.2"/></svg>
-            </Link>
+
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -124,15 +125,15 @@ export default function Navbar() {
             aria-label="Toggle Navigation"
           >
             <motion.div 
-                animate={mobileMenuOpen ? { rotate: 45, y: 8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
+                animate={mobileMenuOpen ? { rotate: 45, y: 8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: isDarkText ? "#000" : "#fff" }} 
                 className="w-6 h-[2px] origin-center transition-all duration-300"
             />
             <motion.div 
-                animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: "#000" }} 
+                animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: isDarkText ? "#000" : "#fff" }} 
                 className="w-6 h-[2px] transition-all duration-300"
             />
             <motion.div 
-                animate={mobileMenuOpen ? { rotate: -45, y: -8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: "#000" }} 
+                animate={mobileMenuOpen ? { rotate: -45, y: -8, backgroundColor: "#000" } : { rotate: 0, y: 0, backgroundColor: isDarkText ? "#000" : "#fff" }} 
                 className="w-6 h-[2px] origin-center transition-all duration-300"
             />
           </button>
@@ -162,16 +163,7 @@ export default function Navbar() {
             </motion.div>
           ))}
           
-          <motion.div variants={itemVariants} className="mt-12 overflow-hidden">
-            <Link
-                href="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#111] text-white font-semibold uppercase tracking-widest text-sm hover:bg-brand transition-colors"
-            >
-                LET'S TALK
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 16.8V7H7.2"/></svg>
-            </Link>
-          </motion.div>
+
         </motion.div>
 
         <motion.div 

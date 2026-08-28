@@ -47,15 +47,15 @@ export default function ProjectsClient() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {projects.map((project, i) => (
-            <motion.div
+              <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative overflow-hidden rounded-xl aspect-[3/4] bg-[#111]"
+              className="group relative overflow-hidden rounded-xl aspect-[3/4] bg-[#111] min-w-[85vw] sm:min-w-0 shrink-0 snap-center"
             >
               <Image
                 src={project.imageUrl}
