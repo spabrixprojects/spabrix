@@ -9,15 +9,15 @@ export default function Footer() {
         
         {/* Left Side: Logo & Socials */}
         <div className="flex flex-col items-start gap-8">
-          <div className="text-3xl font-bold flex items-center">
+          <div className="flex items-center gap-2">
             <Image
               src="/newlogoo.webp"
               alt="Spabrix Logo"
-              width={72}
-              height={72}
+              width={44}
+              height={44}
               className="object-contain"
             />
-            <span className="-ml-3 text-3xl font-bold tracking-widest text-black">Spabrix</span>
+            <span className="text-2xl font-bold tracking-widest text-black">Spabrix</span>
           </div>
           
           <div className="flex items-center gap-4 text-gray-800">
